@@ -18,8 +18,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(BufferRenderer.class)
 public class BufferRendererMixins {
 
-    @Inject(method = "drawWithGlobalProgram(Lnet/minecraft/client/render/BuiltBuffer;)V",
-        at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;assertOnRenderThread()V", shift = At.Shift.AFTER, remap = false),
+    @Inject(method = "drawWithGlobalProgramInternal(Lnet/minecraft/client/render/BuiltBuffer;)V",
+        at = @At("HEAD"),
         cancellable = true)
     private static void rewriteDrawWithGlobalProgram(BuiltBuffer buffer, CallbackInfo ci) {
         ShaderProgram shaderProgram = RenderSystem.getShader();
@@ -30,7 +30,7 @@ public class BufferRendererMixins {
                     .format());
         }
         ShaderProxy.syncState(shaderProgram, buffer.getDrawParameters().mode());
-        ShaderDefinition shader = ShaderRegistry.getOrCreate(shaderProgram);
+        ShaderDefinition shader = ShaderRegistry.getOrCreate(shaderProgram, buffer.getDrawParameters().mode());
         BufferProxy.VertexIndexBufferHandle handle = BufferProxy.createAndUploadVertexIndexBuffer(
             buffer);
         try (MemoryStack stack = MemoryStack.stackPush()) {

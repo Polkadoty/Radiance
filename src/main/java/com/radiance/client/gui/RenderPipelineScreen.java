@@ -522,7 +522,7 @@ public class RenderPipelineScreen extends Screen {
         int btnY = y + (moduleNode.headerH - btnSize) / 2;
         int gearX = deleteX - btnSize - 2;
 
-        context.drawTexture(RenderLayer::getGuiTextured, GEAR_TEX, gearX, btnY, 0, 0, btnSize,
+        context.drawTexture( GEAR_TEX, gearX, btnY, 0, 0, btnSize,
             btnSize, btnSize, btnSize);
 
         context.drawTextWithShadow(textRenderer, "×", deleteX + 3, btnY + 2, 0xFFFF5A5A);

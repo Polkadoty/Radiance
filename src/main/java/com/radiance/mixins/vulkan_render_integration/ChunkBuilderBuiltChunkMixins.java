@@ -1,6 +1,8 @@
 package com.radiance.mixins.vulkan_render_integration;
 
 import com.radiance.client.proxy.world.ChunkProxy;
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.radiance.mixin_related.extensions.vulkan_render_integration.IChunkBuilderBuiltChunkExt;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
@@ -44,8 +46,15 @@ public class ChunkBuilderBuiltChunkMixins implements IChunkBuilderBuiltChunkExt 
         ChunkProxy.enqueueRebuild(self);
     }
 
-    @Inject(method = "setSectionPos(J)V", at = @At(value = "TAIL"))
-    private void syncNativeChunkSlot(long sectionPos, CallbackInfo ci) {
+    @WrapMethod(method = "setOrigin(III)V")
+    private void radiance$lockChunkRelocation(int x, int y, int z, Operation<Void> original) {
+        synchronized (this) {
+            original.call(x, y, z);
+        }
+    }
+
+    @Inject(method = "setOrigin(III)V", at = @At(value = "TAIL"))
+    private void syncNativeChunkSlot(int x, int y, int z, CallbackInfo ci) {
         ChunkBuilder.BuiltChunk self = (ChunkBuilder.BuiltChunk) (Object) this;
         ChunkProxy.relocateSingle(self.index, self.getOrigin().getX(), self.getOrigin().getY(),
             self.getOrigin().getZ());

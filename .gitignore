@@ -125,3 +125,4 @@ libnvidia-ngx-dlss*
 include/
 shaders/
 libxess*
+/prism-neoforge/

@@ -16,14 +16,6 @@
   "license": "GPL-3.0",
   "icon": "assets/radiance/icon.png",
   "environment": "client",
-  "entrypoints": {
-    "client": [
-      "com.radiance.client.RadianceClient"
-    ],
-    "main": [
-      "com.radiance.Radiance"
-    ]
-  },
   "mixins": [
     "radiance.mixins.json"
   ],

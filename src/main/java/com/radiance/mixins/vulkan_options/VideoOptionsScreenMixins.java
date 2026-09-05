@@ -1,7 +1,7 @@
 package com.radiance.mixins.vulkan_options;
 
 import static net.minecraft.client.option.GameOptions.getGenericValueText;
-import static net.minecraft.client.option.InactivityFpsLimit.AFK;
+
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
@@ -14,7 +14,7 @@ import java.util.Optional;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.option.VideoOptionsScreen;
 import net.minecraft.client.gui.tooltip.Tooltip;
-import net.minecraft.client.option.InactivityFpsLimit;
+
 import net.minecraft.client.option.SimpleOption;
 import net.minecraft.client.util.Monitor;
 import net.minecraft.client.util.VideoMode;
@@ -57,9 +57,7 @@ public class VideoOptionsScreenMixins extends GameOptionsScreenMixins {
                 Codec.intRange(10, 260),
                 Options.maxFps,
                 value -> {
-                    MinecraftClient.getInstance()
-                        .getInactivityFpsLimiter()
-                        .setMaxFps(value);
+                    MinecraftClient.getInstance().getWindow().setFramerateLimit(value);
                     Options.setMaxFps(value, true);
                 });
 
@@ -106,24 +104,11 @@ public class VideoOptionsScreenMixins extends GameOptionsScreenMixins {
                 }
             });
 
-        SimpleOption<InactivityFpsLimit> inactivityFpsLimit = new SimpleOption<>(
-            "options.inactivityFpsLimit",
-            option -> {
-                return switch (option) {
-                    case MINIMIZED -> Tooltip.of(
-                        INACTIVITY_FPS_LIMIT_MINIMIZED_TOOLTIP);
-                    case AFK -> Tooltip.of(INACTIVITY_FPS_LIMIT_AFK_TOOLTIP);
-                };
-            },
-            SimpleOption.enumValueText(),
-            new SimpleOption.PotentialValuesBasedCallbacks<>(Arrays.asList(
-                InactivityFpsLimit.values()),
-                InactivityFpsLimit.Codec),
-            AFK,
-            inactivityLimit -> {
-                Options.setInactivityFpsLimit(
-                    inactivityLimit == AFK ? 30 : 9, true);
-            });
+        SimpleOption<Integer> inactivityFpsLimit = new SimpleOption<>(
+            "options.inactivityFpsLimit", SimpleOption.emptyTooltip(),
+            (text, value) -> getGenericValueText(text, Text.literal(value.toString())),
+            new SimpleOption.ValidatingIntSliderCallbacks(1, 260),
+            Options.inactivityFpsLimit, value -> Options.setInactivityFpsLimit(value, true));
 
         SimpleOption<Boolean> enableVsync = SimpleOption.ofBoolean("options.vsync", Options.vsync,
             value -> {

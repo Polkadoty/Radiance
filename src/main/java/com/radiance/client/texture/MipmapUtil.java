@@ -43,10 +43,10 @@ public class MipmapUtil {
 
             for (int x = 0; x < newWidth; x++) {
                 for (int y = 0; y < newHeight; y++) {
-                    nextLevel.setColorArgb(x, y, blend(currentSource.getColorArgb(x * 2, y * 2),
-                        currentSource.getColorArgb(x * 2 + 1, y * 2),
-                        currentSource.getColorArgb(x * 2, y * 2 + 1),
-                        currentSource.getColorArgb(x * 2 + 1, y * 2 + 1), bl));
+                    com.radiance.client.compat.Images.setArgb(nextLevel, x, y, blend(com.radiance.client.compat.Images.getArgb(currentSource, x * 2, y * 2),
+                        com.radiance.client.compat.Images.getArgb(currentSource, x * 2 + 1, y * 2),
+                        com.radiance.client.compat.Images.getArgb(currentSource, x * 2, y * 2 + 1),
+                        com.radiance.client.compat.Images.getArgb(currentSource, x * 2 + 1, y * 2 + 1), bl));
                 }
             }
 
@@ -82,10 +82,10 @@ public class MipmapUtil {
 
             for (int x = 0; x < next.getWidth(); x++) {
                 for (int y = 0; y < next.getHeight(); y++) {
-                    next.setColorArgb(x, y, blend(previous.getColorArgb(x * 2, y * 2),
-                        previous.getColorArgb(x * 2 + 1, y * 2),
-                        previous.getColorArgb(x * 2, y * 2 + 1),
-                        previous.getColorArgb(x * 2 + 1, y * 2 + 1), hasAlpha));
+                    com.radiance.client.compat.Images.setArgb(next, x, y, blend(com.radiance.client.compat.Images.getArgb(previous, x * 2, y * 2),
+                        com.radiance.client.compat.Images.getArgb(previous, x * 2 + 1, y * 2),
+                        com.radiance.client.compat.Images.getArgb(previous, x * 2, y * 2 + 1),
+                        com.radiance.client.compat.Images.getArgb(previous, x * 2 + 1, y * 2 + 1), hasAlpha));
                 }
             }
 
@@ -115,11 +115,11 @@ public class MipmapUtil {
 
                     for (int l = 0; l < j; l++) {
                         for (int m = 0; m < k; m++) {
-                            nativeImage2.setColorArgb(l, m,
-                                blend(nativeImage.getColorArgb(l * 2, m * 2),
-                                    nativeImage.getColorArgb(l * 2 + 1, m * 2),
-                                    nativeImage.getColorArgb(l * 2, m * 2 + 1),
-                                    nativeImage.getColorArgb(l * 2 + 1, m * 2 + 1), bl));
+                            com.radiance.client.compat.Images.setArgb(nativeImage2, l, m,
+                                blend(com.radiance.client.compat.Images.getArgb(nativeImage, l * 2, m * 2),
+                                    com.radiance.client.compat.Images.getArgb(nativeImage, l * 2 + 1, m * 2),
+                                    com.radiance.client.compat.Images.getArgb(nativeImage, l * 2, m * 2 + 1),
+                                    com.radiance.client.compat.Images.getArgb(nativeImage, l * 2 + 1, m * 2 + 1), bl));
                         }
                     }
 
@@ -134,7 +134,7 @@ public class MipmapUtil {
     public static boolean hasAlpha(NativeImage image) {
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
-                if (ColorHelper.getAlpha(image.getColorArgb(i, j)) == 0) {
+                if (com.radiance.client.compat.Colors.getAlpha(com.radiance.client.compat.Images.getArgb(image, i, j)) == 0) {
                     return true;
                 }
             }
@@ -174,12 +174,12 @@ public class MipmapUtil {
 
         if (checkAlpha) {
             float alphaCoverage =
-                (ColorHelper.getAlpha(one) + ColorHelper.getAlpha(two) + ColorHelper.getAlpha(three)
-                    + ColorHelper.getAlpha(four)) / (4.0F * 255.0F);
+                (com.radiance.client.compat.Colors.getAlpha(one) + com.radiance.client.compat.Colors.getAlpha(two) + com.radiance.client.compat.Colors.getAlpha(three)
+                    + com.radiance.client.compat.Colors.getAlpha(four)) / (4.0F * 255.0F);
             resA = alphaCoverage >= CUTOUT_ALPHA_COVERAGE_THRESHOLD ? 255 : 0;
         }
 
-        return ColorHelper.getArgb(resA, resR, resG, resB);
+        return com.radiance.client.compat.Colors.getArgb(resA, resR, resG, resB);
     }
 
     public static int getColorComponent(int one, int two, int three, int four, int bits) {

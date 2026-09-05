@@ -95,14 +95,14 @@ public final class EmissionRecorder {
                         int sampleX = startX + localX;
                         int sampleY = startY + localY;
 
-                        int argb = albedo.getColorArgb(sampleX, sampleY);
+                        int argb = com.radiance.client.compat.Images.getArgb(albedo, sampleX, sampleY);
                         float alphaCoverage = decodeAlphaCoverage(argb);
                         if (alphaCoverage <= 0.0f) {
                             continue;
                         }
 
                         float emission = decodeLabPbrEmission(
-                            specular.getColorArgb(sampleX, sampleY));
+                            com.radiance.client.compat.Images.getArgb(specular, sampleX, sampleY));
                         if (emission <= 0.0f) {
                             continue;
                         }

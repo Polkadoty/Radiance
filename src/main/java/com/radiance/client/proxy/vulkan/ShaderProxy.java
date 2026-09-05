@@ -103,7 +103,7 @@ public final class ShaderProxy {
         NativeImage image = new NativeImage(16, 16, false);
         for (int y = 0; y < 16; y++) {
             for (int x = 0; x < 16; x++) {
-                image.setColorArgb(x, y, 0xFFFFFFFF);
+                com.radiance.client.compat.Images.setArgb(image, x, y, 0xFFFFFFFF);
             }
         }
         NativeImageBackedTexture texture = new NativeImageBackedTexture(image);

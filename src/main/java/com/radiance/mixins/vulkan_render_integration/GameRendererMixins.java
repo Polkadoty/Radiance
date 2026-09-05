@@ -19,10 +19,10 @@ import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.render.item.HeldItemRenderer;
 import net.minecraft.client.texture.NativeImage;
-import net.minecraft.client.util.ObjectAllocator;
-import net.minecraft.client.util.Pool;
+
+
 import net.minecraft.client.util.math.MatrixStack;
-import com.mojang.blaze3d.systems.ProjectionType;
+import com.mojang.blaze3d.systems.VertexSorter;
 import org.joml.Matrix4f;
 import org.joml.Matrix4fStack;
 import org.joml.Matrix4fc;
@@ -49,9 +49,6 @@ public abstract class GameRendererMixins implements IGameRendererExt {
     @Final
     @Shadow
     private MinecraftClient client;
-    @Final
-    @Shadow
-    private Pool pool;
     @Shadow
     @Final
     private BufferBuilderStorage buffers;
@@ -62,13 +59,19 @@ public abstract class GameRendererMixins implements IGameRendererExt {
     private Matrix4f viewMatrix;
 
     @Shadow
-    public abstract Matrix4f getBasicProjectionMatrix(float fovDegrees);
+    public abstract Matrix4f getBasicProjectionMatrix(double fovDegrees);
 
     @Shadow
-    protected abstract float getFov(Camera camera, float tickDelta, boolean changingFov);
+    protected abstract double getFov(Camera camera, float tickDelta, boolean changingFov);
 
-    @Inject(method = "renderBlur()V", at = @At(value = "HEAD"), cancellable = true)
-    public void redirectRenderBlur(CallbackInfo ci) {
+    // Vulkan owns postprocessing; the vanilla OpenGL framebuffer is intentionally absent.
+    @Inject(method = {"loadBlurPostProcessor", "loadPostProcessor"}, at = @At("HEAD"), cancellable = true)
+    private void radianceSkipOpenGlPostProcessors(CallbackInfo ci) {
+        ci.cancel();
+    }
+
+    @Inject(method = "renderBlur(F)V", at = @At(value = "HEAD"), cancellable = true)
+    public void redirectRenderBlur(float delta, CallbackInfo ci) {
         float f = this.client.options.getMenuBackgroundBlurrinessValue();
 
         //if (this.client.world == null && this.client.currentScreen != null && !(f < 1.0F)) {
@@ -86,32 +89,14 @@ public abstract class GameRendererMixins implements IGameRendererExt {
         return instance;
     }
 
-    @Redirect(method = "renderWorld(Lnet/minecraft/client/render/RenderTickCounter;)V",
-        at = @At(value = "INVOKE",
-            target =
-                "Lnet/minecraft/client/render/WorldRenderer;render(Lnet/minecraft/client/util/ObjectAllocator;"
-                    +
-                    "Lnet/minecraft/client/render/RenderTickCounter;ZLnet/minecraft/client/render/Camera;"
-                    +
-                    "Lnet/minecraft/client/render/GameRenderer;Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;)V"))
-    public void performBTimesV(WorldRenderer instance,
-        ObjectAllocator allocator,
-        RenderTickCounter tickCounter,
-        boolean renderBlockOutline,
-        Camera camera,
-        GameRenderer gameRenderer,
-        Matrix4f viewMatrix,
-        Matrix4f projectionMatrix,
-        @Local boolean shouldRenderBlockOutline,
-        @Local MatrixStack matrixStack) {
-        Matrix4f
-            B =
-            new Matrix4f(matrixStack.peek()
-                .getPositionMatrix());
-        this.viewMatrix = new Matrix4f(viewMatrix);
-        viewMatrix = new Matrix4f(B.mul(viewMatrix));
-        instance.render(this.pool, tickCounter, shouldRenderBlockOutline, camera, gameRenderer,
-            viewMatrix, projectionMatrix);
+    @Redirect(method = "renderWorld", at = @At(value = "INVOKE", target =
+        "Lnet/minecraft/client/render/WorldRenderer;render(Lnet/minecraft/client/render/RenderTickCounter;ZLnet/minecraft/client/render/Camera;Lnet/minecraft/client/render/GameRenderer;Lnet/minecraft/client/render/LightmapTextureManager;Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;)V"))
+    public void performBTimesV(WorldRenderer instance, RenderTickCounter counter, boolean outline,
+            Camera camera, GameRenderer gameRenderer, LightmapTextureManager lightmap,
+            Matrix4f view, Matrix4f projection, @Local MatrixStack matrixStack) {
+        this.viewMatrix = new Matrix4f(view);
+        Matrix4f effected = new Matrix4f(matrixStack.peek().getPositionMatrix()).mul(view);
+        instance.render(counter, outline, camera, gameRenderer, lightmap, effected, projection);
     }
 
     @Inject(method = "renderWorld(Lnet/minecraft/client/render/RenderTickCounter;)V", at = @At(value = "TAIL"))
@@ -119,11 +104,6 @@ public abstract class GameRendererMixins implements IGameRendererExt {
         EntityProxy.build();
     }
 
-    @Redirect(method = "renderWorld(Lnet/minecraft/client/render/RenderTickCounter;)V",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gl/Framebuffer;beginWrite(Z)V"))
-    public void cancelFramebufferBeginWrite(Framebuffer instance, boolean setViewport) {
-
-    }
 
     @Inject(method = "renderWorld(Lnet/minecraft/client/render/RenderTickCounter;)V", at = @At(value = "TAIL"))
     public void fuseWorld(RenderTickCounter renderTickCounter, CallbackInfo ci) {
@@ -133,8 +113,8 @@ public abstract class GameRendererMixins implements IGameRendererExt {
     @Inject(method = "renderHand(Lnet/minecraft/client/render/Camera;FLorg/joml/Matrix4f;)V", at = @At(value = "HEAD"), cancellable = true)
     public void redirectRenderHand(Camera camera, float tickDelta, Matrix4f matrix4f,
         CallbackInfo ci) {
-        float worldFov = this.getFov(camera, tickDelta, true);
-        float handFov = this.getFov(camera, tickDelta, false);
+        double worldFov = this.getFov(camera, tickDelta, true);
+        double handFov = this.getFov(camera, tickDelta, false);
         float handProjectionScale =
             (float) (Math.tan(Math.toRadians(worldFov * 0.5F)) /
                 Math.tan(Math.toRadians(handFov * 0.5F)));
@@ -167,14 +147,14 @@ public abstract class GameRendererMixins implements IGameRendererExt {
         com.mojang.blaze3d.systems.RenderSystem.backupProjectionMatrix();
         com.mojang.blaze3d.systems.RenderSystem.setProjectionMatrix(
             this.getBasicProjectionMatrix(this.getFov(this.camera, tickDelta, false)),
-            ProjectionType.PERSPECTIVE);
+            VertexSorter.BY_DISTANCE);
         Matrix4fStack modelViewStack = com.mojang.blaze3d.systems.RenderSystem.getModelViewStack();
         modelViewStack.pushMatrix();
         modelViewStack.identity();
         VertexConsumerProvider.Immediate immediate = VertexConsumerProvider.immediate(
             new BufferAllocator(1536));
         try {
-            InGameOverlayRenderer.renderOverlays(this.client, new MatrixStack(), immediate);
+            InGameOverlayRenderer.renderOverlays(this.client, new MatrixStack());
             immediate.draw();
         } finally {
             modelViewStack.popMatrix();

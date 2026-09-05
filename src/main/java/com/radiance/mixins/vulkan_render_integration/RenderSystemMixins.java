@@ -34,7 +34,7 @@ public abstract class RenderSystemMixins {
         cir.setReturnValue(maxImageSize);
     }
 
-    @Redirect(method = "flipFrame(JLnet/minecraft/client/util/tracy/TracyFrameCapturer;)V",
+    @Redirect(method = "flipFrame(J)V", remap = false,
         at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwSwapBuffers(J)V", remap = false))
     private static void cancelSwapBuffers(long window) {
 

@@ -18,6 +18,12 @@ public class AbstractTextureMixins implements IAbstractTextureExt {
     @Shadow
     protected int glId;
 
+    @Shadow
+    protected boolean bilinear;
+
+    @Shadow
+    protected boolean mipmap;
+
     @Inject(method = "bindTexture()V", at = @At(value = "HEAD"), cancellable = true)
     public void cancelBindTexture(CallbackInfo ci) {
         ci.cancel();
@@ -25,7 +31,12 @@ public class AbstractTextureMixins implements IAbstractTextureExt {
 
     @Inject(method = "setFilter(ZZ)V", at = @At(value = "HEAD"), cancellable = true)
     public void redirectSetFilter(boolean bilinear, boolean mipmap, CallbackInfo ci) {
-        TextureProxy.setFilter(glId,
+        this.bilinear = bilinear;
+        this.mipmap = mipmap;
+        // Vanilla setFilter binds the texture, which lazily allocates its ID.
+        // Our Vulkan replacement must preserve that allocation before sampling.
+        int textureId = ((AbstractTexture) (Object) this).getGlId();
+        TextureProxy.setFilter(textureId,
             (bilinear ? VulkanConstants.VkFilter.VK_FILTER_LINEAR :
                 VulkanConstants.VkFilter.VK_FILTER_NEAREST).getValue(),
             mipmap ? (bilinear
@@ -35,15 +46,6 @@ public class AbstractTextureMixins implements IAbstractTextureExt {
         ci.cancel();
     }
 
-    @Inject(method = "setClamp(Z)V", at = @At(value = "HEAD"), cancellable = true)
-    public void redirectSetClamp(boolean clamp, CallbackInfo ci) {
-        TextureProxy.setClamp(glId,
-            clamp
-                ? VulkanConstants.VkSamplerAddressMode.VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE.getValue()
-                :
-                    VulkanConstants.VkSamplerAddressMode.VK_SAMPLER_ADDRESS_MODE_REPEAT.getValue());
-        ci.cancel();
-    }
 
     @Inject(method = "clearGlId()V", at = @At(value = "HEAD"), cancellable = true)
     public void cancelClearGlId(CallbackInfo ci) {

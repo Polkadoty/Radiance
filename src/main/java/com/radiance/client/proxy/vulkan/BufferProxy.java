@@ -8,6 +8,8 @@ import static org.lwjgl.system.MemoryUtil.memSet;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.radiance.client.constant.Constants;
+import com.radiance.client.compat.OverlayIndices;
+import org.lwjgl.system.MemoryUtil;
 import com.radiance.client.texture.TextureTracker;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
@@ -15,7 +17,7 @@ import java.util.Map;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.BuiltBuffer;
 import net.minecraft.client.render.Camera;
-import net.minecraft.client.render.Fog;
+import com.radiance.client.compat.Fog;
 import net.minecraft.client.render.RenderPhase;
 import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.world.ClientWorld;
@@ -55,7 +57,6 @@ public class BufferProxy {
     public static VertexIndexBufferHandle createAndUploadVertexIndexBuffer(
         BuiltBuffer builtBuffer) {
         BuiltBuffer.DrawParameters drawParameters = builtBuffer.getDrawParameters();
-        assert builtBuffer.getDrawParameters().mode() == VertexFormat.DrawMode.QUADS;
 
         int vertexSize = drawParameters.vertexCount() * drawParameters.format().getVertexSizeByte();
         int vertexId = allocateBuffer();
@@ -67,6 +68,18 @@ public class BufferProxy {
         initializeBuffer(indexId, indexSize, VK_BUFFER_USAGE_INDEX_BUFFER_BIT.getValue());
         if (builtBuffer.getSortedBuffer() != null) {
             queueUpload(builtBuffer.getSortedBuffer(), indexSize, indexId);
+        } else if (drawParameters.mode() != VertexFormat.DrawMode.QUADS) {
+            // The native sequential builder only implements quads. Charts and
+            // debug overlays also submit fans, strips, and expanded thick lines.
+            ByteBuffer indices = MemoryUtil.memAlloc(indexSize);
+            try {
+                OverlayIndices.write(indices, drawParameters.mode(), drawParameters.indexType(),
+                    drawParameters.vertexCount(), drawParameters.indexCount());
+                queueUpload(indices, indexSize, indexId);
+            } finally {
+                // queueUpload synchronously copies into the native staging buffer.
+                MemoryUtil.memFree(indices);
+            }
         } else {
             int type = Constants.IndexTypes.getValue(drawParameters.indexType());
             int drawMode = Constants.DrawModes.getValue(drawParameters.mode());

@@ -5,15 +5,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.gui.widget.CyclingButtonWidget;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.option.SimpleOption;
 import net.minecraft.client.option.SimpleOption.TooltipFactory;
 
-@Environment(EnvType.CLIENT)
 public record PotentialValuesBasedCallbacksNoValue<T>(List<T> values, Codec<T> codec) implements
     SimpleOption.CyclingCallbacks<T> {
 

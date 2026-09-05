@@ -13,6 +13,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EnumMap;
+import com.radiance.client.compat.OverlayIndices;
 import java.util.HexFormat;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -30,28 +32,27 @@ public final class ShaderRegistry {
         "^\\s*(?:layout\\s*\\([^)]*\\)\\s*)?uniform\\s+sampler\\w+\\s+(\\w+)\\s*;\\s*$");
     private static final Pattern SAMPLER_SLOT_PATTERN = Pattern.compile("\\bSampler(\\d+)\\b");
 
-    private static final Map<ShaderProgram, ShaderDefinition> CACHE =
+    private static final Map<ShaderProgram, Map<VertexFormat.DrawMode, ShaderDefinition>> CACHE =
         Collections.synchronizedMap(new WeakHashMap<>());
 
     private ShaderRegistry() {
     }
 
-    public static ShaderDefinition getOrCreate(ShaderProgram shaderProgram) {
-        ShaderDefinition cached = CACHE.get(shaderProgram);
-        if (cached != null) {
-            return cached;
+    public static ShaderDefinition getOrCreate(ShaderProgram shaderProgram,
+        VertexFormat.DrawMode drawMode) {
+        VertexFormat.DrawMode topology = OverlayIndices.topology(drawMode);
+        synchronized (CACHE) {
+            Map<VertexFormat.DrawMode, ShaderDefinition> variants = CACHE.computeIfAbsent(
+                shaderProgram, ignored -> new EnumMap<>(VertexFormat.DrawMode.class));
+            return variants.computeIfAbsent(topology, mode -> create(shaderProgram, mode));
         }
-
-        ShaderDefinition created = create(shaderProgram);
-        CACHE.put(shaderProgram, created);
-        return created;
     }
 
     public static void clear() {
         CACHE.clear();
     }
 
-    private static ShaderDefinition create(ShaderProgram shaderProgram) {
+    private static ShaderDefinition create(ShaderProgram shaderProgram, VertexFormat.DrawMode topology) {
         IShaderProgramExt ext = (IShaderProgramExt) (Object) shaderProgram;
         VertexFormat vertexFormat = ext.radiance$getVertexFormat();
         String vertexSource = ext.radiance$getVertexSource();
@@ -68,7 +69,7 @@ public final class ShaderRegistry {
             fragmentSource, fields);
 
         String key = buildKey(shaderName, vertexFormat, result.vertexSource(),
-            result.fragmentSource(), fields);
+            result.fragmentSource(), fields) + "-" + topology.name().toLowerCase(java.util.Locale.ROOT);
         Path directory = getShaderDirectory();
         Path vertexPath = directory.resolve(key + ".vert");
         Path fragmentPath = directory.resolve(key + ".frag");
@@ -77,7 +78,7 @@ public final class ShaderRegistry {
 
         int nativeId = ShaderProxy.registerShader(key,
             Constants.VertexFormats.getValue(vertexFormat),
-            Constants.DrawModes.QUADS.getValue(),
+            Constants.DrawModes.getValue(topology),
             result.uniformBufferSize(),
             vertexPath.toString(),
             fragmentPath.toString(),

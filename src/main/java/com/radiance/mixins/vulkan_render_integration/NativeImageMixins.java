@@ -44,20 +44,26 @@ public abstract class NativeImageMixins implements
     @Shadow
     public abstract NativeImage.Format getFormat();
 
-    @Inject(method = "uploadInternal(IIIIIIIZ)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/texture/NativeImage;checkAllocated()V", shift = At.Shift.AFTER), cancellable = true)
+    @Inject(method = "uploadInternal(IIIIIIIZZZZ)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/texture/NativeImage;checkAllocated()V", shift = At.Shift.AFTER), cancellable = true)
     public void redirectUploadInternal(int level, int offsetX, int offsetY, int unpackSkipPixels,
-        int unpackSkipRows, int regionWidth, int regionHeight, boolean blur, CallbackInfo ci) {
+        int unpackSkipRows, int regionWidth, int regionHeight, boolean blur, boolean clamp, boolean mipmap, boolean close, CallbackInfo ci) {
         try {
             INativeImageExt self = (INativeImageExt) this;
             int targetId = self.radiance$getTargetID();
+            if (targetId < 0) {
+                throw new IllegalStateException("NativeImage upload has no Radiance texture target");
+            }
+            TextureProxy.setFilter(targetId, blur ? 1 : 0, mipmap && blur ? 1 : 0);
+            TextureProxy.setClamp(targetId, clamp ? 2 : 0);
+
 
             AuxiliaryTextures.loadAndUpload((NativeImage) (Object) this, self, level, offsetX,
-                offsetY, unpackSkipPixels, unpackSkipRows, regionWidth, regionHeight, blur);
+                offsetY, unpackSkipPixels, unpackSkipRows, regionWidth, regionHeight, close);
 
             TextureProxy.queueUpload(pointer, (int) sizeBytes, width, targetId, unpackSkipPixels,
                 unpackSkipRows, offsetX, offsetY, regionWidth, regionHeight, level);
         } finally {
-            if (blur) {
+            if (close) {
                 this.close();
             }
         }

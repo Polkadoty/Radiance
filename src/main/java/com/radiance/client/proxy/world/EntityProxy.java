@@ -50,15 +50,15 @@ import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.VertexConsumers;
-import net.minecraft.client.render.VertexRendering;
-import net.minecraft.client.render.WeatherRendering;
-import net.minecraft.client.render.WorldBorderRendering;
+import com.radiance.client.compat.VertexRendering;
+import com.radiance.client.compat.WeatherRenderer;
+
 import net.minecraft.client.render.block.BlockRenderManager;
 import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 import net.minecraft.client.render.chunk.ChunkBuilder;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.item.HeldItemRenderer;
-import net.minecraft.client.render.model.ModelBaker;
+import net.minecraft.client.render.model.ModelLoader;
 import net.minecraft.client.texture.MissingSprite;
 import net.minecraft.client.texture.TextureManager;
 import net.minecraft.client.util.math.MatrixStack;
@@ -294,9 +294,9 @@ public class EntityProxy {
 //                    new StorageOutlineVertexConsumerProvider(entityStorageVertexConsumerProvider);
 //                vertexConsumerProvider = outlineVertexConsumerProvider;
 //                int color = entity.getTeamColorValue();
-//                outlineVertexConsumerProvider.setColor(ColorHelper.getRed(color),
-//                                                       ColorHelper.getGreen(color),
-//                                                       ColorHelper.getBlue(color),
+//                outlineVertexConsumerProvider.setColor(com.radiance.client.compat.Colors.getRed(color),
+//                                                       com.radiance.client.compat.Colors.getGreen(color),
+//                                                       com.radiance.client.compat.Colors.getBlue(color),
 //                                                       255);
                 vertexConsumerProvider = entityStorageVertexConsumerProvider;
             } else {
@@ -320,7 +320,7 @@ public class EntityProxy {
                     0,
                     0,
                     0,
-                    tickDelta,
+                    entity.getYaw(tickDelta), tickDelta,
                     matrixStack,
                     postTextStorageVertexConsumerProvider,
                     light);
@@ -342,7 +342,7 @@ public class EntityProxy {
                     0,
                     0,
                     0,
-                    tickDelta,
+                    entity.getYaw(tickDelta), tickDelta,
                     matrixStack,
                     vertexConsumerProvider,
                     light);
@@ -444,7 +444,7 @@ public class EntityProxy {
                                 vertexConsumer =
                                 new OverlayVertexConsumer(
                                     crumblingStorageVertexConsumerProvider.getBuffer(
-                                        ModelBaker.BLOCK_DESTRUCTION_RENDER_LAYERS.get(
+                                        ModelLoader.BLOCK_DESTRUCTION_RENDER_LAYERS.get(
                                             stage)), entry, 1.0F);
                             vertexConsumerProvider = renderLayer -> {
                                 VertexConsumer vertexConsumer2 = entityStorageVertexConsumerProvider.getBuffer(
@@ -552,7 +552,7 @@ public class EntityProxy {
                         vertexConsumer =
                         new OverlayVertexConsumer(
                             blockCrumblingStorageVertexConsumerProvider.getBuffer(
-                                ModelBaker.BLOCK_DESTRUCTION_RENDER_LAYERS.get(
+                                ModelLoader.BLOCK_DESTRUCTION_RENDER_LAYERS.get(
                                     stage)), entry, 1.0F);
                     blockRenderManager.renderDamage(world.getBlockState(blockPos), blockPos, world,
                         matrixStack, vertexConsumer);
@@ -661,10 +661,10 @@ public class EntityProxy {
                         vertexConsumer =
                         postStorageVertexConsumerProvider.getBuffer(
                             Objects.requireNonNull(
-                                particleTextureSheet.renderType()));
+                                com.radiance.client.compat.Particles.layer(particleTextureSheet)));
 
                     try {
-                        particle.render(vertexConsumer, camera, tickDelta);
+                        particle.buildGeometry(vertexConsumer, camera, tickDelta);
                     } catch (Throwable var11) {
                         CrashReport crashReport = CrashReport.create(var11, "Rendering Particle");
                         CrashReportSection crashReportSection = crashReport.addElement(
@@ -693,7 +693,7 @@ public class EntityProxy {
                 MatrixStack matrixStack = new MatrixStack();
 
                 try {
-                    particle.renderCustom(matrixStack, storageVertexConsumerProvider, camera,
+                    particle.buildGeometry(storageVertexConsumerProvider.getBuffer(com.radiance.client.compat.Particles.layer(ParticleTextureSheet.CUSTOM)), camera,
                         tickDelta);
                 } catch (Throwable var10) {
                     CrashReport crashReport = CrashReport.create(var10, "Rendering Particle");
@@ -732,11 +732,10 @@ public class EntityProxy {
                     .contains(blockPos)) {
                     Boolean
                         isHighContrastBlockOutline =
-                        client.options.getHighContrastBlockOutline()
-                            .getValue();
+                        false;
                     if (isHighContrastBlockOutline) {
                         VertexConsumer vertexConsumer = storageVertexConsumerProvider.getBuffer(
-                            RenderLayer.getSecondaryBlockOutline());
+                            RenderLayer.getLines());
                         VertexRendering.drawOutline(matrixStack,
                             vertexConsumer,
                             blockState.getOutlineShape(world, blockPos,
@@ -750,8 +749,8 @@ public class EntityProxy {
                     VertexConsumer vertexConsumer = storageVertexConsumerProvider.getBuffer(
                         RenderLayer.getLines());
                     int color =
-                        isHighContrastBlockOutline ? Colors.CYAN
-                            : ColorHelper.withAlpha(102, Colors.BLACK);
+                        isHighContrastBlockOutline ? 0xff00ffff
+                            : com.radiance.client.compat.Colors.withAlpha(102, Colors.BLACK);
                     VertexRendering.drawOutline(matrixStack,
                         vertexConsumer,
                         blockState.getOutlineShape(world, blockPos,
@@ -778,9 +777,7 @@ public class EntityProxy {
             false);
     }
 
-    public static void queueWeatherBuild(WeatherRendering weatherRendering,
-        WorldBorderRendering worldBorderRendering,
-        ClientWorld world,
+    public static void queueWeatherBuild(ClientWorld world,
         Camera camera,
         int ticks,
         float tickDelta) {
@@ -791,14 +788,10 @@ public class EntityProxy {
             0);
         storageVertexConsumerProviders.add(storageVertexConsumerProvider);
 
-        weatherRendering.renderPrecipitation(world, storageVertexConsumerProvider, ticks, tickDelta,
+        WeatherRenderer.renderPrecipitation(world, storageVertexConsumerProvider, ticks, tickDelta,
             camera.getPos());
 
-        MinecraftClient client = MinecraftClient.getInstance();
-        int clampedViewDistance = client.options.getClampedViewDistance() * 16;
-        float farPlaneDistance = client.gameRenderer.getFarPlaneDistance();
-        worldBorderRendering.render(world.getWorldBorder(), camera.getPos(), clampedViewDistance,
-            farPlaneDistance);
+        WeatherRenderer.renderBorder(world, storageVertexConsumerProvider, camera.getPos());
 
         processPostEntityRenderData(storageVertexConsumerProvider, 0, 0, 0, 0,
             PostRenderFlags.WEATHER, EntityProxy::resolveWeatherContentName, renderDataList);

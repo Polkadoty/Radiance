@@ -18,6 +18,23 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ItemRenderer.class)
 public class ItemRendererMixins {
 
+    @Inject(method = "getDirectItemGlintConsumer(Lnet/minecraft/client/render/VertexConsumerProvider;"
+        + "Lnet/minecraft/client/render/RenderLayer;ZZ)Lnet/minecraft/client/render/VertexConsumer;",
+        at = @At("HEAD"), cancellable = true)
+    private static void radiance$directItemGlint(VertexConsumerProvider provider,
+        RenderLayer layer, boolean solid, boolean glint,
+        CallbackInfoReturnable<VertexConsumer> cir) {
+        VertexConsumer base = provider.getBuffer(layer);
+        RenderLayer glintLayer = solid ? RenderLayer.getGlint() : RenderLayer.getDirectEntityGlint();
+        if (base instanceof PBRVertexConsumer pbr) {
+            // 1.21.1 uses this additional path for held/solid items. A separate
+            // glint mesh would become a coincident physical ray-traced surface.
+            cir.setReturnValue(glint ? new PBRVertexConsumer.GLint(pbr, glintLayer) : base);
+        } else {
+            cir.setReturnValue(glint ? VertexConsumers.union(provider.getBuffer(glintLayer), base) : base);
+        }
+    }
+
     @Inject(method =
         "getArmorGlintConsumer(Lnet/minecraft/client/render/VertexConsumerProvider;Lnet/minecraft/client/render/RenderLayer;"
             +

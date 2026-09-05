@@ -9,6 +9,7 @@ public class AuxiliaryTextureReloader implements ResourceReloader {
 
     @Override
     public CompletableFuture<Void> reload(Synchronizer synchronizer, ResourceManager manager,
+        net.minecraft.util.profiler.Profiler prepareProfiler, net.minecraft.util.profiler.Profiler applyProfiler,
         Executor prepareExecutor, Executor applyExecutor) {
         return AuxiliaryTextures.prepareDecodedImagesAsync(manager, prepareExecutor)
             .thenCompose(synchronizer::whenPrepared)

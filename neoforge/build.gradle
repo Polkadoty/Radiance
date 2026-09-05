@@ -1,0 +1,51 @@
+plugins {
+    id 'dev.architectury.loom' version '1.11.456'
+}
+def sharedProperties = new Properties()
+file('../gradle.properties').withInputStream { sharedProperties.load(it) }
+version = sharedProperties.mod_version
+group = sharedProperties.maven_group
+base { archivesName = 'Radiance' }
+repositories {
+    mavenCentral()
+    maven { url = 'https://maven.neoforged.net/releases/' }
+    maven { url = 'https://maven.architectury.dev/' }
+}
+dependencies {
+    minecraft 'com.mojang:minecraft:1.21.1'
+    mappings loom.layered {
+        mappings 'net.fabricmc:yarn:1.21.1+build.3:v2'
+        mappings 'dev.architectury:yarn-mappings-patch-neoforge:1.21+build.4'
+    }
+    neoForge 'net.neoforged:neoforge:21.1.249'
+    implementation 'org.yaml:snakeyaml:2.5'
+    include 'org.yaml:snakeyaml:2.5'
+    forgeRuntimeLibrary 'org.yaml:snakeyaml:2.5'
+}
+sourceSets.main {
+    java.srcDir '../src/main/java'
+    resources.srcDir '../src/main/resources'
+    resources.exclude 'fabric.mod.json'
+}
+loom {
+    accessWidenerPath = file('../src/main/resources/radiance.accesswidener')
+
+}
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
+    withSourcesJar()
+}
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 21
+    options.compilerArgs += ['-Xmaxerrs', '1000']
+}
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('META-INF/neoforge.mods.toml') { expand version: project.version }
+}
+remapJar {
+    atAccessWideners.add('radiance.accesswidener')
+    archiveFileName.set("Radiance-${project.version}-neoforge-1.21.1.jar")
+}
+jar { from('../LICENSE') }

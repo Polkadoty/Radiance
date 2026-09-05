@@ -21,22 +21,22 @@ import java.util.Collections;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
-import net.fabricmc.api.ClientModInitializer;
+
 import net.minecraft.client.MinecraftClient;
 import org.slf4j.Logger;
 
-public class RadianceClient implements ClientModInitializer {
+public class RadianceClient {
 
     public static final Logger LOGGER = LogUtils.getLogger();
     public static Path radianceDir;
 
-    @Override
-    public void onInitializeClient() {
-        MinecraftClient mc = MinecraftClient.getInstance();
-        Path mcBaseDir = mc.runDirectory.toPath();
+    public void initialize(Path mcBaseDir) {
         radianceDir = mcBaseDir.resolve("radiance");
         try {
             Files.createDirectories(radianceDir);
+            // Resolve launcher junctions before passing paths to native ZIP extraction.
+            // Its traversal checks must operate on the actual extraction directory.
+            radianceDir = radianceDir.toRealPath();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

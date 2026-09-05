@@ -1,15 +1,12 @@
 package com.radiance.client.vertex;
 
 import java.util.Optional;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.VertexConsumers;
 import net.minecraft.util.math.ColorHelper;
 
-@Environment(EnvType.CLIENT)
 public class StorageOutlineVertexConsumerProvider implements VertexConsumerProvider {
 
     private final StorageVertexConsumerProvider parent;
@@ -52,12 +49,11 @@ public class StorageOutlineVertexConsumerProvider implements VertexConsumerProvi
         this.alpha = alpha;
     }
 
-    @Environment(EnvType.CLIENT)
-    record OutlineVertexConsumer(VertexConsumer delegate, int color) implements VertexConsumer {
+        record OutlineVertexConsumer(VertexConsumer delegate, int color) implements VertexConsumer {
 
         public OutlineVertexConsumer(VertexConsumer delegate, int red, int green, int blue,
             int alpha) {
-            this(delegate, ColorHelper.getArgb(alpha, red, green, blue));
+            this(delegate, com.radiance.client.compat.Colors.getArgb(alpha, red, green, blue));
         }
 
         @Override

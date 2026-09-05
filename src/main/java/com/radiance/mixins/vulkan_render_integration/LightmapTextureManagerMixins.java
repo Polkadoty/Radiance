@@ -15,7 +15,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.profiler.Profiler;
-import net.minecraft.util.profiler.Profilers;
+
 import org.joml.Vector3f;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Final;
@@ -49,17 +49,9 @@ public abstract class LightmapTextureManagerMixins implements ILightMapManagerEx
     private float darkenWorldFactor = 0;
     @Unique
     private float brightnessFactor = 0;
-    @Unique
-    private NativeImageBackedTexture radiance$texture;
-    @Unique
-    private NativeImage radiance$image;
-    @Unique
-    private Identifier radiance$textureIdentifier;
-
-    @Mutable
-    @Final
-    @Shadow
-    private SimpleFramebuffer lightmapFramebuffer;
+    @Shadow @Final private NativeImageBackedTexture texture;
+    @Shadow @Final private NativeImage image;
+    @Shadow @Final private Identifier textureIdentifier;
     @Shadow
     private boolean dirty;
     @Shadow
@@ -70,84 +62,6 @@ public abstract class LightmapTextureManagerMixins implements ILightMapManagerEx
     @Final
     @Shadow
     private MinecraftClient client;
-
-    // region <init>
-    @Redirect(method = "<init>(Lnet/minecraft/client/render/GameRenderer;Lnet/minecraft/client/MinecraftClient;)V",
-        at = @At(value = "NEW", target = "net/minecraft/client/gl/SimpleFramebuffer"))
-    public SimpleFramebuffer cancelFramebufferConstruction(int width, int height,
-        boolean useDepth) {
-        return UnsafeManager.INSTANCE.allocateInstance(SimpleFramebuffer.class);
-    }
-
-    @Redirect(method = "<init>",
-        at = @At(value = "FIELD",
-            target = "Lnet/minecraft/client/render/LightmapTextureManager;" +
-                "lightmapFramebuffer:Lnet/minecraft/client/gl/SimpleFramebuffer;",
-            opcode = Opcodes.PUTFIELD))
-    public void writeNullFramebuffer(LightmapTextureManager instance, SimpleFramebuffer value) {
-        this.lightmapFramebuffer = null;
-    }
-
-    @Redirect(method = "<init>(Lnet/minecraft/client/render/GameRenderer;Lnet/minecraft/client/MinecraftClient;)V",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gl/SimpleFramebuffer;setTexFilter(I)V"))
-    public void cancelFramebufferSetTexFilter(SimpleFramebuffer instance, int i) {
-
-    }
-
-    @Redirect(method = "<init>(Lnet/minecraft/client/render/GameRenderer;Lnet/minecraft/client/MinecraftClient;)V",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gl/SimpleFramebuffer;setClearColor(FFFF)V"))
-    public void cancelFramebufferSetClearColor(SimpleFramebuffer instance, float r, float g,
-        float b, float a) {
-
-    }
-
-    @Redirect(method = "<init>(Lnet/minecraft/client/render/GameRenderer;Lnet/minecraft/client/MinecraftClient;)V",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gl/SimpleFramebuffer;clear()V"))
-    public void cancelFramebufferClear(SimpleFramebuffer instance) {
-
-    }
-
-    @Inject(method = "<init>(Lnet/minecraft/client/render/GameRenderer;Lnet/minecraft/client/MinecraftClient;)V",
-        at = @At("TAIL"))
-    public void initJavaLightmapTexture(GameRenderer renderer, MinecraftClient client,
-        CallbackInfo ci) {
-        this.radiance$texture = new NativeImageBackedTexture(16, 16, false);
-        this.radiance$textureIdentifier = Identifier.of("radiance", "dynamic/light_map");
-        this.client.getTextureManager()
-            .registerTexture(this.radiance$textureIdentifier, this.radiance$texture);
-        this.radiance$image = this.radiance$texture.getImage();
-        if (this.radiance$image == null) {
-            throw new IllegalStateException("Lightmap texture image was not initialized");
-        }
-
-        for (int y = 0; y < 16; y++) {
-            for (int x = 0; x < 16; x++) {
-                this.radiance$image.setColorArgb(x, y, 0xFFFFFFFF);
-            }
-        }
-
-        this.radiance$texture.setClamp(true);
-        this.radiance$texture.setFilter(true, false);
-        this.radiance$texture.upload();
-    }
-    // endregion
-
-    // region <close>
-    @Redirect(method = "close()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gl/SimpleFramebuffer;delete()V"))
-    public void cancelFramebufferDelete(SimpleFramebuffer instance) {
-
-    }
-
-    @Inject(method = "close()V", at = @At("HEAD"))
-    public void closeJavaLightmapTexture(CallbackInfo ci) {
-        if (this.radiance$texture != null) {
-            this.radiance$texture.close();
-            this.radiance$texture = null;
-            this.radiance$image = null;
-            this.radiance$textureIdentifier = null;
-        }
-    }
-    // endregion
 
     // region <disable>
     @Inject(method = "disable()V", at = @At(value = "HEAD"), cancellable = true)
@@ -160,8 +74,8 @@ public abstract class LightmapTextureManagerMixins implements ILightMapManagerEx
     // region <enable>
     @Inject(method = "enable()V", at = @At(value = "HEAD"), cancellable = true)
     public void cancelEnable(CallbackInfo ci) {
-        if (this.radiance$textureIdentifier != null) {
-            RenderSystem.setShaderTexture(2, this.radiance$textureIdentifier);
+        if (this.textureIdentifier != null) {
+            RenderSystem.setShaderTexture(2, this.textureIdentifier);
         } else {
             RenderSystem.setShaderTexture(2, 0);
         }
@@ -180,10 +94,10 @@ public abstract class LightmapTextureManagerMixins implements ILightMapManagerEx
     public void redirectUpdate(float delta, CallbackInfo ci) {
         if (this.dirty) {
             this.dirty = false;
-            Profiler profiler = Profilers.get();
+            Profiler profiler = this.client.getProfiler();
             profiler.push("lightTex");
             ClientWorld clientWorld = this.client.world;
-            if (clientWorld != null && this.radiance$image != null && this.radiance$texture != null) {
+            if (clientWorld != null && this.image != null && this.texture != null) {
                 float f = clientWorld.getSkyBrightness(1.0F);
                 float skyFactor;
                 if (clientWorld.getLightningTicksLeft() > 0) {
@@ -288,11 +202,11 @@ public abstract class LightmapTextureManagerMixins implements ILightMapManagerEx
                         int red = (int) workingColor.x();
                         int greenInt = (int) workingColor.y();
                         int blueInt = (int) workingColor.z();
-                        this.radiance$image.setColorArgb(block, sky,
+                        com.radiance.client.compat.Images.setArgb(this.image, block, sky,
                             0xFF000000 | red << 16 | greenInt << 8 | blueInt);
                     }
                 }
-                this.radiance$texture.upload();
+                this.texture.upload();
 
                 this.ambientLightFactor = ambientLightFactor;
                 this.skyFactor = skyFactor;
@@ -325,7 +239,7 @@ public abstract class LightmapTextureManagerMixins implements ILightMapManagerEx
 
     @Override
     public int radiance$getTextureId() {
-        return this.radiance$texture != null ? this.radiance$texture.getGlId() : 0;
+        return this.texture != null ? this.texture.getGlId() : 0;
     }
 
     public float radiance$getAmbientLightFactor() {

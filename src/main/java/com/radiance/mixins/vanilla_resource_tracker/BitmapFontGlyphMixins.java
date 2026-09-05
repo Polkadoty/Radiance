@@ -3,7 +3,7 @@ package com.radiance.mixins.vanilla_resource_tracker;
 import com.radiance.mixin_related.extensions.vanilla_resource_tracker.INativeImageExt;
 import com.radiance.mixin_related.extensions.vanilla_resource_tracker.IRenderableGlyphExt;
 import java.util.function.Function;
-import net.minecraft.client.font.BakedGlyph;
+import net.minecraft.client.font.GlyphRenderer;
 import net.minecraft.client.font.BitmapFont;
 import net.minecraft.client.font.RenderableGlyph;
 import net.minecraft.client.texture.NativeImage;
@@ -48,7 +48,7 @@ public abstract class BitmapFontGlyphMixins {
      * @reason to pass image targetID
      */
     @Overwrite
-    public BakedGlyph bake(Function<RenderableGlyph, BakedGlyph> function) {
+    public GlyphRenderer bake(Function<RenderableGlyph, GlyphRenderer> function) {
         return function.apply(new IRenderableGlyphExt() {
             @Override
             public float getOversample() {
@@ -74,7 +74,7 @@ public abstract class BitmapFontGlyphMixins {
             public void upload(int u, int v) {
                 // 这里的反编译有坑！
                 // u,v 是写入到目标纹理图集的坐标；x, y 是从字形位图中取像素的起点
-                image.upload(0, u, v, x, y, width, height, false);
+                image.upload(0, u, v, x, y, width, height, false, false);
             }
 
             @Override

@@ -39,9 +39,9 @@ public class BuiltChunkStorageMixins {
         return i;
     }
 
-    @Inject(method = "updateCameraPosition(Lnet/minecraft/util/math/ChunkSectionPos;)V",
+    @Inject(method = "updateCameraPosition(DD)V",
         at = @At(value = "HEAD"))
-    private void updateChunkStorageSectionPos(ChunkSectionPos sectionPos, CallbackInfo ci) {
-        ChunkProxy.updateSectionPos(sectionPos);
+    private void updateChunkStorageSectionPos(double x, double z, CallbackInfo ci) {
+        ChunkProxy.updateSectionPos(ChunkSectionPos.from(net.minecraft.util.math.BlockPos.ofFloored(x, 0, z)));
     }
 }

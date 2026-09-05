@@ -68,6 +68,9 @@ public class Options {
     public static int chunkBuildingTotalBatches = 12;
     public static int chunkBuildingThreads = getDefaultChunkBuildingThreads();
     public static boolean collectChunkEmission = false;
+    // Compatibility default: the 1.21.1 local body can intersect camera rays.
+    // Opt in to body shadows/reflections after testing the selected shader pack.
+    public static boolean renderFirstPersonBody = false;
 
     public static int getMaxChunkBuildingThreads() {
         int availableProcessors = Runtime.getRuntime().availableProcessors();
@@ -115,6 +118,8 @@ public class Options {
                     String.valueOf(collectChunkEmission))),
                 false);
 
+            renderFirstPersonBody = Boolean.parseBoolean(
+                props.getProperty("renderFirstPersonBody", "false"));
             overwriteConfig();
 //            System.out.println("Successfully read options: " + path);
         } catch (IOException e) {
@@ -137,6 +142,7 @@ public class Options {
         props.setProperty("chunkBuildingTotalBatches", String.valueOf(chunkBuildingTotalBatches));
         props.setProperty("chunkBuildingThreads", String.valueOf(chunkBuildingThreads));
         props.setProperty("collectChunkEmission", String.valueOf(collectChunkEmission));
+        props.setProperty("renderFirstPersonBody", String.valueOf(renderFirstPersonBody));
 
         try {
             Files.createDirectories(path.getParent());

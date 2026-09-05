@@ -2,7 +2,7 @@ package com.radiance.mixins.vanilla_resource_tracker;
 
 import com.radiance.mixin_related.extensions.vanilla_resource_tracker.IGlyphAtlasTextureExt;
 import com.radiance.mixin_related.extensions.vanilla_resource_tracker.IRenderableGlyphExt;
-import net.minecraft.client.font.BakedGlyph;
+import net.minecraft.client.font.GlyphRenderer;
 import net.minecraft.client.font.GlyphAtlasTexture;
 import net.minecraft.client.font.TextRenderLayerSet;
 import org.spongepowered.asm.mixin.Final;
@@ -24,7 +24,7 @@ public abstract class GlyphAtlasTextureMixins extends AbstractTextureMixins impl
     private GlyphAtlasTexture.Slot rootSlot;
 
     @Override
-    public BakedGlyph radiance$bake(IRenderableGlyphExt glyph) {
+    public GlyphRenderer radiance$bake(IRenderableGlyphExt glyph) {
         if (glyph.hasColor() != this.hasColor) {
             return null;
         }
@@ -35,7 +35,7 @@ public abstract class GlyphAtlasTextureMixins extends AbstractTextureMixins impl
             float f = 256.0f;
             float g = 256.0f;
             float h = 0.01f;
-            return new BakedGlyph(this.textRenderLayers,
+            return new GlyphRenderer(this.textRenderLayers,
                 ((float) slot.x + 0.01f) / 256.0f,
                 ((float) slot.x - 0.01f + (float) glyph.getWidth()) / 256.0f,
                 ((float) slot.y + 0.01f) / 256.0f,

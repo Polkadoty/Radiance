@@ -1,0 +1,23 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="GPL-3.0"
+[[mods]]
+modId="radiance"
+version="${version}"
+displayName="Radiance"
+description="Experimental Vulkan renderer port for Minecraft 1.21.1."
+displayTest="IGNORE_ALL_VERSION"
+[[mixins]]
+config="radiance.mixins.json"
+[[dependencies.radiance]]
+modId="neoforge"
+type="required"
+versionRange="[21.1.249,21.2)"
+ordering="NONE"
+side="CLIENT"
+[[dependencies.radiance]]
+modId="minecraft"
+type="required"
+versionRange="[1.21.1]"
+ordering="NONE"
+side="CLIENT"

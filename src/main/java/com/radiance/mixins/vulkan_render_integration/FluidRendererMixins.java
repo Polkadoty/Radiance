@@ -48,27 +48,8 @@ public abstract class FluidRendererMixins {
     }
 
     @Shadow
-    private static boolean isSideCovered(Direction direction, float f, BlockState blockState) {
-        VoxelShape voxelShape = blockState.getCullingFace(direction.getOpposite());
-        if (voxelShape == VoxelShapes.empty()) {
-            return false;
-        } else if (voxelShape == VoxelShapes.fullCube()) {
-            boolean bl = f == 1.0F;
-            return direction != Direction.UP || bl;
-        } else {
-            VoxelShape voxelShape2 = VoxelShapes.cuboid(0.0, 0.0, 0.0, 1.0, f, 1.0);
-            return VoxelShapes.isSideCovered(voxelShape2, voxelShape, direction);
-        }
-    }
-
-    @Shadow
-    private static boolean method_3344(Direction direction, float f, BlockState blockState) {
-        return false;
-    }
-
-    @Shadow
-    private static boolean isOppositeSideCovered(BlockState blockState, Direction direction) {
-        return false;
+    private static boolean isSideCovered(net.minecraft.world.BlockView world, BlockPos pos, Direction direction, float height, BlockState state) {
+        throw new AssertionError();
     }
 
     @Shadow
@@ -147,12 +128,12 @@ public abstract class FluidRendererMixins {
         boolean renderTop = !isSameFluid(fluidState, fluidUp);
         boolean
             renderBottom =
-            shouldRenderSide(fluidState, blockState, Direction.DOWN, fluidDown) && !method_3344(
+            shouldRenderSide(world, pos, fluidState, blockState, Direction.DOWN, fluidDown) && !isSideCovered(world, pos,
                 Direction.DOWN, 0.8888889F, stateDown);
-        boolean renderNorth = shouldRenderSide(fluidState, blockState, Direction.NORTH, fluidNorth);
-        boolean renderSouth = shouldRenderSide(fluidState, blockState, Direction.SOUTH, fluidSouth);
-        boolean renderWest = shouldRenderSide(fluidState, blockState, Direction.WEST, fluidWest);
-        boolean renderEast = shouldRenderSide(fluidState, blockState, Direction.EAST, fluidEast);
+        boolean renderNorth = shouldRenderSide(world, pos, fluidState, blockState, Direction.NORTH, fluidNorth);
+        boolean renderSouth = shouldRenderSide(world, pos, fluidState, blockState, Direction.SOUTH, fluidSouth);
+        boolean renderWest = shouldRenderSide(world, pos, fluidState, blockState, Direction.WEST, fluidWest);
+        boolean renderEast = shouldRenderSide(world, pos, fluidState, blockState, Direction.EAST, fluidEast);
 
         if (renderTop || renderBottom || renderEast || renderWest || renderNorth || renderSouth) {
             float lightDown = world.getBrightness(Direction.DOWN, true);
@@ -222,7 +203,7 @@ public abstract class FluidRendererMixins {
             // ==========================================
             // 1. 渲染顶面 (Surface)
             // ==========================================
-            if (renderTop && !method_3344(Direction.UP,
+            if (renderTop && !isSideCovered(world, pos, Direction.UP,
                 Math.min(Math.min(heightNW, heightSW), Math.min(heightSE, heightNE)), stateUp)) {
                 // 稍微调低一点避免 Z-Fighting
                 heightNW -= 0.001F;
@@ -525,7 +506,7 @@ public abstract class FluidRendererMixins {
                         shouldRenderSide = renderEast;
                 }
 
-                if (shouldRenderSide && !method_3344(direction, Math.max(yStart, yEnd),
+                if (shouldRenderSide && !isSideCovered(world, pos, direction, Math.max(yStart, yEnd),
                     world.getBlockState(pos.offset(direction)))) {
                     BlockPos sidePos = pos.offset(direction);
                     Sprite sideSprite = fluidSprites[1];

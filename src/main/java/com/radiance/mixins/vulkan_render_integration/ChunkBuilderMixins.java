@@ -14,7 +14,7 @@ public class ChunkBuilderMixins implements IChunkBuilderExt {
 
     @Final
     @Shadow
-    SectionBuilder sectionBuilder;
+    SectionBuilder field_52171;
 
     @Final
     @Shadow
@@ -25,7 +25,7 @@ public class ChunkBuilderMixins implements IChunkBuilderExt {
 
     @Override
     public SectionBuilder radiance$getSectionBuilder() {
-        return sectionBuilder;
+        return field_52171;
     }
 
     @Override

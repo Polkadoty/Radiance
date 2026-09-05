@@ -222,7 +222,7 @@ public enum AuxiliaryTextures {
                             regionWidth, regionHeight);
                         if (TextureProxy.hasEmissionTile(targetId, tileKey)) {
                             auxiliaryImage.upload(level, offsetX, offsetY, unpackSkipPixels,
-                                unpackSkipRows, regionWidth, regionHeight, blur);
+                                unpackSkipRows, regionWidth, regionHeight, false, blur);
                             continue;
                         }
 
@@ -232,7 +232,7 @@ public enum AuxiliaryTextures {
                     }
 
                     auxiliaryImage.upload(level, offsetX, offsetY, unpackSkipPixels, unpackSkipRows,
-                        regionWidth, regionHeight, blur);
+                        regionWidth, regionHeight, false, blur);
                 } finally {
                     if (auxiliaryImage != null) {
                         auxiliaryImage.close();

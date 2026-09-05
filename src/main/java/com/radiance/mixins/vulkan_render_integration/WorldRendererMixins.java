@@ -23,23 +23,25 @@ import net.minecraft.client.render.BackgroundRenderer;
 import net.minecraft.client.render.BuiltChunkStorage;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.ChunkRenderingDataPreparer;
-import net.minecraft.client.render.CloudRenderer;
+import com.radiance.client.compat.CloudRenderer;
 import net.minecraft.client.render.DimensionEffects;
-import net.minecraft.client.render.Fog;
+import com.radiance.client.compat.Fog;
 import net.minecraft.client.render.Frustum;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderTickCounter;
-import net.minecraft.client.render.SkyRendering;
-import net.minecraft.client.render.WeatherRendering;
-import net.minecraft.client.render.WorldBorderRendering;
+
+
+
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 import net.minecraft.client.render.block.entity.EndPortalBlockEntityRenderer;
 import net.minecraft.client.render.chunk.ChunkBuilder;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.texture.TextureManager;
-import net.minecraft.client.util.ObjectAllocator;
+import net.minecraft.client.render.LightmapTextureManager;
+import org.spongepowered.asm.mixin.Unique;
+import net.minecraft.util.Identifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
@@ -88,12 +90,10 @@ public abstract class WorldRendererMixins {
     @Shadow
     private Frustum frustum;
 
-    @Final
-    @Shadow
-    private List<Entity> renderedEntities;
+    @Unique
+    private final List<Entity> renderedEntities = new java.util.ArrayList<>();
 
-    @Shadow
-    private int renderedEntitiesCount;
+
 
     @Shadow
     private double lastCameraPitch;
@@ -113,39 +113,22 @@ public abstract class WorldRendererMixins {
     @Final
     private Set<BlockEntity> noCullingBlockEntities;
 
-    @Shadow
-    @Final
-    private WeatherRendering weatherRendering;
+    @Shadow private int ticks;
+    @Unique private final CloudRenderer cloudRenderer = new CloudRenderer();
+    @Inject(method={"renderStars","renderLightSky","renderDarkSky"},at=@At("HEAD"),cancellable=true)
+    private void radiance$skipSkyBuffers(CallbackInfo ci) { ci.cancel(); }
+    @Inject(method="close",at=@At("HEAD"))
+    private void radiance$closeClouds(CallbackInfo ci) { cloudRenderer.close(); }
+    @Inject(method="reload(Lnet/minecraft/resource/ResourceManager;)V",at=@At("HEAD"))
+    private void radiance$reloadClouds(net.minecraft.resource.ResourceManager manager, CallbackInfo ci) { cloudRenderer.reload(manager); }
 
-    @Shadow
-    @Final
-    private WorldBorderRendering worldBorderRendering;
-
-    @Shadow
-    private int ticks;
-    @Shadow
-    @Final
-    private CloudRenderer cloudRenderer;
-    // endregion
-
-    // region <init>
-    @Redirect(method = "<init>", at = @At(value = "NEW", target = "net/minecraft/client/render/SkyRendering"))
-    private SkyRendering cancelNewSkyRendering() {
-        return UnsafeManager.INSTANCE.allocateInstance(SkyRendering.class);
-    }
-    // endregion
-
-    @Redirect(method = "scheduleTerrainUpdate()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/ChunkRenderingDataPreparer;scheduleTerrainUpdate()V"))
+    @Redirect(method = "scheduleTerrainUpdate()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/ChunkRenderingDataPreparer;method_52817()V"))
     public void cancelTerrainUpdateWithChunkRenderingDataPreparer(
         ChunkRenderingDataPreparer instance) {
 
     }
 
     // region <close>
-    @Redirect(method = "close()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/SkyRendering;close()V"))
-    public void cancelSkyRenderingClose(SkyRendering instance) {
-
-    }
 
     @Redirect(method = "reload(Lnet/minecraft/resource/ResourceManager;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/WorldRenderer;loadEntityOutlinePostProcessor()V"))
     public void cancelReloadWithResourceManager(WorldRenderer instance) {
@@ -153,37 +136,37 @@ public abstract class WorldRendererMixins {
     }
 
     @Redirect(method = "reload()V", at = @At(value = "INVOKE", target =
-        "Lnet/minecraft/client/render/ChunkRenderingDataPreparer;setStorage"
+        "Lnet/minecraft/client/render/ChunkRenderingDataPreparer;method_52826"
             + "(Lnet/minecraft/client/render/BuiltChunkStorage;)V"))
     public void cancelReloadWithChunkRenderingDataPreparerSetStorage(
         ChunkRenderingDataPreparer instance, BuiltChunkStorage storage) {
 
     }
 
-    @Redirect(method = "getEntitiesToRender(Lnet/minecraft/client/render/Camera;Lnet/minecraft/client/render/Frustum;Ljava/util/List;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/Camera;isThirdPerson()Z"))
-    public boolean enablePlayerRendererInFirstPlayer(Camera instance) {
-        return true;
-    }
 
-    @Redirect(method = "getEntitiesToRender(Lnet/minecraft/client/render/Camera;Lnet/minecraft/client/render/Frustum;Ljava/util/List;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/EntityRenderDispatcher;shouldRender(Lnet/minecraft/entity/Entity;Lnet/minecraft/client/render/Frustum;DDD)Z"))
-    public <E extends Entity> boolean loosenEntityFiltering(EntityRenderDispatcher instance,
-        E entity, Frustum frustum, double x, double y, double z) {
-        Vec3d vec3d = entity.getPos().subtract(new Vec3d(x, y, z));
-        double distance = vec3d.length();
-        if (distance < 16 * 3) {
-            return true;
-        }
-        return this.entityRenderDispatcher.shouldRender(entity, frustum, x, y, z);
-    }
 
     // region <render>
     @Shadow
     protected abstract void setupTerrain(Camera camera, Frustum frustum, boolean hasForcedFrustum,
         boolean spectator);
 
-    @Shadow
-    protected abstract boolean getEntitiesToRender(Camera camera, Frustum frustum,
-        List<Entity> output);
+    @Unique
+    protected boolean getEntitiesToRender(Camera camera, Frustum frustum, List<Entity> output) {
+        Vec3d pos=camera.getPos();
+        for(Entity entity:world.getEntities()) {
+            if (entity == camera.getFocusedEntity() && !camera.isThirdPerson()
+                    && !com.radiance.client.option.Options.renderFirstPersonBody) {
+                continue;
+            }
+            if (entity.squaredDistanceTo(pos)<48*48 || entityRenderDispatcher.shouldRender(entity,frustum,pos.x,pos.y,pos.z)
+                    || entity.hasPassengerDeep(client.player)) {
+                if(entity instanceof net.minecraft.client.network.ClientPlayerEntity && camera.getFocusedEntity()!=entity) continue;
+                if(entity.age==0){entity.lastRenderX=entity.getX();entity.lastRenderY=entity.getY();entity.lastRenderZ=entity.getZ();}
+                output.add(entity);
+            }
+        }
+        return false;
+    }
 
     @Shadow
     protected abstract boolean canDrawEntityOutlines();
@@ -191,17 +174,19 @@ public abstract class WorldRendererMixins {
     @Shadow
     protected abstract void applyFrustum(Frustum frustum);
 
-    @Shadow
-    protected abstract boolean isSkyDark(float tickDelta);
+    @Unique
+    protected boolean isSkyDark(float delta) {
+        return client.player.getCameraPosVec(delta).y < world.getLevelProperties().getSkyDarknessHeight(world);
+    }
 
     @Shadow
     protected abstract boolean hasBlindnessOrDarkness(Camera camera);
 
     @Inject(method =
-        "render(Lnet/minecraft/client/util/ObjectAllocator;Lnet/minecraft/client/render/RenderTickCounter;"
-            + "ZLnet/minecraft/client/render/Camera;Lnet/minecraft/client/render/GameRenderer;Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;)V", at = @At("HEAD"), cancellable = true)
-    public void redirectRender(ObjectAllocator allocator, RenderTickCounter tickCounter,
-        boolean renderBlockOutline, Camera camera, GameRenderer gameRenderer,
+        "render(Lnet/minecraft/client/render/RenderTickCounter;"
+            + "ZLnet/minecraft/client/render/Camera;Lnet/minecraft/client/render/GameRenderer;Lnet/minecraft/client/render/LightmapTextureManager;Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;)V", at = @At("HEAD"), cancellable = true)
+    public void redirectRender(RenderTickCounter tickCounter,
+        boolean renderBlockOutline, Camera camera, GameRenderer gameRenderer, LightmapTextureManager lightmap,
         Matrix4f effectedRotationMatrix, Matrix4f projectionMatrix, CallbackInfo ci) {
         PlayerProxy.setCameraPos(camera.getPos());
 
@@ -234,10 +219,12 @@ public abstract class WorldRendererMixins {
         boolean bl2 = this.client.world.getDimensionEffects()
             .useThickFog(MathHelper.floor(x), MathHelper.floor(y))
             || this.client.inGameHud.getBossBarHud().shouldThickenFog();
-        Vector4f vector4f = BackgroundRenderer.getFogColor(camera, f, this.client.world,
-            this.client.options.getClampedViewDistance(), gameRenderer.getSkyDarkness(f));
-        Fog fog = BackgroundRenderer.applyFog(camera, BackgroundRenderer.FogType.FOG_TERRAIN,
-            vector4f, h, bl2, f);
+        BackgroundRenderer.render(camera, f, world, client.options.getClampedViewDistance(), gameRenderer.getSkyDarkness(f));
+        BackgroundRenderer.applyFogColor();
+        BackgroundRenderer.applyFog(camera, BackgroundRenderer.FogType.FOG_TERRAIN, Math.max(h,32), bl2, f);
+        float[] fogColor=RenderSystem.getShaderFogColor();
+        Fog fog=new Fog(RenderSystem.getShaderFogStart(),RenderSystem.getShaderFogEnd(),RenderSystem.getShaderFogShape(),
+                fogColor[0],fogColor[1],fogColor[2],fogColor[3]);
 
         TextureManager textureManager = MinecraftClient.getInstance().getTextureManager();
         OverlayTexture overlayTexture = gameRenderer.getOverlayTexture();
@@ -255,10 +242,12 @@ public abstract class WorldRendererMixins {
         // Sky
         float tickDelta = tickCounter.getTickDelta(false);
         float skyAngle = this.world.getSkyAngle(tickDelta);
-        int baseColor = this.world.getSkyColor(camera.getPos(), tickDelta);
+        Vec3d skyColor = this.world.getSkyColor(camera.getPos(), tickDelta);
+        int baseColor = com.radiance.client.compat.Colors.fromFloats(1,(float)skyColor.x,(float)skyColor.y,(float)skyColor.z);
 
         DimensionEffects dimensionEffects = this.world.getDimensionEffects();
-        int horizonColor = dimensionEffects.getSkyColor(skyAngle);
+        float[] horizon = dimensionEffects.getFogColorOverride(skyAngle, tickDelta);
+        int horizonColor = horizon == null ? 0 : com.radiance.client.compat.Colors.fromFloats(horizon[3],horizon[0],horizon[1],horizon[2]);
 
         MatrixStack matrixStack = new MatrixStack();
         matrixStack.push();
@@ -277,15 +266,15 @@ public abstract class WorldRendererMixins {
 
         float rainGradient = this.world.getRainGradient(tickDelta);
 
-        int sunTextureID = textureManager.getTexture(SkyRendering.SUN_TEXTURE).getGlId();
+        int sunTextureID = textureManager.getTexture(Identifier.ofVanilla("textures/environment/sun.png")).getGlId();
 
-        int moonTextureID = textureManager.getTexture(SkyRendering.MOON_PHASES_TEXTURE).getGlId();
+        int moonTextureID = textureManager.getTexture(Identifier.ofVanilla("textures/environment/moon_phases.png")).getGlId();
 
-        BufferProxy.updateSkyUniform(ColorHelper.getRedFloat(baseColor),
-            ColorHelper.getGreenFloat(baseColor), ColorHelper.getBlueFloat(baseColor),
-            ColorHelper.getRedFloat(horizonColor), ColorHelper.getGreenFloat(horizonColor),
-            ColorHelper.getBlueFloat(horizonColor), ColorHelper.getAlphaFloat(horizonColor), sunDirection,
-            dimensionEffects.getSkyType().ordinal(), dimensionEffects.isSunRisingOrSetting(skyAngle),
+        BufferProxy.updateSkyUniform(com.radiance.client.compat.Colors.getRedFloat(baseColor),
+            com.radiance.client.compat.Colors.getGreenFloat(baseColor), com.radiance.client.compat.Colors.getBlueFloat(baseColor),
+            com.radiance.client.compat.Colors.getRedFloat(horizonColor), com.radiance.client.compat.Colors.getGreenFloat(horizonColor),
+            com.radiance.client.compat.Colors.getBlueFloat(horizonColor), com.radiance.client.compat.Colors.getAlphaFloat(horizonColor), sunDirection,
+            dimensionEffects.getSkyType().ordinal(), horizon != null,
             this.isSkyDark(tickDelta), hasBlindnessOrDarkness, submersionType, moonPhase,
             rainGradient, sunTextureID, moonTextureID);
 
@@ -308,7 +297,7 @@ public abstract class WorldRendererMixins {
             EntityProxy.queueTargetBlockOutlineRebuild(camera, world);
         }
 
-        EntityProxy.queueWeatherBuild(this.weatherRendering, this.worldBorderRendering, this.world,
+        EntityProxy.queueWeatherBuild(this.world,
             camera, this.ticks, tickDelta);
 
         // clouds
@@ -317,7 +306,8 @@ public abstract class WorldRendererMixins {
             float k = this.world.getDimensionEffects().getCloudsHeight();
             if (!Float.isNaN(k)) {
                 float ticks = (float) this.ticks + f;
-                int color = this.world.getCloudsColor(f);
+                Vec3d cloudColor = this.world.getCloudsColor(f);
+                int color = com.radiance.client.compat.Colors.fromFloats(1,(float)cloudColor.x,(float)cloudColor.y,(float)cloudColor.z);
                 float cloudHeight = k + 0.33F;
                 this.cloudRenderer.renderClouds(color, cloudRenderMode, cloudHeight, null, null,
                     camera.getPos(), ticks);
@@ -330,13 +320,16 @@ public abstract class WorldRendererMixins {
 
         this.renderedEntities.clear();
 
+        // Match vanilla: world fog must not tint the subsequent GUI and text.
+        BackgroundRenderer.clearFog();
+
         ci.cancel();
     }
     // endregion
 
     // region <setWorld>
     @Redirect(method = "setWorld(Lnet/minecraft/client/world/ClientWorld;)V", at = @At(value = "INVOKE", target =
-        "Lnet/minecraft/client/render/ChunkRenderingDataPreparer;setStorage"
+        "Lnet/minecraft/client/render/ChunkRenderingDataPreparer;method_52826"
             + "(Lnet/minecraft/client/render/BuiltChunkStorage;)V"))
     public void cancelSetWorldChunkRenderingDataPreparerSetStorage(
         ChunkRenderingDataPreparer instance, BuiltChunkStorage storage) {
@@ -347,41 +340,27 @@ public abstract class WorldRendererMixins {
     //region <setupTerrain>
     @Inject(method = "setupTerrain(Lnet/minecraft/client/render/Camera;Lnet/minecraft/client/render/Frustum;ZZ)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/chunk/ChunkBuilder;setCameraPosition(Lnet/minecraft/util/math/Vec3d;)V", shift = At.Shift.AFTER), cancellable = true)
     public void cancelCullAndUpdateWithChunkRenderingDataPreparer(Camera camera, Frustum frustum,
-        boolean hasForcedFrustum, boolean spectator, CallbackInfo ci, @Local Profiler profiler) {
-//        PlayerProxy.setCameraPos(camera.getPos());
-        profiler.pop();
+        boolean hasForcedFrustum, boolean spectator, CallbackInfo ci) {
+this.world.getProfiler().pop();
         ci.cancel();
     }
     //endregion
 
-    // region <addBuiltChunk>
-    @Redirect(method = "addBuiltChunk(Lnet/minecraft/client/render/chunk/ChunkBuilder$BuiltChunk;)V", at = @At(value = "INVOKE", target =
-        "Lnet/minecraft/client/render/ChunkRenderingDataPreparer;schedulePropagationFrom"
-            + "(Lnet/minecraft/client/render/chunk/ChunkBuilder$BuiltChunk;)V"))
-    public void cancelPropagateWithChunkRenderingDataPreparer(ChunkRenderingDataPreparer instance,
-        ChunkBuilder.BuiltChunk builtChunk) {
-
+    // These notifications belong to vanilla's visibility graph, which Vulkan replaces.
+    @Redirect(method = "method_52815", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/ChunkRenderingDataPreparer;method_52819(Lnet/minecraft/util/math/ChunkPos;)V"))
+    private void radianceSkipVanillaChunkNotification(ChunkRenderingDataPreparer preparer, net.minecraft.util.math.ChunkPos pos) {
     }
+
+    @Redirect(method = "addBuiltChunk", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/ChunkRenderingDataPreparer;method_52827(Lnet/minecraft/client/render/chunk/ChunkBuilder$BuiltChunk;)V"))
+    private void radianceSkipVanillaBuiltChunkNotification(ChunkRenderingDataPreparer preparer, ChunkBuilder.BuiltChunk chunk) {
+    }
+    // region <addBuiltChunk>
     // endregion
 
     // region <onChunkUnload>
-    @Redirect(method = "onChunkUnload(J)V", at = @At(value = "INVOKE", target =
-        "Lnet/minecraft/client/render/ChunkRenderingDataPreparer;schedulePropagationFrom"
-            + "(Lnet/minecraft/client/render/chunk/ChunkBuilder$BuiltChunk;)V"))
-    public void cancelPropagateUnloadWithChunkRenderingDataPreparer(
-        ChunkRenderingDataPreparer instance, ChunkBuilder.BuiltChunk builtChunk) {
-
-    }
     // endregion
 
     // region <scheduleNeighborUpdates>
-    @Redirect(method = "scheduleNeighborUpdates(Lnet/minecraft/util/math/ChunkPos;)V", at = @At(value = "INVOKE", target =
-        "Lnet/minecraft/client/render/ChunkRenderingDataPreparer;addNeighbors(Lnet/minecraft/util/math/ChunkPos;)"
-            + "V"))
-    public void cancelNeighborUpdatesWithChunkRenderingDataPreparer(
-        ChunkRenderingDataPreparer instance, ChunkPos chunkPos) {
-
-    }
     // endregion
 
     // region <isRenderingReady>

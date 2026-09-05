@@ -181,9 +181,6 @@ public class Constants {
                 } else if (RenderPhase.CRUMBLING_TRANSPARENCY.equals(
                     multiPhase.phases.transparency)) {
                     return WORLD_TRANSPARENT;
-                } else if (RenderPhase.OVERLAY_TRANSPARENCY.equals(
-                    multiPhase.phases.transparency)) {
-                    return WORLD_TRANSPARENT;
                 } else if (RenderPhase.TRANSLUCENT_TRANSPARENCY.equals(
                     multiPhase.phases.transparency)) {
                     return WORLD_TRANSPARENT;

@@ -6,7 +6,7 @@ import com.radiance.mixin_related.extensions.vanilla_resource_tracker.IRenderabl
 import java.nio.IntBuffer;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import net.minecraft.client.font.BakedGlyph;
+import net.minecraft.client.font.GlyphRenderer;
 import net.minecraft.client.font.RenderableGlyph;
 import net.minecraft.client.font.UnihexFont;
 import net.minecraft.client.texture.NativeImage;
@@ -76,7 +76,7 @@ public abstract class UnicodeTextureGlyphMixins {
      * @reason to pass image targetID
      */
     @Overwrite
-    public BakedGlyph bake(Function<RenderableGlyph, BakedGlyph> function) {
+    public GlyphRenderer bake(Function<RenderableGlyph, GlyphRenderer> function) {
         return function.apply(new IRenderableGlyphExt() {
             public float getOversample() {
                 return 2.0F;

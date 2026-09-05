@@ -5,7 +5,6 @@ import net.minecraft.client.render.RenderPhase;
 import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.TriState;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
@@ -38,7 +37,7 @@ public class RenderLayerMixins {
                     .target(RenderLayer.WEATHER_TARGET)
                     .texture(new RenderPhase.Texture(
                         Identifier.ofVanilla("textures/block/lightning.png"),
-                        TriState.FALSE,
+                        false,
                         false))
                     .build(false));
     }
