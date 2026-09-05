@@ -68,6 +68,17 @@ public class ShaderPackScreen extends Screen {
         super.render(context, mouseX, mouseY, delta);
         context.drawCenteredTextWithShadow(textRenderer, Text.translatable(TITLE), this.width / 2, 16, 0xFFFFFF);
 
+        var rayModule = Pipeline.getRayTracingModule();
+        String loadError = rayModule == null ? "" : rayModule.shaderPackLoadError;
+        if (!loadError.isBlank()) {
+            Text warning = Text.literal("Shader pack failed to load; built-in fallback active. " + loadError);
+            context.drawCenteredTextWithShadow(textRenderer,
+                    textRenderer.trimToWidth(warning.getString(), this.width - 20), this.width / 2, this.height - 42, 0xFFFF7777);
+            if (mouseY >= this.height - 45 && mouseY < this.height - 30) {
+                context.drawTooltip(textRenderer, warning, mouseX, mouseY);
+            }
+        }
+
         Text hoveredTooltip = shaderPackList == null ? null : shaderPackList.getHoveredTooltip();
         if (hoveredTooltip != null) {
             context.drawTooltip(this.textRenderer, hoveredTooltip, mouseX, mouseY);
@@ -81,7 +92,9 @@ public class ShaderPackScreen extends Screen {
     private Text buildLabel(Pipeline.ShaderPackChoice choice) {
         Text label = parseLegacyFormattedText(choice.displayName());
         if (Pipeline.isShaderPackActive(choice)) {
-            label = Text.literal("> ").append(label);
+            var rayModule = Pipeline.getRayTracingModule();
+            boolean failed = rayModule != null && !rayModule.shaderPackLoadError.isBlank();
+            label = Text.literal(failed ? "! " : "> ").append(label);
         }
         return label;
     }

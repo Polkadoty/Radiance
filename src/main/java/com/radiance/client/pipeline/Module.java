@@ -17,6 +17,7 @@ public class Module {
     public List<AttributeConfig> staticAttributeConfigs;
     public Map<String, String> dynamicTranslations = new HashMap<>();
     public String dynamicAttributeStoragePath;
+    public String shaderPackLoadError = "";
 
     // for GUI
     public double x, y;

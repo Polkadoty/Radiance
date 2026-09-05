@@ -177,5 +177,7 @@
   "render_pipeline.mode.pipeline": "Pipeline",
   "render_pipeline.mode.preset": "Preset",
   "render_pipeline.true": "True",
-  "render_pipeline.false": "False"
+  "render_pipeline.false": "False",
+  "options.video.frame_generation": "DLSS Frame Generation (Experimental)",
+  "options.video.reflex": "NVIDIA Reflex Low Latency"
 }

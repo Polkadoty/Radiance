@@ -1437,6 +1437,7 @@ public class Pipeline {
 
         List<AttributeConfig> mergedAttributeConfigs = Module.copyAttributeConfigs(module.staticAttributeConfigs);
         Map<String, String> translations = new HashMap<>();
+        module.shaderPackLoadError = "";
         Path shaderPackAttributeStoragePath = null;
         boolean preserveCurrentDynamicValues = true;
 
@@ -1506,6 +1507,7 @@ public class Pipeline {
             if (metadata != null && !metadata.isBlank()) {
                 Object loaded = new Yaml().load(metadata);
                 if (loaded instanceof Map<?, ?> root) {
+                    module.shaderPackLoadError = Objects.toString(root.get("load_error"), "");
                     Object attributesNode = root.get("attributes");
                     if (attributesNode instanceof List<?> attributeNodes) {
                         for (Object attributeNode : attributeNodes) {

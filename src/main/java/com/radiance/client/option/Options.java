@@ -71,6 +71,8 @@ public class Options {
     // Compatibility default: the 1.21.1 local body can intersect camera rays.
     // Opt in to body shadows/reflections after testing the selected shader pack.
     public static boolean renderFirstPersonBody = false;
+    public static boolean frameGenerationEnabled = false;
+    public static boolean reflexEnabled = false;
 
     public static int getMaxChunkBuildingThreads() {
         int availableProcessors = Runtime.getRuntime().availableProcessors();
@@ -118,6 +120,8 @@ public class Options {
                     String.valueOf(collectChunkEmission))),
                 false);
 
+            setFrameGenerationEnabled(Boolean.parseBoolean(props.getProperty("frameGenerationEnabled", "false")), false);
+            setReflexEnabled(Boolean.parseBoolean(props.getProperty("reflexEnabled", "false")), false);
             renderFirstPersonBody = Boolean.parseBoolean(
                 props.getProperty("renderFirstPersonBody", "false"));
             overwriteConfig();
@@ -130,6 +134,8 @@ public class Options {
     public static void overwriteConfig() {
         Path path = RadianceClient.radianceDir.resolve(OPTION_PROPERTIES);
         Properties props = new Properties();
+        props.setProperty("frameGenerationEnabled", String.valueOf(frameGenerationEnabled));
+        props.setProperty("reflexEnabled", String.valueOf(reflexEnabled));
         props.setProperty("maxFps", String.valueOf(maxFps));
         props.setProperty("inactivityFpsLimit", String.valueOf(inactivityFpsLimit));
         props.setProperty("vsync", String.valueOf(vsync));
@@ -176,6 +182,22 @@ public class Options {
         if (write) {
             overwriteConfig();
         }
+    }
+
+    public static native void nativeSetFrameGenerationEnabled(boolean enabled);
+    public static native void nativeSetReflexEnabled(boolean enabled);
+    public static native boolean isFrameGenerationAvailable();
+
+    public static void setFrameGenerationEnabled(boolean enabled, boolean write) {
+        frameGenerationEnabled = enabled;
+        nativeSetFrameGenerationEnabled(enabled);
+        if (write) overwriteConfig();
+    }
+
+    public static void setReflexEnabled(boolean enabled, boolean write) {
+        reflexEnabled = enabled;
+        nativeSetReflexEnabled(enabled);
+        if (write) overwriteConfig();
     }
 
     public native static void nativeSetVsync(boolean vsync, boolean write);

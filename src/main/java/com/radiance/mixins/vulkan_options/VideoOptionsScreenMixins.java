@@ -205,6 +205,12 @@ public class VideoOptionsScreenMixins extends GameOptionsScreenMixins {
         };
         this.body.addAll(optionsWindow);
         this.body.addSingleOptionEntry(fullScreenResolutionOption);
+        if (Options.isFrameGenerationAvailable()) {
+            this.body.addSingleOptionEntry(SimpleOption.ofBoolean("options.video.frame_generation",
+                Options.frameGenerationEnabled, value -> Options.setFrameGenerationEnabled(value, true)));
+            this.body.addSingleOptionEntry(SimpleOption.ofBoolean("options.video.reflex",
+                Options.reflexEnabled, value -> Options.setReflexEnabled(value, true)));
+        }
 
         this.body.addEntry(
             new CategoryVideoOptionEntry(Text.translatable(Options.CATEGORY_TERRAIN), body));

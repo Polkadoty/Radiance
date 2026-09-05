@@ -29,7 +29,13 @@ public class RendererProxy {
 
     public static native void present();
 
+    public static native void setFrameGenerationAllowed(boolean allowed);
+
     public static void submitCommandAndPresent() {
+        MinecraftClient client = MinecraftClient.getInstance();
+        setFrameGenerationAllowed(client.world != null && client.player != null
+            && client.currentScreen == null && client.getOverlay() == null
+            && !client.isPaused() && client.isWindowFocused());
         submitCommand();
         present();
     }
