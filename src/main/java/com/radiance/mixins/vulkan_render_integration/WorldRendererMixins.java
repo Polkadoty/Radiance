@@ -1,6 +1,5 @@
 package com.radiance.mixins.vulkan_render_integration;
 
-import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.radiance.client.UnsafeManager;
 import com.radiance.client.proxy.vulkan.BufferProxy;
@@ -118,9 +117,9 @@ public abstract class WorldRendererMixins {
     @Inject(method={"renderStars","renderLightSky","renderDarkSky"},at=@At("HEAD"),cancellable=true)
     private void radiance$skipSkyBuffers(CallbackInfo ci) { ci.cancel(); }
     @Inject(method="close",at=@At("HEAD"))
-    private void radiance$closeClouds(CallbackInfo ci) { cloudRenderer.close(); }
+    private void radiance$closeClouds(CallbackInfo ci) { com.radiance.client.compat.SyntheticPersistentScene.clear(); cloudRenderer.close(); }
     @Inject(method="reload(Lnet/minecraft/resource/ResourceManager;)V",at=@At("HEAD"))
-    private void radiance$reloadClouds(net.minecraft.resource.ResourceManager manager, CallbackInfo ci) { cloudRenderer.reload(manager); }
+    private void radiance$reloadClouds(net.minecraft.resource.ResourceManager manager, CallbackInfo ci) { com.radiance.client.compat.SyntheticPersistentScene.clear(); cloudRenderer.reload(manager); }
 
     @Redirect(method = "scheduleTerrainUpdate()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/ChunkRenderingDataPreparer;method_52817()V"))
     public void cancelTerrainUpdateWithChunkRenderingDataPreparer(
@@ -188,6 +187,7 @@ public abstract class WorldRendererMixins {
     public void redirectRender(RenderTickCounter tickCounter,
         boolean renderBlockOutline, Camera camera, GameRenderer gameRenderer, LightmapTextureManager lightmap,
         Matrix4f effectedRotationMatrix, Matrix4f projectionMatrix, CallbackInfo ci) {
+        com.radiance.client.compat.SyntheticPersistentScene.render(client, camera);
         PlayerProxy.setCameraPos(camera.getPos());
 
         float f = tickCounter.getTickDelta(false);
@@ -326,6 +326,11 @@ public abstract class WorldRendererMixins {
         ci.cancel();
     }
     // endregion
+
+    @Inject(method="setWorld", at=@At("HEAD"))
+    private void radiance$resetSyntheticScene(ClientWorld newWorld, CallbackInfo ci) {
+        com.radiance.client.compat.SyntheticPersistentScene.clear();
+    }
 
     // region <setWorld>
     @Redirect(method = "setWorld(Lnet/minecraft/client/world/ClientWorld;)V", at = @At(value = "INVOKE", target =

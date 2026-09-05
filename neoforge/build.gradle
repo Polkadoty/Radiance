@@ -49,3 +49,24 @@ remapJar {
     archiveFileName.set("Radiance-${project.version}-neoforge-1.21.1.jar")
 }
 jar { from('../LICENSE') }
+
+// A remapped Java JAR can build successfully without the native runtime assets.
+// Check the actual distributable so such builds cannot pass verification.
+tasks.register('verifyNativeResources') {
+    dependsOn tasks.named('remapJar')
+    doLast {
+        def archive = tasks.named('remapJar').get().archiveFile.get().asFile
+        new java.util.zip.ZipFile(archive).withCloseable { zip ->
+            ['core.dll', 'libxess.dll', 'modules/ray_tracing.yaml',
+             'shaders/full_screen_vert.spv', 'shaders/rgb_bgr_fix_frag.spv',
+             'shaders/world/ray_tracing/vanilla-pt.zip',
+             'shaders/world/ray_tracing/advanced.zip'].each { path ->
+                def entry = zip.getEntry(path)
+                if (entry == null || entry.size <= 0) {
+                    throw new GradleException("Missing native runtime resource: ${path}")
+                }
+            }
+        }
+    }
+}
+tasks.named('check') { dependsOn tasks.named('verifyNativeResources') }
