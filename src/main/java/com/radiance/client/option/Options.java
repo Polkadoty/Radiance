@@ -187,10 +187,20 @@ public class Options {
     public static native void nativeSetFrameGenerationEnabled(boolean enabled);
     public static native void nativeSetReflexEnabled(boolean enabled);
     public static native boolean isFrameGenerationAvailable();
+    public static native boolean hasFrameGenerationFailure();
+    public static native String frameGenerationStatus();
+
+    // Called after native present on the same render thread. Temporary menu/focus
+    // gating preserves intent; an actual latched runtime failure clears it.
+    public static void refreshFrameGenerationRuntimeState() {
+        if (frameGenerationEnabled && hasFrameGenerationFailure()) {
+            setFrameGenerationEnabled(false, true);
+        }
+    }
 
     public static void setFrameGenerationEnabled(boolean enabled, boolean write) {
-        frameGenerationEnabled = enabled;
-        nativeSetFrameGenerationEnabled(enabled);
+        frameGenerationEnabled = enabled && !hasFrameGenerationFailure();
+        nativeSetFrameGenerationEnabled(frameGenerationEnabled);
         if (write) overwriteConfig();
     }
 

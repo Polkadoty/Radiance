@@ -206,8 +206,13 @@ public class VideoOptionsScreenMixins extends GameOptionsScreenMixins {
         this.body.addAll(optionsWindow);
         this.body.addSingleOptionEntry(fullScreenResolutionOption);
         if (Options.isFrameGenerationAvailable()) {
-            this.body.addSingleOptionEntry(SimpleOption.ofBoolean("options.video.frame_generation",
-                Options.frameGenerationEnabled, value -> Options.setFrameGenerationEnabled(value, true)));
+            Options.refreshFrameGenerationRuntimeState();
+            SimpleOption<Boolean> frameGeneration = SimpleOption.ofBoolean("options.video.frame_generation",
+                value -> Tooltip.of(Text.literal(Options.frameGenerationStatus())),
+                Options.frameGenerationEnabled, value -> Options.setFrameGenerationEnabled(value, true));
+            this.body.addSingleOptionEntry(frameGeneration);
+            var frameGenerationWidget = this.body.getWidgetFor(frameGeneration);
+            if (frameGenerationWidget != null) frameGenerationWidget.active = !Options.hasFrameGenerationFailure();
             this.body.addSingleOptionEntry(SimpleOption.ofBoolean("options.video.reflex",
                 Options.reflexEnabled, value -> Options.setReflexEnabled(value, true)));
         }
