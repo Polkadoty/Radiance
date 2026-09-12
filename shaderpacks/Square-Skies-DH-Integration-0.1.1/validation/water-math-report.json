@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "checks": 187,
+  "maximum_constant_light_integral_error": 2.8739218036616387e-15,
+  "scope": "Homogeneous Beer-Lambert integral, diffuse/split composition algebra, flat-surface Jacobian normalization. Not a runtime GPU/render test."
+}

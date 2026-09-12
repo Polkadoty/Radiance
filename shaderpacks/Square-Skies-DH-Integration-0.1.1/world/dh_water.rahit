@@ -1,0 +1,17 @@
+#version 460
+#extension GL_EXT_ray_tracing : require
+#extension GL_GOOGLE_include_directive : require
+#extension GL_EXT_shader_explicit_arithmetic_types_int64 : require
+#include "util/ray.glsl"
+#include "common/shared.hpp"
+layout(set = 2, binding = 0) uniform Uniform { WorldUBO ubo; };
+
+layout(location = 0) rayPayloadInEXT MainRay mainRay;
+#include "world/dh_coverage.glsl"
+void main() {
+    // Decoder guarantees a homogeneous, nonzero-alpha DH WATER-only part.
+    // No atlas flag texture, opacity lottery, or sampled sea plane is needed.
+    if (radianceDhInsideNearCoverage() || (rayIgnoreWaterSelf(mainRay) && gl_HitTEXT < 0.005) || rayInsideBoat(mainRay)) {
+        ignoreIntersectionEXT;
+    }
+}

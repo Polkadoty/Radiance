@@ -1,0 +1,7 @@
+{
+  "rays": 188,
+  "passed": true,
+  "maximum_path_length_error_blocks": 0.15599999999744796,
+  "tolerance_blocks": 0.5,
+  "note": "Small DDA boundary epsilon removes up to 0.002 blocks per cell. Independent brute-force intervals check analytic traversal, not runtime images."
+}

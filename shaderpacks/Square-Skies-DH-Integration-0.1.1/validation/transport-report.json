@@ -1,0 +1,16 @@
+{
+  "success": true,
+  "float32_rays": 998,
+  "old_stalled_rays": 191,
+  "new_stalled_rays": 0,
+  "full_transport_partition_cases": 400,
+  "max_new_rgba_partition_error": 0.0,
+  "max_old_rgb_partition_error": 0.04994521514602668,
+  "boundary_scan_rays": 181,
+  "new_boundary_rgba_span": 0.0,
+  "old_boundary_max_rgb_step": 0.016718286766654766,
+  "cpu_image_rays": 7000,
+  "cpu_old_stalled_pixels": 7,
+  "median_density_kernel_cost_ratio": 2.413793103448276,
+  "cost_note": "Density-kernel evaluations only. New lighting reuses 3x3 occupancy; old shadow-DDA occupancy/noise reload cost not counted. GPU timing required."
+}

@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "checks": 3079,
+  "minimum_correct_side_reflection_component": 0.0009651773504160575,
+  "maximum_normal_delta_across_one_millionth_block": 1.1849312569231323e-07,
+  "scope": "Finite/unit world-space normals, grazing reflection hemisphere, continuity, bounded water self-hit rejection, flat caustic normalization. No rendered-image or runtime test."
+}

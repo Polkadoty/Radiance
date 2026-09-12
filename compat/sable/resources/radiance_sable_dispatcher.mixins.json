@@ -1,0 +1,9 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.radiance.compat.sable.host.mixin",
+  "plugin": "com.radiance.compat.sable.producer.mixin.ProducerMixinPlugin",
+  "compatibilityLevel": "JAVA_21",
+  "client": ["SableRendererMixin", "RadianceFrameMixin", "SableConfigMixin"],
+  "injectors": {"defaultRequire": 1}
+}

@@ -1,0 +1,74 @@
+{
+  "success": true,
+  "scope": "CPU mirror: seeded occupancy/rounded cache tests, float32 sorted traversal and bounded work, controlled connected-sheet full transport. No GLSL execution, native LUT readback or GPU timing.",
+  "flat_interior_cases": 324,
+  "max_horizontal_gradient": 0.0,
+  "cache_boundary_cases": 600,
+  "max_mass_gradient_cache_difference": 0.0,
+  "max_local_light_cache_difference": 0.0,
+  "max_gradient_error": 1.897157375641001e-08,
+  "float32_limit_cases": 3400,
+  "three_interval_cases": 762,
+  "max_observed_cells": 191,
+  "max_observed_samples": 2045,
+  "order_examples": {
+    "y=66,dy=1": [
+      0,
+      1,
+      2
+    ],
+    "y=350,dy=-1": [
+      2,
+      1,
+      0
+    ],
+    "y=215,dy=1": [
+      1,
+      2
+    ],
+    "y=215,dy=-1": [
+      0
+    ],
+    "y=260,dy=1": [
+      2
+    ],
+    "y=260,dy=-1": [
+      1,
+      0
+    ],
+    "y=195,dy=0": [
+      0
+    ]
+  },
+  "full_RGBA_partition_comparisons": 240,
+  "max_partition_error": 0.0,
+  "max_depth_order_error": 0.0,
+  "max_transparent_layer_composition_error": 0.0,
+  "max_final_bin_fade": 0.0013675519700828698,
+  "clear_weather_occupied_fractions": [
+    0.3057375,
+    0.247475,
+    0.219175
+  ],
+  "occupancy_correlations": [
+    [
+      1.0,
+      -0.017383159292941944,
+      -0.006545423459473748
+    ],
+    [
+      -0.017383159292941944,
+      0.9999999999999999,
+      0.010871974891539425
+    ],
+    [
+      -0.006545423459473749,
+      0.010871974891539423,
+      0.9999999999999999
+    ]
+  ],
+  "combined_coverage": 0.593875,
+  "water_byte_identical_to_v06": true,
+  "cloud_source_sha256": "fc8c37db943d983e26778533ed1d1b8245f564174e6ce5c861aec302eda37208",
+  "extreme_geometric_and_ray_limit_cases": 900
+}

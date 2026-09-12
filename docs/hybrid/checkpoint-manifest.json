@@ -1,0 +1,2217 @@
+{
+  "archiveSha256": "65d26e2121f6ca81ff1938d24867565a4e9e0d0421b1132881224cc6500464c3",
+  "files": [
+    {
+      "source": "MCVR/src/CMakeLists.txt",
+      "sha256": "d12db377674628b8cfcabc4f6dcefc72ccead1fae815753de3f076f4a3e77b25"
+    },
+    {
+      "source": "MCVR/src/common/mapping.hpp",
+      "sha256": "b0f6fdb0b4e7399796dd2a2e51bb34c9f05da10943d257b75944825e9b7ed0bd"
+    },
+    {
+      "source": "MCVR/src/common/shared.hpp",
+      "sha256": "8cf330ab922b8af72de1f2d4b9439413947bdf3af47c5d3ad3d3ab5615d7d1f2"
+    },
+    {
+      "source": "MCVR/src/common/singleton.hpp",
+      "sha256": "24aaf912f05951bfd6e603878df451e2c853efe9c8f0c26ff0a94f780a61d820"
+    },
+    {
+      "source": "MCVR/src/core/CMakeLists.txt",
+      "sha256": "858abbdb5a7a55f72c944e4cf049a428241ac9d58d459e4904667b97c4a8a904"
+    },
+    {
+      "source": "MCVR/src/core/all_extern.hpp",
+      "sha256": "8a35d0768aef1bd5d40530193a98711bacc2939becee90c77debb4fd419ae796"
+    },
+    {
+      "source": "MCVR/src/core/glfw_bind.cpp",
+      "sha256": "becec1b13b50ec768bc61450a3dceee1fb10bccdea2452d3fb081dc863f97f97"
+    },
+    {
+      "source": "MCVR/src/core/middleware/com_radiance_client_option_Options.cpp",
+      "sha256": "fcf9c92f2286254e4c740511f518c6e7ece5e672ec98d719f95800fdf8ddd506"
+    },
+    {
+      "source": "MCVR/src/core/middleware/com_radiance_client_pipeline_Pipeline.cpp",
+      "sha256": "9ad39309cc2dc77c9102063b4b8eeaaee7087c7cb47fdb830de4c31e3250e6a6"
+    },
+    {
+      "source": "MCVR/src/core/middleware/com_radiance_client_proxy_vulkan_BufferProxy.cpp",
+      "sha256": "d3b5e6726be45ce59af66ab98ad699fcb78de4e837dc21a0ccd4ef9c53899639"
+    },
+    {
+      "source": "MCVR/src/core/middleware/com_radiance_client_proxy_vulkan_DrawCommandProxy_Overlay.cpp",
+      "sha256": "e3f2399bb6caee38a473d3a9366c1985148dd2cdc72c19f974528a853f3bdc42"
+    },
+    {
+      "source": "MCVR/src/core/middleware/com_radiance_client_proxy_vulkan_PipelineStateProxy_ClearState.cpp",
+      "sha256": "0c6970a1a617b53757f287d1828dda54e4df2f6d7d2b88c206882117980ae1aa"
+    },
+    {
+      "source": "MCVR/src/core/middleware/com_radiance_client_proxy_vulkan_PipelineStateProxy_ColorBlendState.cpp",
+      "sha256": "558bd495c7313546d62929a84bc0c87ad5a81dbce04a8ed251df8d4bbbb5701a"
+    },
+    {
+      "source": "MCVR/src/core/middleware/com_radiance_client_proxy_vulkan_PipelineStateProxy_DepthStencilState.cpp",
+      "sha256": "5fe3301356d66b368e33cba584d66614d84f201220f97fbca27f8f736a704542"
+    },
+    {
+      "source": "MCVR/src/core/middleware/com_radiance_client_proxy_vulkan_PipelineStateProxy_RasterizationState.cpp",
+      "sha256": "390b259967e7ac694630ed6778431e53be642ffdc60b078cda7455fcca831ba0"
+    },
+    {
+      "source": "MCVR/src/core/middleware/com_radiance_client_proxy_vulkan_PipelineStateProxy_ViewportState.cpp",
+      "sha256": "1470339711aa1c3ba4dc83a7436a8367b4e478c4cb761c099a9f8da74cf2900a"
+    },
+    {
+      "source": "MCVR/src/core/middleware/com_radiance_client_proxy_vulkan_RendererProxy.cpp",
+      "sha256": "10841cf4edceb3ecf067c216865c98c0fcd80949f83bbc5a61011a85d573dd7e"
+    },
+    {
+      "source": "MCVR/src/core/middleware/com_radiance_client_proxy_vulkan_ShaderProxy.cpp",
+      "sha256": "1cb169adb142ac914b91728c95d12c26d861b11246a3198e0c6de925f396cf8f"
+    },
+    {
+      "source": "MCVR/src/core/middleware/com_radiance_client_proxy_vulkan_TextureProxy.cpp",
+      "sha256": "864121a9d9c9bebcac4d73b9fd238615d87f12d17d92e3a9762ea46f838e3906"
+    },
+    {
+      "source": "MCVR/src/core/middleware/com_radiance_client_proxy_vulkan_WindowProxy.cpp",
+      "sha256": "9a1815a0eb5c0a9a1d61b632b8a5e71d7cb0d8614198a4fcf66abd89f1937f75"
+    },
+    {
+      "source": "MCVR/src/core/middleware/com_radiance_client_proxy_world_ChunkProxy.cpp",
+      "sha256": "b69138817c363673e529c6ccab0847a6fcc79eff60180126f3a1adc9a38aee6e"
+    },
+    {
+      "source": "MCVR/src/core/middleware/com_radiance_client_proxy_world_EntityProxy.cpp",
+      "sha256": "90b9d5a67cfb5b3ee1b12fa5415bac7ffd60deacb4552f80ddbe313e684c1a4a"
+    },
+    {
+      "source": "MCVR/src/core/middleware/com_radiance_client_proxy_world_PersistentSceneProxy.cpp",
+      "sha256": "41541c7806d10f36c99f15163a5d7246c50837fc2ff2652c41db692beaf008d4"
+    },
+    {
+      "source": "MCVR/src/core/middleware/com_radiance_client_proxy_world_PlayerProxy.cpp",
+      "sha256": "13ce9316ca034f144413f4041ca952dca56f111f5170a33746edc621da05f929"
+    },
+    {
+      "source": "MCVR/src/core/middleware/com_radiance_compat_dh_NativeLodBridge.cpp",
+      "sha256": "4fc0c5b283eecee39c7dd26ab5f930b06884a221cb24dfd551dfd3ebb4fd6453"
+    },
+    {
+      "source": "MCVR/src/core/middleware/hybrid_hud.cpp",
+      "sha256": "b71f4d60e61ba3e4b3c042a32095e660bd301e38fef5b30e344dad29898ee62e"
+    },
+    {
+      "source": "MCVR/src/core/middleware/hybrid_runtime_probe.cpp",
+      "sha256": "8222344da101c97721602c7fbb2a7791ca281c0734af84d2017282126b2939fe"
+    },
+    {
+      "source": "MCVR/src/core/middleware/jni_frame_guard.hpp",
+      "sha256": "b9d64b5a14fd942a112929448878cd49f3514c42637031fcec08de8e37b248de"
+    },
+    {
+      "source": "MCVR/src/core/middleware/texture_proxy_errors.hpp",
+      "sha256": "a157a5987aba7a866e8eee22a147918411dfa20a3e249060edecbca4fe873947"
+    },
+    {
+      "source": "MCVR/src/core/render/buffers.cpp",
+      "sha256": "2beab1abaed7603964225a1e5d892bd336b0576fe8e433550ceaaa51c8581f49"
+    },
+    {
+      "source": "MCVR/src/core/render/buffers.hpp",
+      "sha256": "51f7a182bb7af1c88d3a5e3a6c179335e4e5cbfabdc6625ef399f6b0cc436003"
+    },
+    {
+      "source": "MCVR/src/core/render/chunks.cpp",
+      "sha256": "273d75da0d81a55694a3049a5fc2b1c2836111c0cd53c9aea4989fd1881c95a9"
+    },
+    {
+      "source": "MCVR/src/core/render/chunks.hpp",
+      "sha256": "16ba3baf825f1d0297e3d8d0738573e765e6248c83d29f7a20a5b0c49165918c"
+    },
+    {
+      "source": "MCVR/src/core/render/compat/dh/dh_lod_decode.hpp",
+      "sha256": "e022f1a5dbbac232193418cc198c7d81045025ae80894d4e070212d1003f4633"
+    },
+    {
+      "source": "MCVR/src/core/render/compat/dh/dh_lod_pbr.hpp",
+      "sha256": "03c83d3c56d07c1295aaaec05400d26922e48ba627366fba6bf0a85759ce73d4"
+    },
+    {
+      "source": "MCVR/src/core/render/compat/dh/geometry_budget.hpp",
+      "sha256": "62ec4e558c124a0d928ac55aa4c1040eff0c70c4ae49df40902df3664f7d0950"
+    },
+    {
+      "source": "MCVR/src/core/render/compat/dh/lod_scene.cpp",
+      "sha256": "2649a7f173879ecd97e48765880d3e008697705611046ca25f1055a67733b405"
+    },
+    {
+      "source": "MCVR/src/core/render/compat/dh/lod_scene.hpp",
+      "sha256": "a8c9ff16287e41ce686d9e57812309535c2bcce035b4e9bc7358ad03f9f6c6e5"
+    },
+    {
+      "source": "MCVR/src/core/render/compat/dh/near_coverage.hpp",
+      "sha256": "cc846e98cb46b562f6c26ad54e3d3f21da6531b0b32637b2c78c6502d07fb7a0"
+    },
+    {
+      "source": "MCVR/src/core/render/emission.cpp",
+      "sha256": "d97492866f3174e8fdb607e6924074cffca8c99f4155eb83105ac51f265dba99"
+    },
+    {
+      "source": "MCVR/src/core/render/emission.hpp",
+      "sha256": "1202fed39dd6f8c2d312f12b1e624400ff33698ba755259d36ee0587af7d4777"
+    },
+    {
+      "source": "MCVR/src/core/render/entities.cpp",
+      "sha256": "ffb3746b85aa77cc4385bcf6c041335ff7f40880161ca00dce7680ddbd11999a"
+    },
+    {
+      "source": "MCVR/src/core/render/entities.hpp",
+      "sha256": "3c4e33a639b2a64db7a03a3f26292fda4ffcf02ee4f094adfc41c9ce9761d91b"
+    },
+    {
+      "source": "MCVR/src/core/render/frame_resource_retainer.cpp",
+      "sha256": "6430d24688d2cd4f62b42c7dd6f0db80d6637ccda74244b3cfa2c05f21d30a19"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/ui_module.cpp",
+      "sha256": "09a6b88d1d732f8bf55f49aee700714fee458bddcb54085f27913a857ab77977"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/ui_module.hpp",
+      "sha256": "2895ecfde757bc802472f87aad9d51af699147f4843ea654fa0a31f7e0bb9e1a"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/dlss/dlss_module.cpp",
+      "sha256": "16e06bb3dbb9e46f6f004bef4046257d08786521f76d79149e43e4acc7b8ec3e"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/dlss/dlss_module.hpp",
+      "sha256": "0226fb1eb7b0d9ff17b6aa1112a412a7cfbf3babf3aaaf4227b82c8ad275b6cb"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/dlss/dlss_wrapper.cpp",
+      "sha256": "07251a76b540d131c8748dba7306fa3db6a7a83242e75411fec5a378f2e09563"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/dlss/dlss_wrapper.hpp",
+      "sha256": "7f77d8d3acc3ae60964e90eeff9a0ea9cca732bda05ee7d1477980b567266863"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/frame_gen/frame_gen_camera.hpp",
+      "sha256": "2885ed6d6cbafea1667e1dc6111d38c2c0bfb5b5dc17c3ef976a8871aa5922bb"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/frame_gen/frame_gen_manager.cpp",
+      "sha256": "a2679134f62dae484296ed2f52af55a4e56fc489d515c12ef23b1f2debb1ee40"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/frame_gen/frame_gen_manager.hpp",
+      "sha256": "f11f215583c094a99f5e965c531d581faee98cdffdd6ef0b9d0dabfa4fac8208"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/fsr_upscaler/fsr3_upscaler.cpp",
+      "sha256": "c3c95d8faa830b876e27aed200fb7bc077d1ab09c88e6524f17bd34ae1d712d1"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/fsr_upscaler/fsr3_upscaler.hpp",
+      "sha256": "a052e6110f366f8ef3b85e1644725f72fb2ad83d430d3e2af9a40023dfcaa42f"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/fsr_upscaler/fsr_setup.cpp",
+      "sha256": "eb9483c21d11fb45511a90abcc5c50b2378792ac35f936b5e9d782179a66d601"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/fsr_upscaler/fsr_setup.hpp",
+      "sha256": "5e1c5775584f1c2e0a538a2ca4057644cae9b7f213e9d22829ff9d24e6d105a6"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/fsr_upscaler/fsr_upscaler_module.cpp",
+      "sha256": "1c120b0947b525632012d5983a41f665befd23588a5cf368da7a50a5b99367ca"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/fsr_upscaler/fsr_upscaler_module.hpp",
+      "sha256": "44a30069afd33fe0ea8c804518846118bdba42b6e8769f2b7c440d347ebaa896"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/nrd/nrd_module.cpp",
+      "sha256": "f8c03a2f40f2c4c8ba2090174da3ee4075aeb4daa156b612b5cc816157250307"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/nrd/nrd_module.hpp",
+      "sha256": "2a0d6823252595499d21eef24748a235409378d2fe551f10ed2e9652b07d25c5"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/nrd/nrd_wrapper.cpp",
+      "sha256": "6b3c0e0442e006e5e42ac2465c31900e93006547155bea813282d5df14da7f80"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/nrd/nrd_wrapper.hpp",
+      "sha256": "e5edde10db2bd54c4b3e2eab0c5066db7b757eabcd30cbd37bab393cad1452e9"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/post_render/post_render_module.cpp",
+      "sha256": "a3e9e59752018a0f56de18d007575934eb5212a52de22c5f7ef82cc10d5c0c42"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/post_render/post_render_module.hpp",
+      "sha256": "89384cbb49c520fdb12380a65a56c4a13f2e27f4240b1675f03985c656de7e9b"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/ray_tracing/ray_tracing_module.cpp",
+      "sha256": "cbcd02abfcf2a58911066dab642fdada03b8eb00219bb64eb86a715b9d754359"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/ray_tracing/ray_tracing_module.hpp",
+      "sha256": "094ec3f32d02739cba0b0b325494f58f7d3648e76fac275904a9af71f82c757b"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/ray_tracing/submodules/world_prepare.cpp",
+      "sha256": "6dae9c094ce301046377bf6cdd941da52eb50ac64c4ace1c117970f66c6376b2"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/ray_tracing/submodules/world_prepare.hpp",
+      "sha256": "8dbbc5f9da6c526e0c4544a20f64e61d0175304942de15580381f7be7ea72c93"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/shader_pack/shader_pack.cpp",
+      "sha256": "3928ae433af346e0669aaa5a9a42627d3f511d75b3d3afbda2054eba74cf9068"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/shader_pack/shader_pack.hpp",
+      "sha256": "afe468555616fb2b95de278cf0245dfc06f6fb39d6894c85b9d924ff7f44b410"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/svgf/blue_noise.cpp",
+      "sha256": "6c13174d9a731441fcf340a124415f0b5524a7468bba84398ef877f52afcdc77"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/svgf/blue_noise.hpp",
+      "sha256": "b80dfed0123c53d2711ed0a9afa2ddacde93a710e0b82708a3efda2a7bff5f79"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/svgf/svgf_denoiser.cpp",
+      "sha256": "36935c848e161779a5078fbb5320ff61f068c03ad37c8af6f0e017c0264f5c6f"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/svgf/svgf_denoiser.hpp",
+      "sha256": "50d8cb78bdf3a3726fe68ca03e92d781d3fa2bbe33425b89759f53656eb29483"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/svgf/svgf_module.cpp",
+      "sha256": "d1c2a246a8e23bf4fa573193bc2b4c39e3f85c33ba0a7849aefcc5c225e2dc54"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/svgf/svgf_module.hpp",
+      "sha256": "07dbfc70409fab6219657849eb7742fd180ff717de85c600a48c569c0426f770"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/template/submodules/template_sub_module.hpp",
+      "sha256": "6bbeb953dcaad28f5c1a1488ecb0a02b09a35e2653cf966ee9ae7de39706b0b7"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/template/template_module.hpp",
+      "sha256": "89b38d184499ca795f2adea411ef7a14a4c6b668e27e700e5dbcab2ef695cd9f"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/temporal_accumulation/temporal_accumulation_module.cpp",
+      "sha256": "551ded604d253d7c5506bf022747d900d550269bc49fe5ccec6722e5bb2c1fb2"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/temporal_accumulation/temporal_accumulation_module.hpp",
+      "sha256": "76f88659622e6b3170bdbd0db785bb9c3791a10ba56276ebd520cb654b6afff8"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/tone_mapping/tone_mapping_module.cpp",
+      "sha256": "529c917270e862eec21ab27ee365a55edba24d4833c7722b25757f9ccfb03b18"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/tone_mapping/tone_mapping_module.hpp",
+      "sha256": "cef19af8ca82500ffe5e32e9de7ff96b4016bd8d17d6f3eeb83ac11d8f49d7cc"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/world_module.cpp",
+      "sha256": "29a7e9d4df9f67a09d2a873eb0b87fa553e38ab8a629baff89a5f7fd073287e0"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/world_module.hpp",
+      "sha256": "ff1e711b5dd2407393b370f8dfe3a9ea122e4f3ecdd3d7b8ea8a8f61d473f429"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/xess_upscaler/xess_sr_module.cpp",
+      "sha256": "83797f8b8931bc56b355a73ec7e3444a4a083b4c62c249f4d1c9381e463243f5"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/xess_upscaler/xess_sr_module.hpp",
+      "sha256": "a20b22415bfa6bab8e1b4523d18f86024b215a0d1eb48cf0c2e4229b6e3d5b77"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/xess_upscaler/xess_wrapper.cpp",
+      "sha256": "d155dab03d81cd0f69f40a45a12c223ed66c89771c080c503841c73c20451a89"
+    },
+    {
+      "source": "MCVR/src/core/render/modules/world/xess_upscaler/xess_wrapper.hpp",
+      "sha256": "52aff1fcd8da0852a666481478367af5c7733cb3caeec1d297cb53869ac43858"
+    },
+    {
+      "source": "MCVR/src/core/render/persistent_scene.cpp",
+      "sha256": "d4326bd1dd17e327f228de3d7ef2ddf3d6020d3698604c442d22d18ef13f5309"
+    },
+    {
+      "source": "MCVR/src/core/render/persistent_scene.hpp",
+      "sha256": "ef069b2efbc42c13d566e251d0287ceb292281137365a6e855613cfa561119bd"
+    },
+    {
+      "source": "MCVR/src/core/render/persistent_scene_gpu.cpp",
+      "sha256": "3febdc1a669141dde00bd0ced10d38ccd7ad21a947f92eeda20b8248dc076d46"
+    },
+    {
+      "source": "MCVR/src/core/render/persistent_scene_gpu.hpp",
+      "sha256": "d530a1eea05a0e8407cbf632425bce80ad50ac7aad245804153006c736d91c42"
+    },
+    {
+      "source": "MCVR/src/core/render/pipeline.cpp",
+      "sha256": "591cffd2d5dff5acd96310d849c8754a6ad6e3a382bf46eaee818bbea109b684"
+    },
+    {
+      "source": "MCVR/src/core/render/pipeline.hpp",
+      "sha256": "b078222b0e8fd1669063105b560039ac9ef978a179c7a023251ea242c848eedb"
+    },
+    {
+      "source": "MCVR/src/core/render/render_framework.cpp",
+      "sha256": "cb4e0311edaf9e327c386b7a06c23abfbc6de09f0d2e2dce13dd881b55563b48"
+    },
+    {
+      "source": "MCVR/src/core/render/render_framework.hpp",
+      "sha256": "28e0d655621c68c76683164cb5d1bfba90ae34815a9861a76c776b14552888e9"
+    },
+    {
+      "source": "MCVR/src/core/render/renderer.cpp",
+      "sha256": "2795ef2867caaab658f2f53256c5fdedaa41bafe1c1b36a7689494e8e9a44cd7"
+    },
+    {
+      "source": "MCVR/src/core/render/renderer.hpp",
+      "sha256": "3d2dfe27a18becbd3b0c62d80218b6466215eb8ed0100b3aff1ce1206dfca9ae"
+    },
+    {
+      "source": "MCVR/src/core/render/streamline_context.cpp",
+      "sha256": "903466ca4306761589a6277b90f673355979b752e48ea45677fb53679f0282fc"
+    },
+    {
+      "source": "MCVR/src/core/render/streamline_context.hpp",
+      "sha256": "1c1d4d676f90c2b5aba6c97bd84631aeb5e3877cfb82e11998aa0db4d2d357da"
+    },
+    {
+      "source": "MCVR/src/core/render/textures.cpp",
+      "sha256": "2010a7b6e2d24a4283e3b600f5370900487898f54e1188d8af7e55a345c1f85f"
+    },
+    {
+      "source": "MCVR/src/core/render/textures.hpp",
+      "sha256": "a84b7f47f901bdc0148e017a283b6a456ef8fde78587357d38014198f9f00a1f"
+    },
+    {
+      "source": "MCVR/src/core/render/triangle_indices.hpp",
+      "sha256": "e04295923b577c2c87fe8ad8220b86146239a6fe34e0d972b7a58bac1cf02557"
+    },
+    {
+      "source": "MCVR/src/core/render/vertex_formats.cpp",
+      "sha256": "007dca5b718df0e9c27456adab6a5aa6386054fa43822e4999a92fb6f6c1de0a"
+    },
+    {
+      "source": "MCVR/src/core/render/world.cpp",
+      "sha256": "c06398d7e4ccd2b1f9da67b37e6cfebbc6a6b9c3172db080761bebf3c5721aca"
+    },
+    {
+      "source": "MCVR/src/core/render/world.hpp",
+      "sha256": "84ecced523f9ef37b653a9dc0de44ddb5d5c28d24e92e5036b85e3eca07fd59f"
+    },
+    {
+      "source": "MCVR/src/core/util/parallel.hpp",
+      "sha256": "0ed0e50f24f788df20b93ae46c09c75f4c87e4406937694d5b936e5ea32e22c6"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/all_core_vulkan.hpp",
+      "sha256": "89311686d08a26d11b82a395afa40de889300595e805d66cb95005fe95f14466"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/as.cpp",
+      "sha256": "df74f44b1a03b48a417987c6da685590de0c042be3a13ef0390f49477c457b35"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/as.hpp",
+      "sha256": "c518874460eb7cbedfd829d3ba8ab3a3cc75dc28d54c4236adcb3dc2f21c9378"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/buffer.cpp",
+      "sha256": "ff66bf8db21b75b26dad465d5109d400ab3c7d9c5fffada2b4414e5f5c5b431a"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/buffer.hpp",
+      "sha256": "660c0a71f1605e8121f511bfc4046c7cac9f7f61d6ba40dbfd5ecf761d131a64"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/command.cpp",
+      "sha256": "d35b5a37bf611c83a186098a4f5c92602553fc86fe9fbabfc5a78d673f248634"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/command.hpp",
+      "sha256": "1f49cdf75044b34ef68aeee82638b64a27fc78430a6674d79dae85a4bde59077"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/descriptor.cpp",
+      "sha256": "9f89032aacc01e88ab9d714a634d5ca6d4cc2ffcb32d54d30b8e84b00d0771e0"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/descriptor.hpp",
+      "sha256": "78363ac7d562b0837dfed242276c14fd97cd2f43412ccee5e9de4253457b6960"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/device.cpp",
+      "sha256": "4df3c7f7484aabbd1b2589cf497e4167feae0008a82f0d79b133dd929b00251e"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/device.hpp",
+      "sha256": "eeed0e2026e9c1a79c1449925832c7f35c8c814714a10da0370fa87c96fb30aa"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/dynamic_pipeline.cpp",
+      "sha256": "ca34a3308c7472846a0781f88b6cf0f8178241692eb3f9e33dc6a1c55985ce52"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/dynamic_pipeline.hpp",
+      "sha256": "362db57586caf11ac66129d60a9206e15697ad2f42045e1f01d28ae896f93a65"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/framebuffer.cpp",
+      "sha256": "f2a612a97e3faf19c4fd80fbe6b3e1e223fab343e0a2eed7c420bbdcc127c663"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/framebuffer.hpp",
+      "sha256": "35090f321330c452ee690f8aa7950d765b585c3c13c96882d8e47e59b8863495"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/framework.cpp",
+      "sha256": "0fee9a95bd15cfe67e632f1b660867a3639c596ba7fd06160429747a35290697"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/framework.hpp",
+      "sha256": "cea44eea56ce53b87a3b9fe443b25c3496113b8c11599b25057f969c456bdabd"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/image.cpp",
+      "sha256": "d0eefd9d01382baf0748b6e699f9fcb20d32bacb85042ad9d9f96e7aa9199dbd"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/image.hpp",
+      "sha256": "df82357899aecb28f46fe8a371dc7316744c869d12b8e3de99a10320abdc0953"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/instance.cpp",
+      "sha256": "de4d2437f229836927eac66de8f2970ec5c9a6ecddcb069ed98ebfaf7a756982"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/instance.hpp",
+      "sha256": "537512e791d8c507aa69ebfd56d47b8b1bf16e1149e0da8a8568c03321f3812f"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/physical_device.cpp",
+      "sha256": "ab9b29e66f53f7bd7ddc2c547c9534f8f67df95539b4d29af367990085fa7d46"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/physical_device.hpp",
+      "sha256": "ba220f120991c87b89e4088dab991745795d19752dbf956899b7f0e23c6f794f"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/pipeline.cpp",
+      "sha256": "7b6478d89a05a9337f8407cc1a89c5704c646e27b0a4f3d75b7404cad0834eb7"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/pipeline.hpp",
+      "sha256": "c2f697c66a951a362a0c2691ce9973ca67ffef02c2f6b53e77c386ff2df68dbe"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/render_pass.cpp",
+      "sha256": "84ccd4b93726a2fecccfbcc7971c9a56a88f3dab2c2681a027ba3efa4741336c"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/render_pass.hpp",
+      "sha256": "d8135f034ed1cd15011c9ee3443e9e615dafd95e0a11374da38cd245b4b316b4"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/sbt.cpp",
+      "sha256": "31c8e406a20df4016fb9500c482466a6bc64102b750148ce779c680cc8ef8863"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/sbt.hpp",
+      "sha256": "886ae554e0424c68a3a80b665af137010ff826f0905727f582a8812d19257ca0"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/shader.cpp",
+      "sha256": "be64c142b018a3b29ae1b23537ec69a6fca784f2d644985ab91bd729d5d20c34"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/shader.hpp",
+      "sha256": "deb0755610a26f4a5620e02c67d59765e5c8e2dbcb4203b2347a441e23d07fb6"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/swapchain.cpp",
+      "sha256": "f310f678d4038f00ad963a26bb5e6c58636d7f3d30276596051152e050fd54dc"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/swapchain.hpp",
+      "sha256": "6a8a161c4a50fcf104b2be0d130a4b2cc2966bdae48da276432b6e887f4fbef4"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/sync.cpp",
+      "sha256": "d6d1cffeefdd8e6b7339c9421977438830b1f9076ac1e965117ec739585d70f0"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/sync.hpp",
+      "sha256": "a4d2090ca175d836884f2d4bdb48d7a24802cac7abee8110ea9559543fa6f1d3"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/vertex.cpp",
+      "sha256": "0ee5ca2de3354c14e93f28a94e409d1fdc79cbd5e7dfd76b5f5e9cefb9595fa1"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/vertex.hpp",
+      "sha256": "16c4c2bd0fb7a691cda900d4da19ca7fd9d63b8c8f03a2d00e30b7fa2b9c28f0"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/vma.cpp",
+      "sha256": "555ec466c20fdaa26244423c67d292ea4a51327446dcb4ac2d5295e8e2281160"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/vma.hpp",
+      "sha256": "fa649613dcecca07eec9532de2b52bb0f3a1a0f0837cc7b0f4e44f7d119ded93"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/window.cpp",
+      "sha256": "33f33852e35406bde01d78a8cd494326db6bad549b2f5b70cb8e5ee97d5591ad"
+    },
+    {
+      "source": "MCVR/src/core/vulkan/window.hpp",
+      "sha256": "b481e8fbe57880f5cb911e5d0c73db403dd0aaa93f70d7a5409f2e8d21487386"
+    },
+    {
+      "source": "MCVR/src/shader/CMakeLists.txt",
+      "sha256": "87dcbbba8e40d02669b85447a34d9e09616ad8b7ebf79be4546dc2799a0e596e"
+    },
+    {
+      "source": "MCVR/src/shader/util/alpha_mode.glsl",
+      "sha256": "e360ae2b432c437b75b5179258cd72fe95fb6923851f415ec5575df4537d66e0"
+    },
+    {
+      "source": "MCVR/src/shader/util/color_space.glsl",
+      "sha256": "76435788369537c0204e69b20e5d0aae7c4af8d6d21e0de868d8c95a910e54d3"
+    },
+    {
+      "source": "MCVR/src/shader/util/disney.glsl",
+      "sha256": "2a5416f1afa4a91d058bc794328fa499ee4ed9fd432069cdab67987f2658fbc4"
+    },
+    {
+      "source": "MCVR/src/shader/util/height_map.glsl",
+      "sha256": "b6cfc320af0240c7a5e0fbb3eef52e96f589c1d22b956ab9a4788911d39cecef"
+    },
+    {
+      "source": "MCVR/src/shader/util/labpbr.glsl",
+      "sha256": "d9e2673cc7a832475da683dc27e50d346943bed437791eb72eb3e785889346e9"
+    },
+    {
+      "source": "MCVR/src/shader/util/random.glsl",
+      "sha256": "f221a54dbe7dab2b5faf56db8953693347389ad5377a60c48405238e2cace31c"
+    },
+    {
+      "source": "MCVR/src/shader/util/ray.glsl",
+      "sha256": "aceb5aab7175284b392815b7bac1f023c971df62c978a8c6cbd6166adc1d5c76"
+    },
+    {
+      "source": "MCVR/src/shader/util/ray_cone.glsl",
+      "sha256": "fcceae26e53ffadacd4753b9ac8874bd75a42f26484535d14390e1fe3466710b"
+    },
+    {
+      "source": "MCVR/src/shader/util/ray_payloads.glsl",
+      "sha256": "6c1a99eaf07ad3c870b6b570c43e2e8a5c5498ef6a15f54a24e019bd2e791356"
+    },
+    {
+      "source": "MCVR/src/shader/util/sampling_helpers.glsl",
+      "sha256": "02abd9246ff19cddad75284dff588fe7254acfe44bcf189c3d4b3defda99d3a3"
+    },
+    {
+      "source": "MCVR/src/shader/util/text_mode.glsl",
+      "sha256": "f2eb16c776542dd23ed6f2f3dff45e70454327589c0b6ba37a3b76f3e1c32fa7"
+    },
+    {
+      "source": "MCVR/src/shader/util/util.glsl",
+      "sha256": "7f7d586b1ebd267a01366daa9aafa146dc0ea741a9444aa805fd341e4783bac0"
+    },
+    {
+      "source": "MCVR/src/shader/util/vertex.glsl",
+      "sha256": "ececeba262b2b893a624b537fdda8c7cef9823e802b535bc2a4f587e098ff15b"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/advanced/common/celestial.glsl",
+      "sha256": "0e86edcf95a7c7987943d202f6ba9adba7e64f08431769732b5cf76d77da824e"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/advanced/common/chunk_lookup.glsl",
+      "sha256": "7441156868f79e4da415279629f5cbbf43f7eea9d8ad0b3f91ff1c972945a435"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/advanced/common/constants.glsl",
+      "sha256": "22d61c25b4a005a801bf6d7959e31211ebc044c80fd719cf5fed0fb010e51110"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/advanced/common/direct_light_eval.glsl",
+      "sha256": "1d0cf25708c2258432f8b35d112b7b0767e13d8afc6462776ae139273b8ff82a"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/advanced/common/direct_light_reservoir.glsl",
+      "sha256": "3491675ac7e0ebf41fac5e643adab1ed4fd2b3d7a6997725c2208d53822b44f6"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/advanced/common/direct_light_reuse_query.glsl",
+      "sha256": "c18171f5370d5257aabc29b9c985ae3b4db2b641693bebc31e052244c791702d"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/advanced/common/direct_light_surface.glsl",
+      "sha256": "cefc24dd08a5bfc48ad4850f7f7d451895cc13a0e3a860d51772514471fb42f1"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/advanced/common/direct_light_visibility.glsl",
+      "sha256": "9565bd1ddc850428ccf55e3565d603b8fa36776e7a4d6388f43ce4bd5f5cd7b6"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/advanced/common/end_portal.glsl",
+      "sha256": "ab586cd4c18200a8f2936ea33aada41d3a4e080d3f3fe815baa12bcc755ea8fc"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/advanced/common/fft_water.glsl",
+      "sha256": "f24750eb595f708bf64837c73d83593e273721b496c0fa30d49efbdd68086d22"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/advanced/common/first_hit_state.glsl",
+      "sha256": "1ace8e40cd374dc7df243e3ac2ffabd61670158740e18fab21296199264058af"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/advanced/common/light.glsl",
+      "sha256": "07e6ce818df02e2c5bae1a8c8afd1449e295b871eb45ee22e9a0ec1350fece0e"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/advanced/common/light_neighborhood.glsl",
+      "sha256": "e882eff4e09c19c76c6d6b8e52e69c785fad11d6a14cc3013771dfe08a539a3c"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/advanced/common/parallax_condition.glsl",
+      "sha256": "eec1f397a22376a3dcb9304132b1f2beca7858bcb3cf49a0c1a8c3e87e178121"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/advanced/common/parallax_trace.glsl",
+      "sha256": "8f7cbc5a24d48e44b6a6e39f208bd68cc963dc90d8e44d565ea7b0b02254c9c1"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/advanced/common/primary_trace.glsl",
+      "sha256": "f14032167e40195303012f229e059e2e3833d6010ec254aa8fb65ad4c0f60af9"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/advanced/common/runtime_primary_secondary_arrays.glsl",
+      "sha256": "f206a7f4876f2e3b97d62b15d65dd93140b5add931cadbe5f33ffcb68f90e405"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/advanced/common/runtime_texture_arrays.glsl",
+      "sha256": "c3666c57caa504843e2b58aecaee21a24a0347909f3fbe0660e71cd1227a10de"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/advanced/common/surface_eval.glsl",
+      "sha256": "d953224a250915b5ed152834682350cdee2d25b782467c4a702428259a635f1a"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/advanced/common/volumetric_cloud.glsl",
+      "sha256": "b787816f050377e3805267e82697083b7650cb7ac4f70b03be666b559fd2cb9e"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/advanced/common/world_miss_eval.glsl",
+      "sha256": "95c929701953ae18982c5d529fcf69bb6279b59fbfd9699d39bd04d91788a0f4"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/advanced/configs.json",
+      "sha256": "96d9f0f77137a568f0c951f6d646c0b027c45f42f417414af45822e62c80dead"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/vanilla-pt/common/celestial.glsl",
+      "sha256": "c197188bd1841270782faffa95b84a14d201a2e91946fa47e67525957dbe0325"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/vanilla-pt/common/constants.glsl",
+      "sha256": "9c8e5a0845156dd2b120af908efabf14a3019969f6b8bb5d1d09191aee495aaf"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/vanilla-pt/common/end_portal.glsl",
+      "sha256": "5a45afdd7dc46da1032e1976244e04dfa1c56c80125e4a98a35e928d3f0bbdc8"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/vanilla-pt/common/fft_water.glsl",
+      "sha256": "defe379a71fc6ad069ef6d57672cf3437a6ad8443af1c775de665fae32550ea7"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/vanilla-pt/common/volumetric_cloud.glsl",
+      "sha256": "1860493e6f74d0fc454d04edc68655bec968b54aa4ce7ff0b2d62c4a54fad2b6"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/vanilla-pt/common/volumetric_cloud_impl.glsl",
+      "sha256": "61790215c25ac0d8ef7089db27dbd462d0bcb69e6c2fa25511ce725d46c67407"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/vanilla-pt/common/world_miss_eval.glsl",
+      "sha256": "9bb66468c62a475cc80fc6d2658e9e9485d3823ececcfcc42fcb0f63bde6221d"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/vanilla-pt/common/world_miss_eval_impl.glsl",
+      "sha256": "ce2558cce4abac758c6bfc47792ad178a9b97b4856a6dc46fe4f8918434dcf17"
+    },
+    {
+      "source": "MCVR/src/shader/world/ray_tracing/internal/vanilla-pt/configs.json",
+      "sha256": "14aa3a02c31794898b227d321b921674a026fe8157cbc1648ee4ea3b550aab0d"
+    },
+    {
+      "source": "Radiance/gradle.properties",
+      "sha256": "0ccf6608c10a67ed4c72a469f37d4c7da0aede2ae1067cd94e42a58b3dc8163a"
+    },
+    {
+      "source": "Radiance/neoforge/build.gradle",
+      "sha256": "94356a7769f698cc264c6a5bb9de5ff9d6b9c9a7faeff9acf71261e74202d2f0"
+    },
+    {
+      "source": "Radiance/neoforge/settings.gradle",
+      "sha256": "6d78943204249a657d453cff76ee7f4bfbbbff8e08d15da3c1f7379c17fa8a7d"
+    },
+    {
+      "source": "Radiance/neoforge/src/main/java/com/radiance/neoforge/NeoForgeSectionModels.java",
+      "sha256": "b4d50c44378d05913d4920af74d34b2c0f7c961a2e554281a9285a3d5e25fc8d"
+    },
+    {
+      "source": "Radiance/neoforge/src/main/java/com/radiance/neoforge/RadianceNeoForge.java",
+      "sha256": "54882a8f8339f2d1760397f4090bcd9ebd060f82e22ed279be1ca9b303898714"
+    },
+    {
+      "source": "Radiance/neoforge/src/main/resources/META-INF/neoforge.mods.toml",
+      "sha256": "9608b62b8815d082356d575010501d09fac1a630b6dea55238c4eeccfcab57dc"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/Radiance.java",
+      "sha256": "5c07a6db5be25616adff9165abe965e793defd8c75dcd01b796093bdea06efa9"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/RadianceClient.java",
+      "sha256": "6445316aa99d848798b2d301b2228f29abd6c0c86cb173c3dcc5ea506075b149"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/UnsafeManager.java",
+      "sha256": "f6b235c274444ed126a8fae496b065e578551b6fe07bc09cea04b6da35a52554"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/compat/CloudRenderer.java",
+      "sha256": "4c5d778b1f7f29625a6c8115ae38c6f52d541c4c72a710a84b6093f94e0b2d91"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/compat/Colors.java",
+      "sha256": "65b0b47cb39f093f08f8af96f6bc94d50464f33fb060225cfc411b550721757e"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/compat/DistantHorizonsCompat.java",
+      "sha256": "5a5e55a370730244e333ec4d135bf295a7e6766e08dce11611ee09517dabaa65"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/compat/Fog.java",
+      "sha256": "9b7dac927c34bc8e73f52fc30be04ad32998c89456534035b32101ed438e3a59"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/compat/Images.java",
+      "sha256": "9059e68033cd1dac2e4cd195894483817671492ae0272445ae2684b30e9e62e4"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/compat/OverlayIndices.java",
+      "sha256": "bb0efa1328deebc718f65a720a275ef1201e7accb2e96ab8e638056a78f90fb1"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/compat/Particles.java",
+      "sha256": "294b1bd28412e49b83821cd485c62337ab55509ab2a6e63f1bb9720d8eb8efc2"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/compat/SectionModelRenderer.java",
+      "sha256": "f63dcba67320b7e28d99b055f751947fa532557a4163350e2ba2b227d1f566ec"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/compat/SyntheticMeshPackets.java",
+      "sha256": "9151ae3c0e6ab6afcfcf9748efe7d027248dc0cf44853eaea9765778e65bdec4"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/compat/SyntheticPersistentScene.java",
+      "sha256": "9ad452e77983ef18abcb2a74e69d05c1bc69a31cb909095d12a8529dd8d4f7ad"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/compat/VertexRendering.java",
+      "sha256": "4800df76299fbf653346cdd39c1c20cdce385e77e17f67a47bc7bda0b8e1fe8e"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/compat/WeatherRenderer.java",
+      "sha256": "3d051e18b14bd38a35fa8678d72a62c90e5598285095b93b50fe60e328f27ad7"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/constant/Constants.java",
+      "sha256": "cee95fd31b706a1d9a2957408510f19cb3ca0371c353a2b781def406506b2d73"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/constant/VulkanConstants.java",
+      "sha256": "2ecf9d90cf2922dce978ccc468d94bd491a1ac2b62182d9ea71388fe6436f863"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/gui/AttributeWidgetUtil.java",
+      "sha256": "15c3937a9317a19fbff49f9d81850c4f4dd2894345d66f3f0faecb9c20bd8e31"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/gui/ModuleAttributeScreen.java",
+      "sha256": "b82d12554f974abeb35036e45c4398fcfbfa6ade04bdb54d072d3bd4a9f734f9"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/gui/ModuleNode.java",
+      "sha256": "46752a22291ee101c4269af9100c552c9e52787461dc7b744eb8544fd3be3e3f"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/gui/PotentialValuesBasedCallbacksNoValue.java",
+      "sha256": "298c0d31bb440167ee28bec5a0d695e19ebd438d39461b482319a1fc7d188632"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/gui/RenderPipelineScreen.java",
+      "sha256": "e65006e8c17fdfe2cdc9422d107de31b3308d6f38a9558169c02f1970e779547"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/gui/ShaderPackScreen.java",
+      "sha256": "d813250a9a4e522ce8a59753b2dd15673904ccaf679e55f8414abac1d5783778"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/gui/ShaderPackSettingsScreen.java",
+      "sha256": "4eee53e24301494d9f04534041e72d56391c4952bdb127e44526f494c9956661"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/option/DLSSMode.java",
+      "sha256": "4ed7e6e1fbe5fdfc7875749da043910bb38e136e45145c578a7f6d258694117a"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/option/DenoiserMode.java",
+      "sha256": "79d1296a53b3998cf631ee3bb63f71149f73fcb39614e71106ec66c1383b2aca"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/option/Options.java",
+      "sha256": "0def6b86d5ec52626f8343d818463ddc896033c281bc923efce8fca8b12bc99a"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/option/UpscalerQuality.java",
+      "sha256": "fcbcd3bd44156809f163fc1eeb17f559125ed813006681c81239310fb15e5467"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/option/UpscalerType.java",
+      "sha256": "d274b318228f7b1af32d3ce600920f4b0745233b8c3fce9e2155cdf4c7bd4913"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/pipeline/Module.java",
+      "sha256": "57955a8aacd64923229a85ee7dc2a92011a79f130fdcf3346caf6c8214784072"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/pipeline/ModuleEntry.java",
+      "sha256": "ccd9d3182857b45de3a6eed0e84a393cd8316409bd00c387fd0c08d9130ac43e"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/pipeline/Pipeline.java",
+      "sha256": "5080c860e2f27aa197ee4e726bea25b76c104308025e39b624c1ce077334246f"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/pipeline/Presets.java",
+      "sha256": "5bb5b187aaeb92a2b14f106f09dfe312eee27787f17f0137f8e0b4bad2b0a862"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/pipeline/config/AttributeConfig.java",
+      "sha256": "2880045701a591253dafa63d53d6b36910981c368dc36512a6dfd62d5ae25ab9"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/pipeline/config/ImageConfig.java",
+      "sha256": "7837783c14d587c297f81304748b2c081a89bc82cbff701f9b4960b2305a2c52"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/proxy/vulkan/BufferProxy.java",
+      "sha256": "9f78c370874a3747dfbbc54b3abd23d2811bc71e81db19c1083a6d06451f9f79"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/proxy/vulkan/DrawCommandProxy.java",
+      "sha256": "3e3c20331fae1d2cbae0a15e732c08e80eddf66febe091a341001e4def7f0a64"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/proxy/vulkan/PipelineStateProxy.java",
+      "sha256": "c3d4ba4225ea150f9a7dc96f28cdcbdcc2cc65d50663bef133f25aede61b210b"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/proxy/vulkan/RendererProxy.java",
+      "sha256": "57342b869fb60655c817482d66191c64702881b1be80e5803bb4c5c59af5bc20"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/proxy/vulkan/ShaderProxy.java",
+      "sha256": "92d328dab71cf2f61967fcfe4206658ebe6e61382e6db40e91dfe6bd3307994a"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/proxy/vulkan/TextureProxy.java",
+      "sha256": "fd98c65cf5aaa5e3137d2ba9744d9af1c2a7e25d94c43947833c268d61d798a3"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/proxy/vulkan/WindowProxy.java",
+      "sha256": "56256ae72af5e87c68c406be7d66392406fadf9e385a43911977d9ff7af3156e"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/proxy/world/ChunkProxy.java",
+      "sha256": "15c38a27559177bc5c0e2d37fe6aec748413cdfb4f9c415662fb65aa86689bf3"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/proxy/world/EntityProxy.java",
+      "sha256": "08e34dbf50168ecfc2eb89f549ae6870380687814961ee8b0e067b1286843f89"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/proxy/world/PersistentSceneProxy.java",
+      "sha256": "15c52491dca2775664087b3c32024fd57590700b5de3ba4c0d9dd92ecba50a8a"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/proxy/world/PlayerProxy.java",
+      "sha256": "215b9aa1d29a7bc0256f728ac092cb07725043a70f5e1239923b8324ae98f01e"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/shader/ShaderDefinition.java",
+      "sha256": "9bcee20230fc476eab7eae0902327163cf7c577825765f28f360d060a030642c"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/shader/ShaderField.java",
+      "sha256": "3d2e1acdc495921d305d421b7391cb4c2fcfe144e456514c3f0f98054f9008f3"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/shader/ShaderRegistry.java",
+      "sha256": "2d13a660660aa7a0d722e1d95933db7d8d4cec5abff61dafe5a4de3e29f9c2bd"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/shader/ShaderTranslator.java",
+      "sha256": "f24b247fb3d4d70e8a556079143323911b646c69399980d2720a123799a3236d"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/texture/AuxiliaryTextureReloader.java",
+      "sha256": "1c394f65717d4c5ce7c9e6387e11c602f9f899dcc10905e8acf78d3a5c3a6200"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/texture/AuxiliaryTextures.java",
+      "sha256": "7e296da8219fc50644152bd9d6a9ced336d2185fbc935f984d3826f7061c4b28"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/texture/EmissionRecorder.java",
+      "sha256": "eb337298f75e9e561ea7e9dfb1348dce948c6fd3dc16e5da3a1b5548b8eda340"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/texture/IdentifierInputStream.java",
+      "sha256": "75bcce7e6928aaf53552f6ef6339736559f3dbac460babf14aafcca18b553dd7"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/texture/MaterialCacheSelfTest.java",
+      "sha256": "1041045147a7c0e81b1133b495e096cf98c99ca88073ea5e8f1f1d49aa4dc614"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/texture/MipmapUtil.java",
+      "sha256": "6e677d34900519b8dae14f74a72f5b53ab54607155d5ae414508a2c2a7ec97ff"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/texture/TextureTracker.java",
+      "sha256": "159dae2d6bc1ef4cb29605173ee3cd055e211a8c45c26c394052079826e47a77"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/util/BlockColorEmissionProvider.java",
+      "sha256": "d8612444e4e74132c1779c387abf609cd870409d8a7f4bdc9b2ba2b812144353"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/util/CategoryVideoOptionEntry.java",
+      "sha256": "57055d2ef54898e3e93941c04c4a25a7fcc98268b428ac9bcc68f38465c0d9d9"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/vertex/PBRVertexConsumer.java",
+      "sha256": "ce676e83cabcd0677e0d695425b37360086bacbde3bd14406b55f944fb9a9e7d"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/vertex/PBRVertexFormatElements.java",
+      "sha256": "9eb64196e3d1953f1d329c0146454e092843045cc800041ee6e3a920c049b855"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/vertex/PBRVertexFormats.java",
+      "sha256": "005e8e80304fb6b7df10ffc4dc5cf188696462efdb8798561d4ab5e6e6287541"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/vertex/StorageOutlineVertexConsumerProvider.java",
+      "sha256": "fa8369d4d57b8fae0ea96bdba0276ac7b807635be4a48ad97772dcd8850ea700"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/client/vertex/StorageVertexConsumerProvider.java",
+      "sha256": "de25aa50ac3adfc82c2f1e124fa65baff8a3db38babf26de3aef3e43e926a035"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixin_related/MixinPlugin.java",
+      "sha256": "7ca8d0c3ac1638250efe69d6e26ee6a5568b34ed55459fb539ee2bcd1c48e28c"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixin_related/extensions/vanilla_resource_tracker/IGlyphAtlasTextureExt.java",
+      "sha256": "d37ec55c1f8873a1e5b23c2139bc10b4fd37fb2c8c25321f89706ea9d2d627eb"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixin_related/extensions/vanilla_resource_tracker/INativeImageExt.java",
+      "sha256": "2b0a6896cf9d232d3147b85f52196368523028429031fa6bb5f14877d01a8089"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixin_related/extensions/vanilla_resource_tracker/IRenderableGlyphExt.java",
+      "sha256": "5109024397dcfa7f1e3f0d4f6015fba6368aa776f987c820f2715c05b509b486"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixin_related/extensions/vanilla_resource_tracker/ISpriteContentsExt.java",
+      "sha256": "6f8c77a09e55ec72d72398b818c7bd2b21f617885b01548d88c683330887c4fc"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixin_related/extensions/vanilla_resource_tracker/ISpriteExt.java",
+      "sha256": "87c35e7fe43ad96ba2a3ce1748578a7d4fdaef242337b2eeda5ad9b6f26f60cc"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixin_related/extensions/vulkan_render_integration/IAbstractTextureExt.java",
+      "sha256": "9cb6fe88eb57c2bbc21bb89a538454265e8a255fcbbeae491a13c037dc569e9e"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixin_related/extensions/vulkan_render_integration/IBlockColorsExt.java",
+      "sha256": "4031ade78f382df61507d4942ba23834becf35f99969155fd45534b384629d01"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixin_related/extensions/vulkan_render_integration/IChunkBuilderBuiltChunkExt.java",
+      "sha256": "9156e0a1676187834ce3e6f96f6e3632f833c835fa7971d50a45cdcc3a6d3184"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixin_related/extensions/vulkan_render_integration/IChunkBuilderExt.java",
+      "sha256": "e239d997d5e73614cf2a634d880553e6cf01ef8fb77e8c8fff0acb92b0f14afc"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixin_related/extensions/vulkan_render_integration/ICompiledShaderExt.java",
+      "sha256": "783adb0b06cbcbb2431345aaf25d6771f25c9e9d14d0dc584ad1b0ec7c941536"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixin_related/extensions/vulkan_render_integration/IDrawContextExt.java",
+      "sha256": "92a6fbe2d36c5f273a42b001fd43aeef87b56079a3849f8235cbb3e46164edf9"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixin_related/extensions/vulkan_render_integration/IGameRendererExt.java",
+      "sha256": "78cdd13b6c06177b499ab8bea7d78fe722729647d6e2b403c202c1635674b444"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixin_related/extensions/vulkan_render_integration/IGlUniformExt.java",
+      "sha256": "28bb9a0ee794c93297c0ef2ddcaec7f48955c853d88628a99612eb12745e70a4"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixin_related/extensions/vulkan_render_integration/IHeldItemRendererExt.java",
+      "sha256": "b6b2e058494dd06c00adc494189845a93bf64274f17a9680d45f6b6eb30a2ef7"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixin_related/extensions/vulkan_render_integration/ILightMapManagerExt.java",
+      "sha256": "3d5ef88301e16cb5e02be5b3b4a6d6bcdbcce26ff8e6ef429774fe2e1d754d1b"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixin_related/extensions/vulkan_render_integration/INativeImageExt.java",
+      "sha256": "56c342c76cab65c1fc5751726b62891aafa98f240bd0ccbee3e3cb4c75bec505"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixin_related/extensions/vulkan_render_integration/IOverlayTextureExt.java",
+      "sha256": "fa8c5a3d9528e555fbe948ce5df4445c09c1efb492284fb24604cad972d55760"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixin_related/extensions/vulkan_render_integration/IParticleExt.java",
+      "sha256": "9cf144fd093784814cd3eb6ea10848fedb194039ca0384298bfef5e91d9533d0"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixin_related/extensions/vulkan_render_integration/IParticleManagerExt.java",
+      "sha256": "e5ccb1ea608363983cdbeea76b72d1561be9122d768957bdedd4a3caffad52c1"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixin_related/extensions/vulkan_render_integration/IShaderProgramExt.java",
+      "sha256": "5c7c9bb2e276454606167b90bda20b35d42e4c27e391c6493fce030100072b8a"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vanilla_resource_tracker/AbstractTextureMixins.java",
+      "sha256": "5286a068068505f6193343748466663f235b93b1f8cccc6c5d05e8999dcd863b"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vanilla_resource_tracker/BitmapFontGlyphMixins.java",
+      "sha256": "69386f75b75d15d0c88617c5ae755186ca33b54b470b84c5afce44ea7c1a67f8"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vanilla_resource_tracker/BuiltinEmptyGlyphMixins.java",
+      "sha256": "8a1e638c06f1fe455f109a4ffc31dd8e76906e090e259e17929dfee053d41024"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vanilla_resource_tracker/FontStorageMixins.java",
+      "sha256": "97b608b3f55c36ad17e3092d69c1c13ddf720055d99333126732dac019663569"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vanilla_resource_tracker/GlyphAtlasTextureMixins.java",
+      "sha256": "cd39364120a187908f05626374ede1c7cdf7367c852733bae47e551100a430a8"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vanilla_resource_tracker/NamespaceResourceManagerMixins.java",
+      "sha256": "b2f006a206a7f28695f520835efe4fefc02ee54552505ef8004a398b2c6aef7e"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vanilla_resource_tracker/NativeImageBackedTextureMixins.java",
+      "sha256": "1e70670d7d0704288531ee945a86c1b44e4b19f2791257af65929a994c7b8853"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vanilla_resource_tracker/NativeImageMixins.java",
+      "sha256": "feb5cea40238df52e548eb21f1917a51d8001b58b020cc663001984486eedf45"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vanilla_resource_tracker/OverlayTextureMixins.java",
+      "sha256": "06a0bd8925bae6aec0566211cf44290d8796c6a4573b1a51130215d7323105e9"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vanilla_resource_tracker/PlayerSkinTextureMixins.java",
+      "sha256": "9558756eef5a2cada83e96de47af1936f74bdbcf0e7e914659a7c55a1f4c7635"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vanilla_resource_tracker/ReloadableTextureMixins.java",
+      "sha256": "d158135d16086270f6dd2a5115fca5300fdb05ebd4e8977d4ca16268fcfde8b5"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vanilla_resource_tracker/SpriteAtlasTextureMixins.java",
+      "sha256": "dc382531c4ff50d43934da29d9220cd2676734009254a25af0403630e6beaba3"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vanilla_resource_tracker/SpriteContentsMixins.java",
+      "sha256": "1fd5c9daeae9085cf8e5df782a90162a4e815a3f3a545f7775840c8fb0f7722c"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vanilla_resource_tracker/SpriteMixins.java",
+      "sha256": "6ebbf13a84f16f1fbe8d871f1a322260d02d298abe04f0cef948bce3c2006db9"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vanilla_resource_tracker/TextureManagerMixins.java",
+      "sha256": "a4fd19ae5fe3b00173991df509721560a35776b2ad241e93924ecdfaea0bbf0c"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vanilla_resource_tracker/TextureUtilMixins.java",
+      "sha256": "377fbd3c40e3f2e59a7c61becfddaa776988712c6b401a8da24dc7983aeae064"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vanilla_resource_tracker/TtfGlyphMixins.java",
+      "sha256": "d34f44da4ba58fa2bada9acdd2a1c414707ce25bc5bfac731b9af8c235bebda2"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vanilla_resource_tracker/UnicodeTextureGlyphMixins.java",
+      "sha256": "f6004c863b666de72aac8f553abb73529bd94be3c85045e95809a989a169fa30"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_options/GameOptionsScreenMixins.java",
+      "sha256": "d8836ede3086c1840aa4c9bff5936ea2f39e0f8bac09656438cae5806494d96b"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_options/VideoOptionsScreenMixins.java",
+      "sha256": "0279676de3dd10ff5552df08a3ac56e99c8baf460a7022b62de8932535ce14ea"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/AbstractTextureMixins.java",
+      "sha256": "1d4623a0371dd6743e0cf0ecfebc26d759edf5128aa59d387dcacc0ca2310324"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/BannerBlockEntityRendererMixins.java",
+      "sha256": "08510f326b1f4cdcb4a9749b86ed54be241fb2a5912683863a261f415d5d7ee2"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/BillboardParticleMixins.java",
+      "sha256": "adaa74d582f5c97e844f5329a5f1e72280a3fc60764d9a52fd58853fb42d8bb6"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/BlockColorsMixins.java",
+      "sha256": "e6be80cec437ba9b1cac8b1ace63314d9ab7acb7cc0130c90c37f852cd310fe7"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/BlockModelRendererMixins.java",
+      "sha256": "3d442739134bbb984a3334a64a404b56c860b28aa0daac4507964cd826a3c561"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/BufferRendererMixins.java",
+      "sha256": "4c5c5b728d45057dbf735ef96e3951bc8e97cc4f6b49760652427e72a7205f57"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/BuiltBufferMixins.java",
+      "sha256": "de69d1f4a25bef4a21b2b3e782c139741527912016f8b47ec64b9df4a7149ba5"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/BuiltChunkStorageMixins.java",
+      "sha256": "8bf0dedb224623c439f3e792ab0d2bc2796ef90f615bd2c89937d9e1bff61ada"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/ChunkBuilderBuiltChunkMixins.java",
+      "sha256": "1dbb0c0537d0d38523371efd2a049b23691253fc6ff08bc561a6d2301602fffa"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/ChunkBuilderMixins.java",
+      "sha256": "392e9c8c132de57dab85536ffe0326b9bfbd740421bf9e914246d2e39d48e9e2"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/ClientChunkManagerMixins.java",
+      "sha256": "d0ad02a53bea6feea49b6c92d5bfd1d4e1c557d941674d4ba5863e736ba15b96"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/CompiledShaderMixins.java",
+      "sha256": "384d03efdca3beec1cefdd07ae5dcb2f49f6a53937bf074fccf9aa6bf934c158"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/DirectoryAtlasSourceMixins.java",
+      "sha256": "2775fc90605a0c09b1c5c36c8dfc20a6e35819bf4ca5706787dec354af2962de"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/DrawContextMixins.java",
+      "sha256": "bfecff3d6ed019d4252a4cc30acaa541e5c6ddcf43d54aca536b4c4c98dfeb37"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/EntityRenderDispatcherMixins.java",
+      "sha256": "76b37acfbe7f2fda6aa053c4a563a506d5938549498299529f0770b9038e875b"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/EntityRendererMixins.java",
+      "sha256": "e76b23880807082b5e81970ab38ba615489b8a2417975fdbc879555dea948c3a"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/FluidRendererMixins.java",
+      "sha256": "77f3d34e6ce5585e68882f6782e34ae59fc9ed6d19a2a3ab09061829d32d85cc"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/GLXMixins.java",
+      "sha256": "97e3e7889cce7a54c36f438c56fe25c993180030e83c1f42d18e650a9521a4de"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/GameRendererMixins.java",
+      "sha256": "10882e6b4a17ea2fab2be683567d661daa74588827e1f3c479aac502a078f2ea"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/GlStateManagerMixins.java",
+      "sha256": "8ffb6cb8dcbd9f18a0257b06a77c9088b40883f51f751fe30e81cc330398abb9"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/GlUniformMixins.java",
+      "sha256": "4896072356ea3af1bd97ac2c18806ba7b41e2650d9d7e6080d9115a72f08b766"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/HeldItemRendererMixins.java",
+      "sha256": "71a686ab4cf26f6731c53177ae9f09eb9df4338034e2a108c9e5869ba55c033f"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/ItemRendererMixins.java",
+      "sha256": "c949bb26fbc94a847b155cd19ac9dcaf499a22b75cda4294584436733d142b7e"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/LightmapTextureManagerMixins.java",
+      "sha256": "8f823892749683f2d2c03bb3b2ee351fc7ea9aab31bd9beab5d70a49158660a9"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/LightningEntityRendererMixins.java",
+      "sha256": "2fbe710eca0c1958b3ddac12768f01fa8c67f3d1d3b0e52ec715e701e46f6036"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/MinecraftClientMixins.java",
+      "sha256": "14424169d5e85c49a9a9fa586d7dae698f5570ac65c12e4c664e3a97eedf3c1d"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/MipmapHelperMixins.java",
+      "sha256": "53efdb697d1478c1e9759ebcc1eebd89456ab8b2d120759c932e71d979624f62"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/NativeImageMixins.java",
+      "sha256": "9880709864572d6c26dea90937efb2c545c4f62e7839e05e455d516a50e0d30b"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/OverlayTextureMixins.java",
+      "sha256": "6eab835177d55d92609ee9c927711fb5824098976cfc19a36bd73ea38263959c"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/PalettedPermutationsAtlasSourceMixins.java",
+      "sha256": "8465c6509c3ced3e6e0d8e7f9999cf5a472c1286d7cf8056c248b1c4b026292e"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/ParticleManagerMixins.java",
+      "sha256": "95a398053d1fa29c37985496008c47b28e648a1190e2dd7bef4908d69291a597"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/ParticleMixins.java",
+      "sha256": "578b52f591b267c6a74c51a80afb3e7bfda2cc8ff7ed229417746f2a8d4213b0"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/ReloadableResourceManagerImplMixins.java",
+      "sha256": "32a9af214f8965143f08eec2578ab05f58bc94fff1a7e2d884cb612c146100b7"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/RenderLayerMixins.java",
+      "sha256": "c4c99b4c215d5b76120ad449cc85a9effb0ac86fce90e37353b4a8a14d1bb5a7"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/RenderPhaseLightmapMixins.java",
+      "sha256": "683c38ce81b12140fe41b7d306aaa6d616c04b8ed077cc016d655de13a318ad9"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/RenderPhaseMixins.java",
+      "sha256": "28d470510f6704b5b7f1b790cd3f6b4a072b1915ab5efb6537fb513b0c538e14"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/RenderPhaseTargetMixins.java",
+      "sha256": "4e0bffab711279fa98f71cef7707bfda16a3cd0346522b9ddcfba4cd6f59c9cf"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/RenderSystemMixins.java",
+      "sha256": "41fe6739f3dc39604df8fc613bb6c8303675c129ed427ee81b83213705ff995a"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/ScreenMixins.java",
+      "sha256": "593720d6fcecc5d29c7b18c805f0002e75223f25c8a50b2551c51ece2ca1299a"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/ScreenshotRecorderMixins.java",
+      "sha256": "44df74bc56f5a8460e1924d7ae0d4d5fd04d3398a018265b89e2c435980d88e1"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/SectionBuilderMixins.java",
+      "sha256": "15d9b3a0251dd5e4f2a477c3c144150eeb7070d38cd9309acdc02b464b99133d"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/ShaderProgramMixins.java",
+      "sha256": "89f580ee1cd08135fcb28b01f9216fb1791369ce0b8ced8ca11c3e247b27e069"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/SingleAtlasSourceMixins.java",
+      "sha256": "8dafbaad1284fa486e0c1f1404b426f787d6fd91564532304ef8a024000f261c"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/TextureUtilMixins.java",
+      "sha256": "2c6aaa35c1100ae3dcd75623744595f229a3dcbc3a37e592df5ac16608507748"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/UnstitchAtlasSourceMixins.java",
+      "sha256": "7761e41f2c7078ab5c397eed724d0fe03f946a8c12b35bc63c06387a0933a473"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/VideoWarningManagerWarningPatternLoaderMixins.java",
+      "sha256": "cd85410522deb6484d03bf92d64bb17823603d6479174f27b421fe5a272de57b"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/WindowMixins.java",
+      "sha256": "27047760960302da8065ab6cbccfa4fbc48f469f7891b577570e9368f8ecd85f"
+    },
+    {
+      "source": "Radiance/src/main/java/com/radiance/mixins/vulkan_render_integration/WorldRendererMixins.java",
+      "sha256": "2c1f0824245f1f72441181498e9ae08eb75bac23f22a8c9006d1759453fb112f"
+    },
+    {
+      "source": "Radiance/src/main/resources/XESS_LICENCE.txt",
+      "sha256": "4f1a8a3258ebb2326d865b3d2a0e5baf9f9edc0c5c0909c691f79f3b57896480"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/blockstates/redstone_wire.json",
+      "sha256": "1f9c220a3741ee064bd10563b55711343d456db0d8872d3548b01fb20353a543"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/grass_block.json",
+      "sha256": "49587dd4580c573a69ba068fdb731b346e42c47081ec4c0ca0661258b14c0d54"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_dot_0.json",
+      "sha256": "2f11416a586cab9309723da239af6a9c494dd8be39f1d8aa74dfc1d57a1ab702"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_dot_1.json",
+      "sha256": "9b2a0125fdce9dfa4b70191af07177fa97763a1af26ac94cd074293e49541128"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_dot_10.json",
+      "sha256": "f49eaad20671482cf1319567657f70f01f5aea81d06ecd959eb2f1b5d3551bf8"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_dot_11.json",
+      "sha256": "491ffb9e743630100db9250e1b65b84d63ba8c7635c8e3d4a6d57783056c1c03"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_dot_12.json",
+      "sha256": "c6110e7d29b92b4895616f04119f9aebf282102ab1ca58b92db26263c3a834eb"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_dot_13.json",
+      "sha256": "bd62a2339d4ad849401e252d5f2d36210943029c9f90ddd2b97e509cf9a897fa"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_dot_14.json",
+      "sha256": "ba179ab8bed9e9a2d58d7895cea429320ece6130c47718fb9b3fa0dac2c0fc36"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_dot_15.json",
+      "sha256": "ecd9625df6ca813ffb8d167265327a8cb2c38381f581d400b67fbae70e4720b6"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_dot_2.json",
+      "sha256": "b1f579851ce9ded30b7e5e8151327ac4d2393e052d4bd26333912247d6d8f477"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_dot_3.json",
+      "sha256": "7b8afb8f64ceb950820e92783d34a07afd1f9651ff7091bf17eb19a607f17e8e"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_dot_4.json",
+      "sha256": "d73a2c8930ea0576ccf372d346cff9b337037aedfb60670e1082221e36c916b5"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_dot_5.json",
+      "sha256": "4fc7acd26001225ee46ba4d1eced79958dc595b3b1bc55267f0930db911c1353"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_dot_6.json",
+      "sha256": "216ad0de03be4607a3379b657800422150755471227e62d756368a4e5684b937"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_dot_7.json",
+      "sha256": "82441dc3d63d6adff8d52ce242ed142bf4d75c44502bd86fe1d1f5b9741a7b67"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_dot_8.json",
+      "sha256": "9618b2527fb89e93121c06a17712603ad35b69d1de747079faf867cb7d006e7d"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_dot_9.json",
+      "sha256": "2a869ef9357b8191b86ec1aa8b6dc4b50fbf58176f915d05d3d18b402c66da3a"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side0_0.json",
+      "sha256": "ce105ddc988a54c5ec768c7826ca8b9bae2db6c6121077db06b687298a8393ea"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side0_1.json",
+      "sha256": "d842d3ceb0fd11a02943806aa69e97f6cadd5fcb70ce788e1fedb1aa2b43616a"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side0_10.json",
+      "sha256": "15118f9ef1422c41503c563bc3d78fd7c0cf70c670c77c996dc7291b8af1d92d"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side0_11.json",
+      "sha256": "bae229be7b5b7e808f8a79aee67365a3ee3509d0ae1536b217cdda54ebb278c5"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side0_12.json",
+      "sha256": "4def49eead4a87f577295b869c3afaa1ac3553d6e0ca5949d84776d7211cc349"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side0_13.json",
+      "sha256": "ec7b20616db28507c62426e00f43a3c20b81b605ace3184cc57344c45022138c"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side0_14.json",
+      "sha256": "703dc39d429f29848686e110de13d6d5dd0da81303f00db1e8ef7d98135a2161"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side0_15.json",
+      "sha256": "953f1f397159aef15c0a688584de9326b6d7885b0c397a58e279b51670c7e12d"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side0_2.json",
+      "sha256": "0dcb97dce35104d450c596a39ff040d201ac3d5945709f71e09cf35cb12c0324"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side0_3.json",
+      "sha256": "be2eb489ee6b5cc6ab56f04ec094cd01b9bba7000521b80b043c2d1c11de9849"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side0_4.json",
+      "sha256": "18f4f2f01d2f7992e9c4a7249dd73ce0c0672054c06cce712cffa41906cb5b6c"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side0_5.json",
+      "sha256": "e8e744a74c68086b839cc4f952e54508948a577d6ea9b9c8eebf589321c54e88"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side0_6.json",
+      "sha256": "5e3423fe8ba2a3435c474a9eab31464ec46f95d76b62573652e9cbe90ee9e5a7"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side0_7.json",
+      "sha256": "1d8176e0685fd036fd517548e82025b8e47df823a88796c647a28c99ddb0c0a9"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side0_8.json",
+      "sha256": "13c989731fb45d372bbcadd9b03ebae2dab411cc005217e9d4beb803e61ba165"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side0_9.json",
+      "sha256": "138d47aad917adfa995d5b9453b1b49617e65bd404695c92b09649820cd9ba90"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side1_0.json",
+      "sha256": "1d35c32044114c694a85653e0e1ead2ce3f4a5c2182fa28dbe4699d622f4d46c"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side1_1.json",
+      "sha256": "b384ad84725e1c21062cec2508cf974cad4033b1169e26709b4a9f404874da27"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side1_10.json",
+      "sha256": "91ecd47c824083320c5dbb19e355214472f250febbe9dd0a642ba8cecd529bae"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side1_11.json",
+      "sha256": "d29536c7425d9fc9b27eba8ce596db71661256adee3f404cd3ef2ef0d41f1512"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side1_12.json",
+      "sha256": "0c4b23363ca4256e53d50e35c2d14f53c3e540b4b8857b35b944fb8f9efe0720"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side1_13.json",
+      "sha256": "ccc52627159adc2d98fe5d77a06b0ecae79cd2abb61bfb5614a7ae7e8cefee30"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side1_14.json",
+      "sha256": "bc69b57bb9d593e64aee28dffc36a30e79b349fca033b004651205165e7ebac7"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side1_15.json",
+      "sha256": "b351ed9588e9fb74c1a4f3a095d9601bd1c9bed2bd91d6e8a1ca80b162a500cf"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side1_2.json",
+      "sha256": "3d786eee426e69495e0dfc390c4e448a159947b6bdb83ffd852305d17e6f0fc3"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side1_3.json",
+      "sha256": "445c89de857eb0396aaa6805f1a7ad87ba5b364af010fb230c2d23352258cc19"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side1_4.json",
+      "sha256": "1d89aa8c71d1ccfb64297cf158ee0f586c0aa5eea78f2a0ec39aafb94ce1fcd4"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side1_5.json",
+      "sha256": "872b31e2453f634d7893c1e77e093e3254e2b005fe1fd7ec6796f01025dd9c8c"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side1_6.json",
+      "sha256": "03b43fa98362709b8ba5756e010d3921fda4cc6078e217cfa3023b629676e845"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side1_7.json",
+      "sha256": "796574cc768e52b9fb39acf4b38cbec068946dd046e1c7c7a60af2e00a01f31f"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side1_8.json",
+      "sha256": "6cd7c68b7308e7daff65c9e0bcdc4c5ed5bd66c37990e6045f711380c170aea9"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side1_9.json",
+      "sha256": "3d231307ad8dd0225fe7345523423e4bf0a734f7fc9f23cdc82592ca9013b394"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_0.json",
+      "sha256": "bdd808c8f55e45563e49a247e25429450c1601db9ae39ff6e8071eb73fc2dec8"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_1.json",
+      "sha256": "38fb2f735f6e34fec9ed572e805e45a55c984d86ecb3e9ffacaecd375edc9c9b"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_10.json",
+      "sha256": "280f1456b163bae0526f9b8eda4c0e0ad8d33a6ba552aab51fe3e0e3632f7acf"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_11.json",
+      "sha256": "653ba3b888f0e0e81c08f14aa68ca0f96228d00923fa05b14aef5b6569cfd232"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_12.json",
+      "sha256": "e8fc8b7ab6bbe8a980833d9ac38b0d5061e367eea6061606c805a82bffa0a439"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_13.json",
+      "sha256": "aa2dd1934964ad82d53c9e858e1b52e703d47628934893acd5f9b3f7d8cab4f1"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_14.json",
+      "sha256": "6d6b7e38818c61322673beb228219eaecbad4fcfd8fad1e6abac452e2e7cecd0"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_15.json",
+      "sha256": "5509a1ecad8ba4a16fd139b0af9482014526fbf6897d1400f15a46f92dacc007"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_2.json",
+      "sha256": "4d0519656a845d81c92d8a830d59fc597deb516606661b7b0c1ed0cdac1740a9"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_3.json",
+      "sha256": "c57a6cebecf8ee3351c51fc1b206e431e3e4771f8c3e0cb1a0e52583895d047c"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_4.json",
+      "sha256": "831b1cfa555d693729879a0a32048d5375263271116ad48d8c437aacff3a1284"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_5.json",
+      "sha256": "7cbefcd6ee1f7b3c7a3aac0fbf6c91ad96c7da244cb9a02066fcc23288033ba9"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_6.json",
+      "sha256": "16efe2f65edbbb4947a4f3aeeaa7c8bf252c3073dbb265bec1d7c541d04df9f6"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_7.json",
+      "sha256": "b0744f8465ea105f0ba6ab0107a58c4631cb4ff35f3d6c528b8b3f139dd4dd18"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_8.json",
+      "sha256": "b84b73a7da7e3c251c6e3f6d018c7cabcf2adf4daf2cc5f74e3d2d60c500287d"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_9.json",
+      "sha256": "12a20dc077a82a32b838762111050fdb4a6dda6734e6813a6849bee717cbfe74"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt0_0.json",
+      "sha256": "1b3da54e2de123e9fbd761279ad3fa5f57fd43489d655e0dd891c83d0e319afd"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt0_1.json",
+      "sha256": "de3d9205e3c4d042a6772504c1277aa43e97d6663fc07ae1c0a90f6338be59bf"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt0_10.json",
+      "sha256": "ad590c0815362779b5d0551a72447545e4519b70213d6cadf5d77a74fe6a485b"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt0_11.json",
+      "sha256": "812a03b11c8971a2aa499ae40d854825ba2cffca26484d52b9abfca527717e46"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt0_12.json",
+      "sha256": "8753c1d50e8a1572e67db13451cf7e394cab063d4c81df35c1918889a6cfe0f4"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt0_13.json",
+      "sha256": "41d77cd279b10de8854ae3e8d6e35a13d79c19bc5cc3cb4a7ff99efcb9f41847"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt0_14.json",
+      "sha256": "dc38bdefe633cc064dcc234bb5a22455cb84ed34816f5c41e693edccd3f22a75"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt0_15.json",
+      "sha256": "7d1ea05bb1c0f114cf9837cdbb1facf0a599901613435111db9cd578c7e0204f"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt0_2.json",
+      "sha256": "f908d814dd911d183856a88e14110fb87791cf777d79e21939632be17cbf89aa"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt0_3.json",
+      "sha256": "3e003f2c18d4faacdf19ddfeb81390dab7391df6bb5bcbfcca2d06353fb207bb"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt0_4.json",
+      "sha256": "cfe767b8980e8741fc3ff3ce8b1be1ce3a9e33d033e1f493904bb9c1b1b5cd4e"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt0_5.json",
+      "sha256": "d833a1c56e4adccf990d95cea8257e1e2b3b6e43fe4fbd080dd2d3c9a5b03c56"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt0_6.json",
+      "sha256": "08b2e48f1a66295517747acfc65d6e9926e0702a38121a7809041f8b9b5c649a"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt0_7.json",
+      "sha256": "054946e7f92075157f60bab28339b9432f296332dda00992dc770fcd82f9ec93"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt0_8.json",
+      "sha256": "696fff291baf1d31d77aeba8efcfc916c8cf058cdd9ba30a572c4f421eaa0c6f"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt0_9.json",
+      "sha256": "cff99cee7d7900c16a5d8502b65019bcef8fc530c7ef95dc1b909c543c7db86a"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt1_0.json",
+      "sha256": "002f081ef676a607b40be384442c787a97d1417e3ae30641908096135600dd0e"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt1_1.json",
+      "sha256": "d31ed95c94c8fb53937800259ccd3b1f751a40cb2f25d107d703d2bcdcb1f24b"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt1_10.json",
+      "sha256": "889e928502f4b10c492fa7abfcdcf3346632943bbdf8d0393fbf001ec9daa5c2"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt1_11.json",
+      "sha256": "f26d12841d9f3d27a8b03c3760089965c9fa6a44bec3f4295966b5905116453b"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt1_12.json",
+      "sha256": "3c4036d415d9c45a88c027537d51588f1c5608288afec50f735a4c0329f54ebc"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt1_13.json",
+      "sha256": "4b983a0d1ca965088a62bf0377d611c53462cda2830ab3449a2d348f69d9bd86"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt1_14.json",
+      "sha256": "9c104829c5a19a3a07e1685b281b41d10f33e8d74b60acac6c784b6be280b06a"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt1_15.json",
+      "sha256": "0748b6a007899fd809a8006b2bf31ba38458a805b7fe2088c98c8e1d4a49ee17"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt1_2.json",
+      "sha256": "a88377500286778ff90b1cee32e5f146a6ae34a1c62b43a9e73513950c896327"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt1_3.json",
+      "sha256": "a0ac130256328bf16d4b93e8d8fe460731a3cc6d5804dd683c1511adb4e1ab86"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt1_4.json",
+      "sha256": "d6848202c4459a190e5797b658eb1565feee35b1a2e0f578abce7f34277df374"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt1_5.json",
+      "sha256": "5d85702078fcf6e812f0f692128236dd3d0793d547a5391b690ebadb2f08b9cb"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt1_6.json",
+      "sha256": "c72ee277e56a9454281ab35738bcaf5a5da2a59ef173b41da2a04df9a308bddb"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt1_7.json",
+      "sha256": "9b5be15b0b84c8d2331cf09f1339fcce271cd126b2faecc69adbba73369ad3c0"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt1_8.json",
+      "sha256": "aa227460da6da536ebf750a1bae44ff7d89276bcd5cb75e6e0a05e1e72c4d5f1"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt1_9.json",
+      "sha256": "d74d0d7d4658cdc22a55c6e2ab4cd708642bf6fb1dfd71f9f5cee6256b4748c0"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt_0.json",
+      "sha256": "c24d212e582ebdb81abdb2284af26889d1131f84d803ab48a2845b7e4ed5600b"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt_1.json",
+      "sha256": "bfb0ee8043d612dbcf2b15ee1e4b57d14d9e7e5322ce0d7e9c861ac6b142578e"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt_10.json",
+      "sha256": "fcf8682a6c1ee685bc43f5200cc51cb248aa5c907949c0db4a37e63b3c991bd7"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt_11.json",
+      "sha256": "591042904b972b2c7616b9b2bf296df6b69ad209a67fa4b5f384660a68f8af4e"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt_12.json",
+      "sha256": "696f6dc3fc879b3a08dd7ce42075a52fa71a56c963e38f59cec55fa2e79f3bae"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt_13.json",
+      "sha256": "baa92c977e7f344c96fcb0433ba843abd4a9a33574bdd986baff4a9fb78283cd"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt_14.json",
+      "sha256": "fba19c1c89dbf03bcb0cd429130d84839eb4aa4d110df4d2f2a2c1a57f16cb96"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt_15.json",
+      "sha256": "29d580d8c357e0c74d3e27ce7fe3eb65dc7625d30b8d7a37cb63196c0c144e88"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt_2.json",
+      "sha256": "1b7568e9ab4960fd0b639306b7bd62d56e99ce214e564102c707fdfaafac974b"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt_3.json",
+      "sha256": "c58d757bda584972dd9e1c8bfb254d146bf327d8c27d94e15a8cd4115073317e"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt_4.json",
+      "sha256": "b3e6874451992aa918155378621535a1972af2cf0a26c0a7b638c9bf818213ba"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt_5.json",
+      "sha256": "b75946023bab00ae20fba7242451ec05821f5fd616a6c9b8324448e0fc4ae473"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt_6.json",
+      "sha256": "3d4cb1087049e752e39e48e669bef93ec64a0e534a7bc10bcc77542208c25d69"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt_7.json",
+      "sha256": "c81e86641c1f89f33705aa4f8680a56c24a4495624adae8c42fb58e509d47692"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt_8.json",
+      "sha256": "979f24643ab90ade8b602d0f78426f610fa431f29af415ce9a29f8325754ff27"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_side_alt_9.json",
+      "sha256": "036b5d868e5dbdf91a8755813d186b5381e5b40d350547993f8d73ff1b225bca"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_up_0.json",
+      "sha256": "82264b6a420e84e80e5aa6e7797876cc178fc110796a43ea8e17367373c65c7a"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_up_1.json",
+      "sha256": "811ed70a96da92a08d065c0a0ae17bbf8b2a7aa01beaa5c42eb1d052984bb651"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_up_10.json",
+      "sha256": "5cd76b40452035ca1d62b78b7f3fba2ec47752a53264a9c2696fc80344130c0a"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_up_11.json",
+      "sha256": "e6cc0458ccc18dc6560abd12210885943e10d6a78286197e3d7d721ac185bda2"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_up_12.json",
+      "sha256": "ffdb7f19b868e685fe57f42ca11928d3f8273a332a008c17790f9b064d507772"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_up_13.json",
+      "sha256": "9924ead7eedf6849a8bc765e9dc75ae4ebfa09c18fd4bbaf25c62cfaa3d38036"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_up_14.json",
+      "sha256": "275c7a89da5886151a85cfb717009cb69b467de1a05a89a50aa13bf98acea113"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_up_15.json",
+      "sha256": "e0139a3999b14cfb4504959b0c44d367fa8c2d52945f370337fad42b0d3f6171"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_up_2.json",
+      "sha256": "aec690b76646f32ac70a47340a34c59433a62413f22e18b158a8bdf1e601980f"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_up_3.json",
+      "sha256": "15f2446537ebb9a9d5801a43b68c236bfc384fefc367c2c237a2af44da917896"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_up_4.json",
+      "sha256": "970ce234ee0fac5f4b98c797c954c39f42b355211bb7c2513b33d87494cfa093"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_up_5.json",
+      "sha256": "61c3bce8f73c7c0484a8c2f42a9b5172b9ea3d0833492dd2b8ebb7350b39e038"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_up_6.json",
+      "sha256": "f0b95fe2a383d8c4051600c1f93ceb80fd61151c54de7a4df6aeda2b2ea74cff"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_up_7.json",
+      "sha256": "1421078c019a105d7b8e32f8e1d88e02bc268f38af421834ceba9b6a9ba6d417"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_up_8.json",
+      "sha256": "91dada279e0e52f740b771c64c411e4f90bd3ad36b973b34f2456e7dddc12b46"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/minecraft/models/block/redstone_dust_up_9.json",
+      "sha256": "38fdb4ae2b6902b8c55d0d7625b707ac07445b164040a4c820a79a2f1cbbd7ff"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/radiance/lang/en_us.json",
+      "sha256": "395038b2703694dd50496a59fa0f5f011e3488242d5242e8dfdd41611c9adcbc"
+    },
+    {
+      "source": "Radiance/src/main/resources/assets/radiance/lang/zh_cn.json",
+      "sha256": "a2a8bdb9738abab2ad64d56e27554ffd2215b79bf27b0fcd01acb696899a14ca"
+    },
+    {
+      "source": "Radiance/src/main/resources/fabric.mod.json",
+      "sha256": "72d1d319fd90afd84ded50ad96cdb9a0fb57322b11b24abf974f3d0155c71379"
+    },
+    {
+      "source": "Radiance/src/main/resources/modules/dlss.yaml",
+      "sha256": "44db6a34f3bcf5cfee09db2f7698cfcc56145e1acc1fff70ac4b953a45b67b7e"
+    },
+    {
+      "source": "Radiance/src/main/resources/modules/fsr_upscaler.yaml",
+      "sha256": "bf0a82f46a2f250acd0901795bcb66b86ae4f1bd008c9da971cf16a234cf4e0b"
+    },
+    {
+      "source": "Radiance/src/main/resources/modules/nrd.yaml",
+      "sha256": "755a1ea65baf135e2aec517028d503b18f8f7a05b3ed70bf13278a9703c2285c"
+    },
+    {
+      "source": "Radiance/src/main/resources/modules/post_render.yaml",
+      "sha256": "5fbb766a6f84ca6cafaae06f7093b21eedf58565fe6b1e4cf5ae797c309b5c45"
+    },
+    {
+      "source": "Radiance/src/main/resources/modules/ray_tracing.yaml",
+      "sha256": "10ef3c44a4fd282ac0d9877fd2606ac1243ef776137b2b0fb9eb8d876e993ba2"
+    },
+    {
+      "source": "Radiance/src/main/resources/modules/temporal_accumulation.yaml",
+      "sha256": "8ecf264243df34e544525426168ba5d51a93c7081d2190d30229152d84d157cc"
+    },
+    {
+      "source": "Radiance/src/main/resources/modules/tone_mapping.yaml",
+      "sha256": "2b48d2120684580bad1253ffa611ba5745ffa40975a566ea9dc2850eb715bfe3"
+    },
+    {
+      "source": "Radiance/src/main/resources/modules/xess_sr.yaml",
+      "sha256": "427919fbb01f33290f3f8d96c6088a9dc659ab32cbd1ae53ddb3ad0ca590bd14"
+    },
+    {
+      "source": "Radiance/src/main/resources/radiance.accesswidener",
+      "sha256": "a9b5e3fb221a6464434699cf257dd19dc3cd95c2d6cc1502bdbf86ab1853a9ee"
+    },
+    {
+      "source": "Radiance/src/main/resources/radiance.mixins.json",
+      "sha256": "c681f114ebf2fe7fbb1f0923df733e84ff7151786964113bb2d7428e75f1f1ad"
+    },
+    {
+      "source": "dh-companion/resources/LICENSE.LESSER.txt",
+      "sha256": "f831e7eed577481687a9bc0b48024e5e40b6f655fcde073ede964b50be5d55d9"
+    },
+    {
+      "source": "dh-companion/resources/LICENSE.txt",
+      "sha256": "3237699d9e6781c85877365abd9493ca132a0fd31f43e1a3278b8e75f3654af4"
+    },
+    {
+      "source": "dh-companion/resources/META-INF/neoforge.mods.toml",
+      "sha256": "47a0a7022b9c71bf750e79c6508ec133a9a57471532155ec35c0b8dcb2634789"
+    },
+    {
+      "source": "dh-companion/resources/radiance-dh.mixins.json",
+      "sha256": "80b59bb50df5d66814442a02565f831cc948d272c08639daed719d185af104a9"
+    },
+    {
+      "source": "dh-companion/src/com/radiance/compat/dh/LodSelectionBudget.java",
+      "sha256": "c207ad23647f5f12bcf45b1845e656b23c18056205d91a773a7b3f78234f4659"
+    },
+    {
+      "source": "dh-companion/src/com/radiance/compat/dh/LodWaterParts.java",
+      "sha256": "61d1557e8cf2ce3ee818d4b1a083ac2c0cc4ec7f27a9f54c49b2e336e1af368d"
+    },
+    {
+      "source": "dh-companion/src/com/radiance/compat/dh/LodWaterSurface.java",
+      "sha256": "d56a91eceb8e8adf3c8148af250f63944445bb69845a7d03036c0298177216a4"
+    },
+    {
+      "source": "dh-companion/src/com/radiance/compat/dh/NativeLodBridge.java",
+      "sha256": "9d4db658fcf4ef88412d236ec31e5e633ed6baaaaf801ab67267441cc8d48d9d"
+    },
+    {
+      "source": "dh-companion/src/com/radiance/compat/dh/RadianceDhBeaconOwnership.java",
+      "sha256": "2734004756db1d44d823dc753b8fa679eb1d5e8dbfdd2bdbade6c4b06e0e8afc"
+    },
+    {
+      "source": "dh-companion/src/com/radiance/compat/dh/RadianceDhCloudOwnership.java",
+      "sha256": "e09d8335abcbad35909d1b7a4fb19aaec5cd9d095a36125636574d0fb717bb67"
+    },
+    {
+      "source": "dh-companion/src/com/radiance/compat/dh/RadianceDhConfig.java",
+      "sha256": "9b317a7fdb5acf2c599e021d39834da81d6b8fc4d372d5503b3767fa44bc7e51"
+    },
+    {
+      "source": "dh-companion/src/com/radiance/compat/dh/RadianceDhFrameHook.java",
+      "sha256": "0628eb21cf36229402d9463ee497a668b08eb5a7f4b313f236c747ded4821c18"
+    },
+    {
+      "source": "dh-companion/src/com/radiance/compat/dh/RadianceDhMod.java",
+      "sha256": "0d0814676173dc98a6fbe836940ffbedf6a5ab28843dda4bdb614029cd157440"
+    },
+    {
+      "source": "dh-companion/src/com/radiance/compat/dh/RadianceDhRenderApi.java",
+      "sha256": "d2bace4a7d5746f1d26ea63a495d5f660aa7e7f59b539b9c604c9880ef334e8f"
+    },
+    {
+      "source": "dh-companion/src/com/radiance/compat/dh/RadianceDhTerrainRenderer.java",
+      "sha256": "ae6c47b4e99fffde1c6a72821b582f59956fc640ca4a1fd9ac7bcef47e44ec28"
+    },
+    {
+      "source": "dh-companion/src/com/radiance/compat/dh/RadianceDhViewport.java",
+      "sha256": "9784ca6b4281060b05539c03e74b96e46f8144eae387ef936b5593587c43cd02"
+    },
+    {
+      "source": "dh-companion/src/com/radiance/compat/dh/mixin/DependencySetupMixin.java",
+      "sha256": "979840d872de558d59fee163ed7dc9ae9ebc4c91481ef448e6b346cdd077f574"
+    },
+    {
+      "source": "dh-companion/src/com/radiance/compat/dh/mixin/LodQuadTreeMixin.java",
+      "sha256": "419fb72b9db28fa836017a85e9d18045a677fc07908234a330cca5fe020da900"
+    },
+    {
+      "source": "dh-companion/src/com/radiance/compat/dh/mixin/MinecraftRenderWrapperMixin.java",
+      "sha256": "04508d63bc51045f8e9b67137db897d483694dae8773d1cd2c4baf63c12e0ba8"
+    },
+    {
+      "source": "dh-companion/src/com/radiance/compat/dh/mixin/NeoforgeClientProxyMixin.java",
+      "sha256": "9f6552b3825a403f4071b7bebafbcd51bd47eb2f523001fe692c009338d77b08"
+    },
+    {
+      "source": "hybrid-companion/resources/META-INF/neoforge.mods.toml",
+      "sha256": "be74bd6f7fbc3891fe8511d325045ae92129af424123d371a5b48ad428546a03"
+    },
+    {
+      "source": "hybrid-companion/resources/radiance_hybrid.mixins.json",
+      "sha256": "8d184a52d176231d2c67afc6bcf9c691456bb745141d4b4ee20db94fbf74f304"
+    },
+    {
+      "source": "hybrid-companion/src/com/radiance/hybrid/HudCompositor.java",
+      "sha256": "ef8b21022d124bab6e6d8be2d649be5251c9d94528cbc28b9262ec2d94d33553"
+    },
+    {
+      "source": "hybrid-companion/src/com/radiance/hybrid/HudRenderMixin.java",
+      "sha256": "3de5ec1d4ef88345e633ee6b419a7a3de0db13b7c41f9cd8ddad9df127ac992a"
+    },
+    {
+      "source": "hybrid-companion/src/com/radiance/hybrid/HudTransferSelfTest.java",
+      "sha256": "4c8ca63c1e319d17bc824145f133144020ee5fbedf911280781fbceb43c55a1c"
+    },
+    {
+      "source": "hybrid-companion/src/com/radiance/hybrid/HybridContext.java",
+      "sha256": "160a284ead1b3bf298f9d96b06014c678dba9385bba5094d2abb4f8e7f4df658"
+    },
+    {
+      "source": "hybrid-companion/src/com/radiance/hybrid/HybridMainTargetAccess.java",
+      "sha256": "f688486527992cff5246fc2ea91db9f3fe86d25448b1c20b1edef7f72d96b0bd"
+    },
+    {
+      "source": "hybrid-companion/src/com/radiance/hybrid/HybridTargets.java",
+      "sha256": "81ea305b6138c387c84051dc62c1a4ca9b2d25bb5b321c7f01d854a7ef13732f"
+    },
+    {
+      "source": "hybrid-companion/src/com/radiance/hybrid/MainTargetMixin.java",
+      "sha256": "df919b636d69e29d9f9310cd3cf711c9aef0701c989521100a1ce12e1558f04c"
+    },
+    {
+      "source": "hybrid-companion/src/com/radiance/hybrid/NativeInterop.java",
+      "sha256": "40d4dfb170cf44611304ff1ce06ade9b99bb99b4146dd84ecd084070b29b168d"
+    },
+    {
+      "source": "hybrid-companion/src/com/radiance/hybrid/OffscreenDispatchSelfTest.java",
+      "sha256": "11237cbf41d5785c789cb68c7ea3e8c67bd70572ec1aae6c1a48a055a4da205f"
+    },
+    {
+      "source": "hybrid-companion/src/com/radiance/hybrid/OffscreenDrawMixin.java",
+      "sha256": "03adda0e4f91eecf60afd0f2a6474123e888e7b1334cc7aad06f95edff200e47"
+    },
+    {
+      "source": "hybrid-companion/src/com/radiance/hybrid/OffscreenDrawSelfTest.java",
+      "sha256": "2d78ae3585063acef0512112e5d9060039b5d93578112444cc698607935ca183"
+    },
+    {
+      "source": "hybrid-companion/src/com/radiance/hybrid/OffscreenRenderer.java",
+      "sha256": "ddf7fedf68c8da1e7eddf34e01686afc9ddd33fa44e6eeefad26ac8db81ded10"
+    },
+    {
+      "source": "hybrid-companion/src/com/radiance/hybrid/PipelineStateMixin.java",
+      "sha256": "e42c9d79892661e776f5cfd5cb8f0fbb1c5c4f34c35b187840c176ed1e8b25d9"
+    },
+    {
+      "source": "hybrid-companion/src/com/radiance/hybrid/RenderTargetMixin.java",
+      "sha256": "c8b6283db08619a4f82186bac259f605c3341bc4909bda9a209e70ee2c1cf7c4"
+    },
+    {
+      "source": "hybrid-companion/src/com/radiance/hybrid/RenderTargetSelfTest.java",
+      "sha256": "ddaf9bfcbd064c7799037d62122fadb1b494fae93edf521f39fe9e5422c451a1"
+    },
+    {
+      "source": "hybrid-companion/src/com/radiance/hybrid/RendererStartupMixin.java",
+      "sha256": "13a1b0fd52e5383f560d87a73bfeb8446ebaac81cd814890ff82b1c3fbc69e6c"
+    },
+    {
+      "source": "hybrid-companion/src/com/radiance/hybrid/ShaderLifetimeMixin.java",
+      "sha256": "82d41b8ebe18f0cec9e80802abb21ac2d1b6ff59bcc133636bbf23f101b01fe7"
+    },
+    {
+      "source": "hybrid-companion/src/com/radiance/hybrid/StencilRestoreSelfTest.java",
+      "sha256": "8a716c5e093128e38e359f24d05b7bf70895b5258c13d339eb9c84c30828d364"
+    },
+    {
+      "source": "hybrid-companion/src/com/radiance/hybrid/TargetRoutingSelfTest.java",
+      "sha256": "ca31be83785f17ba6103dede2209f2d1752a751b2b2b369e777729a34ef5d3a3"
+    },
+    {
+      "source": "hybrid-companion/src/com/radiance/hybrid/TextureBindingMixin.java",
+      "sha256": "c413cf729b68218d19958e921c673ff79a747f8574dd3bf121eb602c4fc7e0a4"
+    },
+    {
+      "source": "hybrid-companion/src/com/radiance/hybrid/TextureNamespaceSelfTest.java",
+      "sha256": "8691086eac9e75cb1c46113ef8372b7069a1b306a7e3b87e61174bad7ff74dd5"
+    },
+    {
+      "source": "hybrid-companion/src/com/radiance/hybrid/TextureStorageMixin.java",
+      "sha256": "114e50f869db3e32a50739e05e42935283b68187376b9e1e3caf255cee616b01"
+    },
+    {
+      "source": "hybrid-companion/src/com/radiance/hybrid/TextureUploadMixin.java",
+      "sha256": "86cce8fe4398a422cebba0289c7d43b7cbfa70e5a55bd01616a87e505d478c45"
+    },
+    {
+      "source": "hybrid-companion/src/com/radiance/hybrid/VeilCapabilitiesMixin.java",
+      "sha256": "bd58c20db7a683db9f76e6c3f395c5632ec71af1581283c63ca04cfab5a2554e"
+    },
+    {
+      "source": "hybrid-companion/src/com/radiance/hybrid/VeilLayerListMixin.java",
+      "sha256": "b1bc6fca732ffe0599b893a8c1404010113f551a1c67824118c2e37779eab800"
+    },
+    {
+      "source": "hybrid-companion/src/com/radiance/hybrid/VeilLayerRegistrationMixin.java",
+      "sha256": "a82c873aaafea0ca2ca0984947d573695c287bd2a6bfcc52f8d91dc6421667a1"
+    },
+    {
+      "source": "hybrid-companion/src/com/radiance/hybrid/WindowContextMixin.java",
+      "sha256": "fe020acf43b56a27937aded77d2703b1a759d9d01fb67aae07e323d27d57a8db"
+    },
+    {
+      "source": "sable-companion/resources/META-INF/neoforge.mods.toml",
+      "sha256": "6419363e0cf90fc60da96d5cc85da6a7709193e33a1848cec4e48f79cb286ad8"
+    },
+    {
+      "source": "sable-companion/resources/radiance_sable_dispatcher.mixins.json",
+      "sha256": "8a1e1133d710727bf358109582e70ac6ec2721a8558edb1b2abc8159cf5e2ce4"
+    },
+    {
+      "source": "sable-companion/src/com/radiance/compat/sable/host/SableBridgeMod.java",
+      "sha256": "d7ba6f192440707524bd00508f0fdb46ac3b0df8665bf355402a15b63d9b87fc"
+    },
+    {
+      "source": "sable-companion/src/com/radiance/compat/sable/host/SableVulkanDispatcher.java",
+      "sha256": "f9ad04ccb89ac73b866a61de2edb262bb507e834ecfa9d5ecb1d36a86ae3b6e6"
+    },
+    {
+      "source": "sable-companion/src/com/radiance/compat/sable/host/mixin/RadianceFrameMixin.java",
+      "sha256": "70188b98e650460e15f2e73c0dac66bc353293a91aa8dea9632a6577fdd71431"
+    },
+    {
+      "source": "sable-companion/src/com/radiance/compat/sable/host/mixin/SableConfigMixin.java",
+      "sha256": "66a61cd29f97730c948769ce664602504c52ea7232c462a4b30356851da6550d"
+    },
+    {
+      "source": "sable-companion/src/com/radiance/compat/sable/host/mixin/SableRendererMixin.java",
+      "sha256": "15fcb764fecb2d19e988dba384492df544ed42795973ca5e60890a092203f5d5"
+    }
+  ]
+}

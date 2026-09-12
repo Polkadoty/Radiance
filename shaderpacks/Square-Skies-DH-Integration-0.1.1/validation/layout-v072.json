@@ -1,0 +1,31 @@
+{
+  "sample": "1024x1024 cells per layer, clear weather; CPU occupancy, not screen coverage",
+  "bases": [
+    192,
+    384,
+    640
+  ],
+  "layers": [
+    {
+      "layer": 0,
+      "before_groups": 6604,
+      "after_groups": 1034,
+      "before_occupancy": 0.1956653594970703,
+      "after_occupancy": 0.01620769500732422
+    },
+    {
+      "layer": 1,
+      "before_groups": 6816,
+      "after_groups": 929,
+      "before_occupancy": 0.1676626205444336,
+      "after_occupancy": 0.01274871826171875
+    },
+    {
+      "layer": 2,
+      "before_groups": 6846,
+      "after_groups": 1006,
+      "before_occupancy": 0.1478424072265625,
+      "after_occupancy": 0.013067245483398438
+    }
+  ]
+}

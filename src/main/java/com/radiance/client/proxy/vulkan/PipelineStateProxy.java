@@ -143,24 +143,25 @@ public class PipelineStateProxy {
         }
 
         public static void glSetStencilFuncSeparate(int face, int func, int ref, int mask) {
-            if (face == GL11.GL_FRONT) {
-                vkSetStencilFrontFunc(func, ref, mask);
-            } else {
-                vkSetStencilBackFunc(func, ref, mask);
-            }
+            checkStencilFace(face);
+            int compareOp = VulkanConstants.VkCompareOp.ofGL(func);
+            if (face != GL11.GL_BACK) vkSetStencilFrontFunc(compareOp, ref, mask);
+            if (face != GL11.GL_FRONT) vkSetStencilBackFunc(compareOp, ref, mask);
         }
 
         public static void glSetStencilFunc(int func, int ref, int mask) {
-            vkSetStencilFunc(VulkanConstants.VkStencilOp.ofGL(func), ref, mask);
+            vkSetStencilFunc(VulkanConstants.VkCompareOp.ofGL(func), ref, mask);
         }
 
         public static void glSetStencilOpSeparate(int face, int failOp, int depthFailOp,
             int passOp) {
-            if (face == GL11.GL_FRONT) {
+            checkStencilFace(face);
+            if (face != GL11.GL_BACK) {
                 vkSetStencilFrontOp(VulkanConstants.VkStencilOp.ofGL(failOp),
                     VulkanConstants.VkStencilOp.ofGL(depthFailOp),
                     VulkanConstants.VkStencilOp.ofGL(passOp));
-            } else {
+            }
+            if (face != GL11.GL_FRONT) {
                 vkSetStencilBackOp(VulkanConstants.VkStencilOp.ofGL(failOp),
                     VulkanConstants.VkStencilOp.ofGL(depthFailOp),
                     VulkanConstants.VkStencilOp.ofGL(passOp));
@@ -171,6 +172,10 @@ public class PipelineStateProxy {
             vkSetStencilOp(VulkanConstants.VkStencilOp.ofGL(failOp),
                 VulkanConstants.VkStencilOp.ofGL(depthFailOp),
                 VulkanConstants.VkStencilOp.ofGL(passOp));
+        }
+        private static void checkStencilFace(int face) {
+            if (face != GL11.GL_FRONT && face != GL11.GL_BACK && face != GL11.GL_FRONT_AND_BACK)
+                throw new IllegalArgumentException("Invalid stencil face: " + face);
         }
         // endregion
     }

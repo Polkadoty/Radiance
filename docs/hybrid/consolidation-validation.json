@@ -1,0 +1,15 @@
+{
+  "sourceFilesCompared": 553,
+  "unexpectedDifferences": 0,
+  "intentionalChanges": [
+    "MCVR/src/core/CMakeLists.txt",
+    "dh-companion/resources/META-INF/neoforge.mods.toml",
+    "sable-companion/resources/META-INF/neoforge.mods.toml"
+  ],
+  "additionalSources": [
+    "Sable producer and callback modules",
+    "Veil boundary overlay",
+    "installed Square Skies DH shaderpack"
+  ],
+  "runtimeRetestedAfterConsolidation": false
+}

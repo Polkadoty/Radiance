@@ -1,0 +1,10 @@
+{
+  "homogeneous_integration_checks": 192,
+  "old_default_max_visibility_rays": 32,
+  "new_default_max_visibility_rays": 12,
+  "short_path_max_visibility_rays": 4,
+  "old_medium_caustic_solver_calls": 16,
+  "new_medium_caustic_solver_calls": 0,
+  "gpu_timing_measured": false,
+  "limitation": "Coarser scene visibility quadrature can lose narrow shafts. Medium caustic focusing is omitted; receiver caustics remain unchanged."
+}

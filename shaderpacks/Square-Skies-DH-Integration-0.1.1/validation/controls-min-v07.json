@@ -1,0 +1,39 @@
+{
+  "pack": "Square Skies 0.7 - Three Flat Layers",
+  "structural_checks": "passed",
+  "scope": "Offline structural checks plus GLSL/SPIR-V validation. No native loader execution, Vulkan pipeline or Minecraft runtime test.",
+  "compiler": "C:\\GitHub\\tools\\VulkanSDK\\1.4.328.1\\Bin\\glslc.exe",
+  "target": "Vulkan 1.4",
+  "overrides": {
+    "SS_COVERAGE": "0.0",
+    "SS7_MIDDLE_COVERAGE": "0.0",
+    "SS7_UPPER_COVERAGE": "0.0",
+    "SS7_MAX_SAMPLES": "128",
+    "VPT_VOLUMETRIC_CLOUD_VIEW_STEPS": "8",
+    "SS_EDGE_RADIUS": "0.3",
+    "SS_CLOUD_STEP": "1.0"
+  },
+  "results": [
+    {
+      "source": "world/world.rgen",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "59033a5ac2e5fdd70b39e545cad208ccfec22a0fd575b661ac6078dd9c4bb234"
+    },
+    {
+      "source": "world/shadow.rmiss",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "b6e1a78a3f6a6eb43582c08c8b50c8374694ad61d688e5f6d56ffdef11ef277e"
+    },
+    {
+      "source": "world/world.rmiss",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "7e990a77f50ddddc2ee4f09159f71db040558be15601b77f93d7a0a7dc495501"
+    }
+  ]
+}

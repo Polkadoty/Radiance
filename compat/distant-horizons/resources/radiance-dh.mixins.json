@@ -1,0 +1,8 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.radiance.compat.dh.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": ["DependencySetupMixin", "MinecraftRenderWrapperMixin", "NeoforgeClientProxyMixin", "LodQuadTreeMixin"],
+  "injectors": {"defaultRequire": 1}
+}

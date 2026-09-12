@@ -1,0 +1,29 @@
+{
+  "pack": "Square Skies 0.6 - Rolling Clouds",
+  "structural_checks": "passed",
+  "scope": "Offline structural checks plus GLSL/SPIR-V validation. No native loader execution, Vulkan pipeline or Minecraft runtime test.",
+  "compiler": "C:\\GitHub\\tools\\VulkanSDK\\1.4.328.1\\Bin\\glslc.exe",
+  "target": "Vulkan 1.4",
+  "overrides": {
+    "SS_HEIGHT_VARIATION": "0.0",
+    "SS_AERIAL_STRENGTH": "0.0",
+    "SS_MOON_GAIN": "0.0",
+    "SS_CLOUD_BRIGHTNESS": "0.3"
+  },
+  "results": [
+    {
+      "source": "world/world.rgen",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "59033a5ac2e5fdd70b39e545cad208ccfec22a0fd575b661ac6078dd9c4bb234"
+    },
+    {
+      "source": "world/world.rmiss",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "7e990a77f50ddddc2ee4f09159f71db040558be15601b77f93d7a0a7dc495501"
+    }
+  ]
+}

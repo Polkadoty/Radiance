@@ -1,0 +1,76 @@
+#version 460
+#extension GL_EXT_ray_tracing : require
+#extension GL_GOOGLE_include_directive : require
+#extension GL_EXT_nonuniform_qualifier : require
+#extension GL_EXT_buffer_reference : require
+#extension GL_EXT_shader_explicit_arithmetic_types_int64 : require
+
+#include "util/alpha_mode.glsl"
+#include "common/fft_water.glsl"
+// Square Skies original water optics, 2026-09-05.
+#include "common/integration_water_sun.glsl"
+#include "util/labpbr.glsl"
+#include "util/random.glsl"
+#include "util/ray.glsl"
+#include "util/ray_cone.glsl"
+#include "util/util.glsl"
+#include "common/shared.hpp"
+
+layout(set = 0, binding = 0) uniform sampler2D textures[];
+
+layout(set = 1, binding = 1) readonly buffer BLASOffsets {
+    uint offsets[];
+}
+blasOffsets;
+
+layout(set = 1, binding = 2) readonly buffer IndexBufferAddr {
+    uint64_t addrs[];
+}
+indexBufferAddrs;
+
+layout(set = 1, binding = 7) readonly buffer TextureMappingBuffer {
+    TextureMapping mapping;
+};
+
+layout(set = 2, binding = 0) uniform Uniform {
+    WorldUBO ubo;
+};
+
+layout(std430, buffer_reference, buffer_reference_align = 8) readonly buffer IndexBuffer {
+    uint indices[];
+}
+indexBuffer;
+
+#include "util/vertex.glsl"
+
+layout(location = 1) rayPayloadInEXT ShadowRay shadowRay;
+hitAttributeEXT vec2 attribs;
+layout(set = 2, binding = 2) uniform SkyUniform { SkyUBO skyUBO; };
+#include "common/celestial.glsl"
+
+#include "world/dh_coverage.glsl"
+void main() {
+    if (radianceDhInsideNearCoverage()) { ignoreIntersectionEXT; return; }
+    uint group=getGeometryBufferIndex(gl_InstanceCustomIndexEXT,gl_GeometryIndexEXT);
+    uint i0,i1,i2;MaterialVertex m0,m1,m2;
+    loadTriangleIndices(group,gl_PrimitiveID,i0,i1,i2);
+    loadTriangleMaterial(group,i0,i1,i2,m0,m1,m2);
+    vec3 geo=normalize(transpose(mat3(gl_WorldToObject3x4EXT))*m0.norm);
+    if(shadowRay.ss5Mode==1u) {
+        if(abs(geo.y)>0.75&&gl_WorldRayDirectionEXT.y>0.03)
+            shadowRay.ss5WaterT=min(shadowRay.ss5WaterT,gl_HitTEXT);
+        // Accept all real boundaries; closest-hit validates the nearest top.
+        // Sides block the exit probe exactly as in near water.
+        return;
+    }
+    if(shadowRay.insideBoat>0u) { ignoreIntersectionEXT;return; }
+    bool crossedBefore=(shadowRay.pad0&0x80000000u)!=0u;
+    if(SS_WATER_ENABLE!=0&&!crossedBefore&&abs(geo.y)>0.75&&
+       gl_WorldRayDirectionEXT.y>0.03&&ubo.skyType==1) {
+        vec3 sun=celestialSunDirection();float caustic;
+        shadowRay.throughput*=ssSharedReceiverSun(gl_WorldRayOriginEXT,vec3(ubo.cameraPos.xyz),
+            gl_WorldRayDirectionEXT,gl_HitTEXT,ubo.gameTime,sun,caustic);
+        shadowRay.pad0=0x80000000u|floatBitsToUint(caustic);
+    }
+    ignoreIntersectionEXT;
+}

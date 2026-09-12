@@ -1,0 +1,41 @@
+{
+  "pack": "Square Skies 0.3 - Small Clouds and Calm Water",
+  "structural_checks": "passed",
+  "scope": "Offline structural checks plus GLSL/SPIR-V validation. No native loader execution, Vulkan pipeline or Minecraft runtime test.",
+  "compiler": "C:\\GitHub\\tools\\VulkanSDK\\1.4.328.1\\Bin\\glslc.exe",
+  "target": "Vulkan 1.4",
+  "overrides": {
+    "SS_WATER_ENABLE": "0",
+    "SS3_WATER_RIPPLE_STRENGTH": "0.0"
+  },
+  "results": [
+    {
+      "source": "world/world.rgen",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "4f4cb1b4c162efe555d9844eef4168a065a5c56470a092d631e84ba009e301f8"
+    },
+    {
+      "source": "world/default.rchit",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "35ef95cf781fdab3c2e16beaea97814811f3a711806ed632d5ea220b5c347c4c"
+    },
+    {
+      "source": "world/no_height.rchit",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "ec6785f1514dd975a5b097409c7c03905f5f53587a8a4d3b03eb18f5e0585b0c"
+    },
+    {
+      "source": "world/shadow.rahit",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "9a92562b22adc637cfad0f553d4869363f6b72f1b0e22dfe80d21e4d41f0daef"
+    }
+  ]
+}

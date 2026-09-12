@@ -200,31 +200,27 @@ public class GlStateManagerMixins {
         ci.cancel();
     }
 
-    @Inject(method = "_stencilFunc(III)V",
-        at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;assertOnRenderThread()V", shift = At.Shift.AFTER),
-        cancellable = true,
+    // Redirect only the driver call; NeoForge backs up Minecraft's cached state.
+    // Cancelling before that cache is updated makes item-decoration restore stale.
+    @org.spongepowered.asm.mixin.injection.Redirect(method = "_stencilFunc(III)V",
+        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glStencilFunc(III)V"),
         remap = false)
-    private static void redirectStencilFunc(int func, int ref, int mask, CallbackInfo ci) {
+    private static void redirectStencilFunc(int func, int ref, int mask) {
         PipelineStateProxy.DepthStencilState.glSetStencilFunc(func, ref, mask);
-        ci.cancel();
     }
 
-    @Inject(method = "_stencilMask(I)V",
-        at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;assertOnRenderThread()V", shift = At.Shift.AFTER),
-        cancellable = true,
+    @org.spongepowered.asm.mixin.injection.Redirect(method = "_stencilMask(I)V",
+        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glStencilMask(I)V"),
         remap = false)
-    private static void redirectStencilMask(int mask, CallbackInfo ci) {
+    private static void redirectStencilMask(int mask) {
         PipelineStateProxy.DepthStencilState.vkSetStencilWriteMask(mask);
-        ci.cancel();
     }
 
-    @Inject(method = "_stencilOp(III)V",
-        at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;assertOnRenderThread()V", shift = At.Shift.AFTER),
-        cancellable = true,
+    @org.spongepowered.asm.mixin.injection.Redirect(method = "_stencilOp(III)V",
+        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glStencilOp(III)V"),
         remap = false)
-    private static void redirectStencilMask(int sfail, int dpfail, int dppass, CallbackInfo ci) {
+    private static void redirectStencilMask(int sfail, int dpfail, int dppass) {
         PipelineStateProxy.DepthStencilState.glSetStencilOp(sfail, dpfail, dppass);
-        ci.cancel();
     }
     // endregion
 

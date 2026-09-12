@@ -1,0 +1,6 @@
+{
+  "error": "root.passes[2] cannot define multiple define objects",
+  "success": false,
+  "parser_cpp_sha256": "6fef92ec24424e4ec31ab7ba06b168d396d5fb26885439a1ad82908f60a3395e",
+  "pack": "C:\\Users\\Andrew\\Documents\\Codex\\2026-09-05\\https-github-com-minecraft-radiance-radiance\\work\\square-cloud-shaderpack\\Square-Skies-Prototype-0.3"
+}

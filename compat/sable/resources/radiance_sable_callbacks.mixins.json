@@ -1,0 +1,9 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.radiance.compat.sable.callbacks.mixin",
+  "plugin": "com.radiance.compat.sable.callbacks.mixin.CallbackMixinPlugin",
+  "compatibilityLevel": "JAVA_21",
+  "client": ["SableClientCallbacksMixin", "SableShadowEffectsMixin", "SableWaterEffectsMixin", "SableDirectionalShaderMixin"],
+  "injectors": {"defaultRequire": 1}
+}

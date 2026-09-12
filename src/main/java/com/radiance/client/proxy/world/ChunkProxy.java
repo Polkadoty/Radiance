@@ -210,6 +210,12 @@ public class ChunkProxy {
                 forcedRebuildIndices.remove(builtChunk.index);
                 continue;
             }
+            // A missing client chunk is not a completed empty section. Keep its
+            // request queued until the server's terrain arrives.
+            ChunkBuilder candidateBuilder = ((IChunkBuilderBuiltChunkExt) builtChunk).radiance$getChunkBuilder();
+            BlockPos candidateOrigin = builtChunk.getOrigin();
+            if (!((IChunkBuilderExt) candidateBuilder).radiance$getWorld().isChunkLoaded(
+                    candidateOrigin.getX() >> 4, candidateOrigin.getZ() >> 4)) continue;
             boolean forced = forcedRebuildIndices.contains(builtChunk.index);
             if (!forced && !builtChunk.shouldBuild()) continue;
 
@@ -280,7 +286,7 @@ public class ChunkProxy {
             if (chunkRendererRegion == null) {
                 synchronized (builtChunk) {
                     if (!buildOrigin.equals(builtChunk.getOrigin())) return;
-                    invalidateSingle(builtChunk.index);
+                    publishEmptySection(builtChunk.index, buildOrigin);
                     builtChunk.data.set(ChunkBuilder.ChunkData.EMPTY);
                 }
                 return;
@@ -347,7 +353,7 @@ public class ChunkProxy {
                     builtChunk.data.set(chunkData);
                     builtChunkNum++;
 
-                    invalidateSingle(builtChunk.index);
+                    publishEmptySection(builtChunk.index, buildOrigin);
                 } else {
                     ChunkBuilder.ChunkData chunkData = new ChunkBuilder.ChunkData() {
                         @Override
@@ -507,6 +513,13 @@ public class ChunkProxy {
                 buffer.close();
             }
         }
+    }
+
+    private static void publishEmptySection(int index, BlockPos origin) {
+        // Publish through the same versioned native completion path as real geometry.
+        // Zero geometry creates no BLAS; it still certifies this exact section as ready.
+        rebuildSingle(origin.getX(), origin.getY(), origin.getZ(), index,
+            0, 0L, 0L, 0L, 0L, 0L, 0L, true);
     }
 
     private static native void rebuildSingle(int originX,

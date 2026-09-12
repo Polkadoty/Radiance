@@ -1,0 +1,19 @@
+{
+  "pack": "Square Skies 0.5 - Detailed Water and Caustics",
+  "structural_checks": "passed",
+  "scope": "Offline structural checks plus GLSL/SPIR-V validation. No native loader execution, Vulkan pipeline or Minecraft runtime test.",
+  "compiler": "C:\\GitHub\\tools\\VulkanSDK\\1.4.328.1\\Bin\\glslc.exe",
+  "target": "Vulkan 1.4",
+  "overrides": {
+    "SS_WATER_STEPS": "2"
+  },
+  "results": [
+    {
+      "source": "world/world.rgen",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "59033a5ac2e5fdd70b39e545cad208ccfec22a0fd575b661ac6078dd9c4bb234"
+    }
+  ]
+}

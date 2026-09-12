@@ -29,6 +29,22 @@ public abstract class NativeImageMixins implements INativeImageExt {
     @Unique
     private NativeImage flagImage = null;
 
+    @Unique private Identifier radiance$auxiliaryIdentifier;
+    @Unique private int radiance$auxiliaryLevel = -1;
+    @Unique private long radiance$auxiliaryGeneration = -1;
+
+    @Override
+    public void radiance$prepareAuxiliaryImages(Identifier id, int level, long generation) {
+        if (generation == radiance$auxiliaryGeneration && level == radiance$auxiliaryLevel
+            && java.util.Objects.equals(id, radiance$auxiliaryIdentifier)) return;
+        if (specularImage != null) { specularImage.close(); specularImage = null; }
+        if (normalImage != null) { normalImage.close(); normalImage = null; }
+        if (flagImage != null) { flagImage.close(); flagImage = null; }
+        radiance$auxiliaryIdentifier = id;
+        radiance$auxiliaryLevel = level;
+        radiance$auxiliaryGeneration = generation;
+    }
+
     @Inject(method = "read(Lnet/minecraft/client/texture/NativeImage$Format;Ljava/io/InputStream;)"
         +
         "Lnet/minecraft/client/texture/NativeImage;", at = @At(value = "RETURN"), cancellable = true)

@@ -1,0 +1,25 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="GPL-3.0-only"
+[[mods]]
+modId="radiance_hybrid"
+version="0.0.2-native-hud.2"
+displayName="Radiance Hybrid Backend Foundation"
+description='''Opt-in context and framebuffer foundation. Mod draw composition remains experimental and incomplete.'''
+[[dependencies.radiance_hybrid]]
+modId="minecraft"
+type="required"
+versionRange="[1.21.1]"
+side="CLIENT"
+[[dependencies.radiance_hybrid]]
+modId="radiance"
+type="required"
+versionRange="[0.1.5-alpha-port.1-hybrid.6]"
+side="CLIENT"
+[[mixins]]
+config="radiance_hybrid.mixins.json"
+[[dependencies.radiance_hybrid]]
+modId="veil"
+type="required"
+versionRange="[4.3.2]"
+side="CLIENT"

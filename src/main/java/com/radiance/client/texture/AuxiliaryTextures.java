@@ -74,6 +74,7 @@ public enum AuxiliaryTextures {
         Arrays.stream(values()).collect(Collectors.toList()));
     private static final Object DECODED_IMAGE_CACHE_LOCK = new Object();
     private static final Map<CacheKey, CacheEntry> DECODED_IMAGE_CACHE = new ConcurrentHashMap<>();
+    private static volatile long decodedImageGeneration;
     private final String suffix;
     private final IdentifierCandidateProvider identifierCandidateProvider;
     private final Getter getter;
@@ -138,6 +139,7 @@ public enum AuxiliaryTextures {
                 }
             }
             DECODED_IMAGE_CACHE.clear();
+            ++decodedImageGeneration;
         }
     }
 
@@ -152,6 +154,7 @@ public enum AuxiliaryTextures {
                 return;
             }
 
+            sourceExt.radiance$prepareAuxiliaryImages(identifier, level, decodedImageGeneration);
             for (AuxiliaryTextures auxiliaryTexture : ALL_TEXTURES) {
                 NativeImage auxiliaryTemplateImage = null;
                 int auxiliaryTargetId;
@@ -181,7 +184,8 @@ public enum AuxiliaryTextures {
                     }
                 }
 
-                if (auxiliaryTemplateImage == null && (
+                NativeImage auxiliaryImage = auxiliaryTexture.getter.get(sourceExt);
+                if (auxiliaryImage == null && (
                     identifier.getPath().contains("textures/block") || identifier.getPath()
                         .contains("textures/item") || identifier.getPath()
                         .contains("textures/entity"))) {
@@ -191,55 +195,70 @@ public enum AuxiliaryTextures {
                         auxiliaryTemplateImage = preparedLevelCopy;
                     } else {
                         int defaultValue = auxiliaryTexture.defaultValueProvider.get(source);
-                        auxiliaryTemplateImage = source.applyToCopy(i -> defaultValue);
+                        // A missing PBR map is constant; do not transform every source pixel.
+                        auxiliaryTemplateImage = createDefaultImage(source, defaultValue);
                     }
                 }
 
-                if (auxiliaryTemplateImage == null) {
+                if (auxiliaryImage == null && auxiliaryTemplateImage == null) {
                     continue;
                 }
 
-                NativeImage auxiliaryImage = null;
-                try {
-                    auxiliaryImage = ((com.radiance.mixin_related.extensions.vulkan_render_integration.INativeImageExt) (Object) auxiliaryTemplateImage).radiance$alignTo(
-                        source);
-                    if (auxiliaryTemplateImage != auxiliaryImage) {
-                        auxiliaryTemplateImage.close();
+                if (auxiliaryImage == null) {
+                    try {
+                        auxiliaryImage = ((com.radiance.mixin_related.extensions.vulkan_render_integration.INativeImageExt) (Object) auxiliaryTemplateImage).radiance$alignTo(
+                            source);
+                    } finally {
+                        if (auxiliaryTemplateImage != auxiliaryImage) auxiliaryTemplateImage.close();
                     }
-
-                    ((INativeImageExt) (Object) auxiliaryImage).radiance$setTargetID(
-                        auxiliaryTargetId);
-
-                    if (auxiliaryImage.getWidth() != source.getWidth()
-                        || auxiliaryImage.getHeight() != source.getHeight()
-                        || auxiliaryImage.getFormat() != source.getFormat()) {
-                        throw new RuntimeException(
-                            auxiliaryTexture.name + " image size / format mismatch");
-                    }
-
-                    if (level == 0 && auxiliaryTexture == SPECULAR) {
-                        long tileKey = EmissionRecorder.buildTileKey(offsetX, offsetY,
-                            regionWidth, regionHeight);
-                        if (TextureProxy.hasEmissionTile(targetId, tileKey)) {
-                            auxiliaryImage.upload(level, offsetX, offsetY, unpackSkipPixels,
-                                unpackSkipRows, regionWidth, regionHeight, false, blur);
-                            continue;
-                        }
-
-                        TextureProxy.uploadEmissionTile(EmissionRecorder.buildTileUpdate(targetId,
-                            source, auxiliaryImage, offsetX, offsetY, unpackSkipPixels,
-                            unpackSkipRows, regionWidth, regionHeight));
-                    }
-
-                    auxiliaryImage.upload(level, offsetX, offsetY, unpackSkipPixels, unpackSkipRows,
-                        regionWidth, regionHeight, false, blur);
-                } finally {
-                    if (auxiliaryImage != null) {
-                        auxiliaryImage.close();
-                    }
+                    auxiliaryTexture.setter.set(sourceExt, auxiliaryImage);
                 }
+
+                ((INativeImageExt) (Object) auxiliaryImage).radiance$setTargetID(
+                    auxiliaryTargetId);
+
+                if (auxiliaryImage.getWidth() != source.getWidth()
+                    || auxiliaryImage.getHeight() != source.getHeight()
+                    || auxiliaryImage.getFormat() != source.getFormat()) {
+                    throw new RuntimeException(
+                        auxiliaryTexture.name + " image size / format mismatch");
+                }
+
+                if (level == 0 && auxiliaryTexture == SPECULAR) {
+                    long tileKey = EmissionRecorder.buildTileKey(offsetX, offsetY,
+                        regionWidth, regionHeight);
+                    if (TextureProxy.hasEmissionTile(targetId, tileKey)) {
+                        auxiliaryImage.upload(level, offsetX, offsetY, unpackSkipPixels,
+                            unpackSkipRows, regionWidth, regionHeight, false, false);
+                        continue;
+                    }
+
+                    TextureProxy.uploadEmissionTile(EmissionRecorder.buildTileUpdate(targetId,
+                        source, auxiliaryImage, offsetX, offsetY, unpackSkipPixels,
+                        unpackSkipRows, regionWidth, regionHeight));
+                }
+
+                auxiliaryImage.upload(level, offsetX, offsetY, unpackSkipPixels, unpackSkipRows,
+                    regionWidth, regionHeight, false, false);
+                // The source NativeImage owns this aligned map. Retain it for subsequent
+                // animated-frame uploads; its existing close hook frees all three maps.
             }
         }
+    }
+
+    private static NativeImage createDefaultImage(NativeImage source, int value) {
+        NativeImage image = new NativeImage(source.getFormat(), source.getWidth(), source.getHeight(), false);
+        long pointer = ((com.radiance.mixin_related.extensions.vulkan_render_integration.INativeImageExt) (Object) image).radiance$getPointer();
+        int channels = source.getFormat().getChannelCount();
+        long pixels = (long) source.getWidth() * source.getHeight();
+        org.lwjgl.system.MemoryUtil.memSet(pointer, 0, pixels * channels);
+        for (int channel = 0; channel < channels; ++channel) {
+            byte component = (byte) (value >>> (channel * 8));
+            if (component == 0) continue;
+            for (long pixel = 0; pixel < pixels; ++pixel)
+                org.lwjgl.system.MemoryUtil.memPutByte(pointer + pixel * channels + channel, component);
+        }
+        return image;
     }
 
     private boolean matchesSuffix(String path) {

@@ -68,6 +68,8 @@ public abstract class SectionBuilderMixins {
             new Reference2ObjectArrayMap<>(RenderLayer.getBlockLayers()
                 .size());
         Random random = Random.create();
+        java.util.function.Function<RenderLayer, net.minecraft.client.render.VertexConsumer> buffers =
+            layer -> this.beginBufferBuilding(map, allocatorStorage, layer);
 
         for (BlockPos blockPos3 : BlockPos.iterate(blockPos, blockPos2)) {
             BlockState blockState = renderRegion.getBlockState(blockPos3);
@@ -92,16 +94,14 @@ public abstract class SectionBuilderMixins {
             }
 
             if (blockState.getRenderType() == BlockRenderType.MODEL) {
-                RenderLayer renderLayer = RenderLayers.getBlockLayer(blockState);
-                PBRVertexConsumer bufferBuilder = this.beginBufferBuilding(map, allocatorStorage,
-                    renderLayer);
                 matrixStack.push();
-                matrixStack.translate((float) ChunkSectionPos.getLocalCoord(blockPos3.getX()),
-                    (float) ChunkSectionPos.getLocalCoord(blockPos3.getY()),
-                    (float) ChunkSectionPos.getLocalCoord(blockPos3.getZ()));
-                this.blockRenderManager.renderBlock(blockState, blockPos3, renderRegion,
-                    matrixStack, bufferBuilder, true, random);
-                matrixStack.pop();
+                try {
+                    matrixStack.translate((float) ChunkSectionPos.getLocalCoord(blockPos3.getX()),
+                        (float) ChunkSectionPos.getLocalCoord(blockPos3.getY()),
+                        (float) ChunkSectionPos.getLocalCoord(blockPos3.getZ()));
+                    com.radiance.client.compat.SectionModelRenderer.render(this.blockRenderManager,
+                        blockState, blockPos3, renderRegion, matrixStack, random, buffers);
+                } finally { matrixStack.pop(); }
             }
         }
 

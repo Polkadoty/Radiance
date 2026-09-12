@@ -1,0 +1,19 @@
+{
+  "pack": "Square Skies 0.3 - Small Clouds and Calm Water",
+  "structural_checks": "passed",
+  "scope": "Offline structural checks plus GLSL/SPIR-V validation. No native loader execution, Vulkan pipeline or Minecraft runtime test.",
+  "compiler": "C:\\GitHub\\tools\\VulkanSDK\\1.4.328.1\\Bin\\glslc.exe",
+  "target": "Vulkan 1.4",
+  "overrides": {
+    "SS3_DEBUG_VIEW": "4"
+  },
+  "results": [
+    {
+      "source": "world/world.rgen",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "4f4cb1b4c162efe555d9844eef4168a065a5c56470a092d631e84ba009e301f8"
+    }
+  ]
+}

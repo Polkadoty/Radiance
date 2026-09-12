@@ -13,6 +13,9 @@ public interface INativeImageExt {
 
     void radiance$setIdentifier(Identifier id);
 
+    /** Cache lifetime follows the owning source image; reloads and mip/source changes invalidate it. */
+    void radiance$prepareAuxiliaryImages(Identifier id, int level, long generation);
+
     NativeImage radiance$getSpecularNativeImage();
 
     void radiance$setSpecularNativeImage(NativeImage image);

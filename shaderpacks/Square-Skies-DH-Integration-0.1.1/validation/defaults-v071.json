@@ -1,0 +1,332 @@
+{
+  "pack": "Square Skies 0.7.1 - Open Skies",
+  "structural_checks": "passed",
+  "scope": "Offline structural checks plus GLSL/SPIR-V validation. No native loader execution, Vulkan pipeline or Minecraft runtime test.",
+  "compiler": "C:\\GitHub\\tools\\VulkanSDK\\1.4.328.1\\Bin\\glslc.exe",
+  "target": "Vulkan 1.4",
+  "overrides": {},
+  "results": [
+    {
+      "source": "trans_lut/trans_lut.frag",
+      "pass": "trans_lut",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "c02fde5d29af7363cf4865228bd103e5694bf90f66323a728c6bfbaa7092de45"
+    },
+    {
+      "source": "sky_cube/sky_cube.frag",
+      "pass": "sky_cube",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "90c0b302303f778c27a284262b54849cfa2f0fca4b4297b596c1874683e4fb0e"
+    },
+    {
+      "source": "sky_cube/sky_cube.frag",
+      "pass": "sky_cube",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "90c0b302303f778c27a284262b54849cfa2f0fca4b4297b596c1874683e4fb0e"
+    },
+    {
+      "source": "sky_cube/sky_cube.frag",
+      "pass": "sky_cube",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "90c0b302303f778c27a284262b54849cfa2f0fca4b4297b596c1874683e4fb0e"
+    },
+    {
+      "source": "sky_cube/sky_cube.frag",
+      "pass": "sky_cube",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "90c0b302303f778c27a284262b54849cfa2f0fca4b4297b596c1874683e4fb0e"
+    },
+    {
+      "source": "sky_cube/sky_cube.frag",
+      "pass": "sky_cube",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "90c0b302303f778c27a284262b54849cfa2f0fca4b4297b596c1874683e4fb0e"
+    },
+    {
+      "source": "sky_cube/sky_cube.frag",
+      "pass": "sky_cube",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "90c0b302303f778c27a284262b54849cfa2f0fca4b4297b596c1874683e4fb0e"
+    },
+    {
+      "source": "world/world.rgen",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "59033a5ac2e5fdd70b39e545cad208ccfec22a0fd575b661ac6078dd9c4bb234"
+    },
+    {
+      "source": "world/default.rchit",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "5941dcb80ba8f91c9ad0a86f7e1642799a8717a678b38fbcc851967fb0fde610"
+    },
+    {
+      "source": "world/default.rahit",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "7f3a97ea0bf52fcec6d3e4460369e915842f17e6fbde6dd9ffca5e79fccf7fa5"
+    },
+    {
+      "source": "world/no_height.rchit",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "b96db4c948efb1713b855498669d5b8f93125cb75cd4231fe04d3e05330fa509"
+    },
+    {
+      "source": "world/shadow.rchit",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "e9a2c3f5305bb5b54024e060f42296817943f854753dab4dd6266dbe7107a4fc"
+    },
+    {
+      "source": "world/shadow.rahit",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "df6d46bceb629b5288514b9fa9c74d7c897551d6ec40ea33e56497b636f6c80c"
+    },
+    {
+      "source": "world/clouds.rchit",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "608c08805213f40ef69c98661443a2352c85618eb9959418cd30438af0f7f533"
+    },
+    {
+      "source": "world/clouds.rahit",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "c98498bd5e6cda7dee2fd960b9fca80c20dca4078fb2cea2f1dae7a1c7e43fd2"
+    },
+    {
+      "source": "world/end_gateway.rchit",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "91c94e983ba7be89ef7cc5a6a9f0763b2eb0978dbb1e4ade23ad2773fa95cb54"
+    },
+    {
+      "source": "world/end_gateway.rahit",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "d3752bd32742e2f84bb746f8f82a551fa2f206acda3ed0dff300e1bfe42f6af6"
+    },
+    {
+      "source": "world/end_portal.rchit",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "5e95d79b12de035eafd1bd22800145ab60c7233b55fa9d16d896c814e9649945"
+    },
+    {
+      "source": "world/end_portal.rahit",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "d3752bd32742e2f84bb746f8f82a551fa2f206acda3ed0dff300e1bfe42f6af6"
+    },
+    {
+      "source": "world/water_mask.rchit",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "03b41001829dd78f8ac41991b072ce7e28e490c65d1c6c33d64c2361d62db9f5"
+    },
+    {
+      "source": "world/water_mask.rahit",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "1521f8a799efc565e2eba5a5bcb1fb9ea7a2bfb3079a364d5cfd84418afdf90a"
+    },
+    {
+      "source": "world/world_no_reflect.rchit",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "54fc6d54837aa0f9beecf7d2f10f2d5c84026215c3f47110464f8a08f4ccd86d"
+    },
+    {
+      "source": "world/world_no_reflect.rahit",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "d3752bd32742e2f84bb746f8f82a551fa2f206acda3ed0dff300e1bfe42f6af6"
+    },
+    {
+      "source": "world/text.rahit",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "ac1d2591a206b4b28941871933d57d035812164797fbfc0260908a267d30c99a"
+    },
+    {
+      "source": "world/transparent_only.rchit",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "198f726e7f6efbbe96b3e5988f598d7361df84f99a93c8e3440b8c45f5a7b1cb"
+    },
+    {
+      "source": "world/transparent_only.rahit",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "571c0d7d128369416c151de2726d321e6803db0259d6d92d07edff5bdfa0b4f4"
+    },
+    {
+      "source": "world/shadow.rmiss",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "b6e1a78a3f6a6eb43582c08c8b50c8374694ad61d688e5f6d56ffdef11ef277e"
+    },
+    {
+      "source": "world/world.rmiss",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "7e990a77f50ddddc2ee4f09159f71db040558be15601b77f93d7a0a7dc495501"
+    },
+    {
+      "source": "world/hand.rmiss",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "f1ddabeb18f1a85d62d1422cc617573e5ac17928dc27fe46e5d13dfffc5e5b75"
+    },
+    {
+      "source": "world/world_no_volumetric.rmiss",
+      "pass": "world",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "01a1de0dfefa836c19df3f19724c2e8940e01bb9cc83407c6bda8a475c38d5ed"
+    },
+    {
+      "source": "volumetric_cloud/temporal.comp",
+      "pass": "volumetric_cloud_temporal",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "b46852b328a207478dd4bb30c8fdd04774a35622fe05c0fc2d96eb1ca14d7473"
+    },
+    {
+      "source": "volumetric_cloud/apply.comp",
+      "pass": "volumetric_cloud_apply",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "68915755db1587e11933d965d836881543dd7b6806aee3c169eb1030817985b9"
+    },
+    {
+      "source": "post_render/render_world_post.vert",
+      "pass": "post_render_particle",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "4c3cfab306f4be8424550b25e0200e5534a9489ae9105674beae5ceeb9585e42"
+    },
+    {
+      "source": "post_render/render_world_post.frag",
+      "pass": "post_render_particle",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "8f14cd281715aa259e2ef4544d435f45640c770c27227e76fb01c9b340cbbf37"
+    },
+    {
+      "source": "post_render/render_text.vert",
+      "pass": "post_render_text",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "48584232f9a10658d7242aee323bb6b0b037736a55425cca3e46e99691b7568d"
+    },
+    {
+      "source": "post_render/render_text.frag",
+      "pass": "post_render_text",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "40654100dfacf6fc370737dcc86edd1dfb4378eccfc37a3361ba6a7159754080"
+    },
+    {
+      "source": "post_render/render_star.vert",
+      "pass": "post_render_star",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "7059503e42fa47471702434b4389e9d36db00ffc4d41d3f649f95e940e477d1b"
+    },
+    {
+      "source": "post_render/render_star.frag",
+      "pass": "post_render_star",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "b31c7ec50bce6f9580dfb2cb4988ffac4de926f84d70735a1f885174d13d1b64"
+    },
+    {
+      "source": "post_render/post_copy.frag",
+      "pass": "post_copy_ldr_to_post_motion",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "4cd88a1185d7a917f4340a554f0c22464a9e2e88d07998377f5223d8139848ad"
+    },
+    {
+      "source": "post_render/post_motion_blur.frag",
+      "pass": "post_motion_blur",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "ad8389770d2eb44e168a5cac9b296d0d69283228dda538d5def728a3b684429c"
+    },
+    {
+      "source": "post_render/post_dof_focus.frag",
+      "pass": "post_dof_focus_to_pong",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "2fe8b457a0065e590a595955bfdfa84a7201935e5a831694c7735df37da7d85a"
+    },
+    {
+      "source": "post_render/post_dof.frag",
+      "pass": "post_dof_blur_h_from_pong",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "7402cc9000e9114f5e3858cece4c191b14a7a1164d21a5dc0215ffc3ec0c1391"
+    },
+    {
+      "source": "post_render/post_dof_focus.frag",
+      "pass": "post_dof_focus_to_ping",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "2fe8b457a0065e590a595955bfdfa84a7201935e5a831694c7735df37da7d85a"
+    },
+    {
+      "source": "post_render/post_dof.frag",
+      "pass": "post_dof_blur_v_from_pong",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "7402cc9000e9114f5e3858cece4c191b14a7a1164d21a5dc0215ffc3ec0c1391"
+    },
+    {
+      "source": "post_render/post_dof.frag",
+      "pass": "post_dof_blur_h_from_ping",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "7402cc9000e9114f5e3858cece4c191b14a7a1164d21a5dc0215ffc3ec0c1391"
+    },
+    {
+      "source": "post_render/post_dof.frag",
+      "pass": "post_dof_blur_v_from_ping",
+      "success": true,
+      "diagnostics": "",
+      "sha256": "7402cc9000e9114f5e3858cece4c191b14a7a1164d21a5dc0215ffc3ec0c1391"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.radiance.hybrid.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "WindowContextMixin",
+    "RendererStartupMixin",
+    "RenderTargetMixin",
+    "MainTargetMixin",
+    "TextureBindingMixin",
+    "VeilCapabilitiesMixin",
+    "VeilLayerRegistrationMixin",
+    "VeilLayerListMixin",
+    "OffscreenDrawMixin",
+    "ShaderLifetimeMixin",
+    "PipelineStateMixin",
+    "TextureStorageMixin",
+    "TextureUploadMixin",
+    "HudRenderMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

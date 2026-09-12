@@ -1,0 +1,38 @@
+{
+  "success": true,
+  "scope": "CPU mirror, connected warped island and mixed-height occupancy caches. Fixed incident radiance; no native atmosphere LUT readback or GPU timing.",
+  "height_gradient_cases": 2400,
+  "max_gradient_error": 4.8564314125698615e-08,
+  "cache_boundary_cases": 250,
+  "max_density_gradient_cache_error": 0.0,
+  "max_local_light_cache_error": 0.0,
+  "full_RGBA_partition_comparisons": 320,
+  "max_partition_error": 0.0,
+  "max_near_boundary_RGB_jump": 0.0006901950123407996,
+  "atmosphere_semigroup_cases": 500,
+  "max_atmosphere_error": 8.881784197001252e-16,
+  "atmosphere_vertical_fit_points": 505,
+  "max_atmosphere_transmittance_fit_error": 0.001358947826682444,
+  "matched_incident_cloud_night_day_rgb_ratio": [
+    [
+      0.2447802989532597,
+      0.26232009036882603,
+      0.2847421671249159
+    ],
+    [
+      0.08550511507127265,
+      0.09860269198676261,
+      0.1277202506939093
+    ],
+    [
+      0.2150941624705467,
+      0.23271557953795433,
+      0.25842369052507114
+    ]
+  ],
+  "view_bins_mean": 126.75,
+  "local_light_queries_mean": 36.2,
+  "atmosphere_LUT_queries_per_cloud_ray": 8,
+  "cloud_source_sha256": "ab88d545ca3f5881ec11e7f6f4caa747e2aff9c6618e62fcee218f9810249bea",
+  "water_byte_identical_to_v051": true
+}
