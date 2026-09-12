@@ -32,6 +32,8 @@ import net.minecraft.client.render.chunk.ChunkBuilder;
 import net.minecraft.client.render.chunk.ChunkRendererRegion;
 import net.minecraft.client.render.chunk.ChunkRendererRegionBuilder;
 import net.minecraft.client.render.chunk.SectionBuilder;
+import com.radiance.client.compat.SectionGeometryRenderer;
+import com.radiance.mixin_related.extensions.vulkan_render_integration.ISectionBuilderExt;
 import net.minecraft.client.texture.MissingSprite;
 import net.minecraft.client.texture.TextureManager;
 import net.minecraft.util.math.BlockPos;
@@ -230,15 +232,16 @@ public class ChunkProxy {
             ChunkBuilder chunkBuilder =
                 ((IChunkBuilderBuiltChunkExt) builtChunk).radiance$getChunkBuilder();
             BlockPos buildOrigin = builtChunk.getOrigin().toImmutable();
-            ChunkRendererRegion region = regionBuilder.build(
-                ((IChunkBuilderExt) chunkBuilder).radiance$getWorld(),
-                ChunkSectionPos.from(buildOrigin));
+            SectionGeometryRenderer.Prepared geometry = SectionGeometryRenderer.capture(buildOrigin,
+                ((IChunkBuilderExt) chunkBuilder).radiance$getWorld());
+            ChunkRendererRegion region = geometry.createRegion(regionBuilder,
+                ((IChunkBuilderExt) chunkBuilder).radiance$getWorld(), ChunkSectionPos.from(buildOrigin));
 
             inFlightIndices.add(builtChunk.index);
             inFlightRebuilds.incrementAndGet();
             Runnable build = () -> {
                 try {
-                    rebuildSingle(builtChunk, buildOrigin, region, isImportant);
+                    rebuildSingle(builtChunk, buildOrigin, region, isImportant, geometry);
                 } finally {
                     inFlightIndices.remove(builtChunk.index);
                     inFlightRebuilds.decrementAndGet();
@@ -278,7 +281,8 @@ public class ChunkProxy {
     }
 
     private static void rebuildSingle(ChunkBuilder.BuiltChunk builtChunk,
-        BlockPos buildOrigin, ChunkRendererRegion chunkRendererRegion, boolean important) {
+        BlockPos buildOrigin, ChunkRendererRegion chunkRendererRegion, boolean important,
+        SectionGeometryRenderer.Prepared geometry) {
         try (var scope = scopedBlockBufferAllocatorStorage()) {
             IChunkBuilderBuiltChunkExt builtChunkExt = (IChunkBuilderBuiltChunkExt) builtChunk;
             ChunkBuilder chunkBuilder = builtChunkExt.radiance$getChunkBuilder();
@@ -294,7 +298,7 @@ public class ChunkProxy {
 
             BlockBufferAllocatorStorage storage = blockBufferAllocatorStorageThreadLocal.get();
             rebuildSingle(chunkRendererRegion, chunkBuilder, chunkBuilderExt, builtChunk, buildOrigin, storage,
-                important);
+                important, geometry);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -306,7 +310,7 @@ public class ChunkProxy {
         ChunkBuilder.BuiltChunk builtChunk,
         BlockPos buildOrigin,
         BlockBufferAllocatorStorage storage,
-        boolean important) {
+        boolean important, SectionGeometryRenderer.Prepared geometry) {
 
         ChunkSectionPos chunkSectionPos = ChunkSectionPos.from(buildOrigin);
 
@@ -322,8 +326,8 @@ public class ChunkProxy {
                     .getZ()));
 
         SectionBuilder.RenderData renderData =
-            ((IChunkBuilderExt) chunkBuilder).radiance$getSectionBuilder()
-                .build(chunkSectionPos, chunkRendererRegion, vertexSorter, storage);
+            ((ISectionBuilderExt) chunkBuilderExt.radiance$getSectionBuilder())
+                .radiance$build(chunkSectionPos, chunkRendererRegion, vertexSorter, storage, geometry);
 
         Map<RenderLayer, BuiltBuffer> buffers = renderData.buffers;
         try {

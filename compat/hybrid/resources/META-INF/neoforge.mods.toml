@@ -14,7 +14,7 @@ side="CLIENT"
 [[dependencies.radiance_hybrid]]
 modId="radiance"
 type="required"
-versionRange="[0.1.5-alpha-port.1-hybrid.6]"
+versionRange="[0.1.5-alpha-port.1-hybrid.7]"
 side="CLIENT"
 [[mixins]]
 config="radiance_hybrid.mixins.json"

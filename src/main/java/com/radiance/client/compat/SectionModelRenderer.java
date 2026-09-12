@@ -14,6 +14,14 @@ import net.minecraft.util.math.random.Random;
 
 /** Loader hook for model data and layered terrain; the common path stays vanilla-compatible. */
 public final class SectionModelRenderer {
+    private static final ThreadLocal<Function<RenderLayer, VertexConsumer>> ACTIVE_BUFFERS = new ThreadLocal<>();
+
+    /** Optional renderer adapters may request a different material layer during a terrain build. */
+    public static VertexConsumer activeBuffer(RenderLayer layer) {
+        var buffers = ACTIVE_BUFFERS.get();
+        return buffers == null ? null : buffers.apply(layer);
+    }
+
     @FunctionalInterface
     public interface Renderer {
         void render(BlockRenderManager manager, BlockState state, BlockPos pos,
@@ -31,6 +39,13 @@ public final class SectionModelRenderer {
     public static void render(BlockRenderManager manager, BlockState state, BlockPos pos,
         ChunkRendererRegion region, MatrixStack matrices, Random random,
         Function<RenderLayer, VertexConsumer> buffers) {
-        renderer.render(manager, state, pos, region, matrices, random, buffers);
+        var previous = ACTIVE_BUFFERS.get();
+        ACTIVE_BUFFERS.set(buffers);
+        try {
+            renderer.render(manager, state, pos, region, matrices, random, buffers);
+        } finally {
+            if (previous == null) ACTIVE_BUFFERS.remove();
+            else ACTIVE_BUFFERS.set(previous);
+        }
     }
 }

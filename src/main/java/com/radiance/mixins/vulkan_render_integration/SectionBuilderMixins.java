@@ -2,6 +2,8 @@ package com.radiance.mixins.vulkan_render_integration;
 
 import com.mojang.blaze3d.systems.VertexSorter;
 import com.radiance.client.vertex.PBRVertexConsumer;
+import com.radiance.client.compat.SectionGeometryRenderer;
+import com.radiance.mixin_related.extensions.vulkan_render_integration.ISectionBuilderExt;
 import it.unimi.dsi.fastutil.objects.Reference2ObjectArrayMap;
 import java.util.Map;
 import net.minecraft.block.BlockRenderType;
@@ -32,7 +34,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(SectionBuilder.class)
-public abstract class SectionBuilderMixins {
+public abstract class SectionBuilderMixins implements ISectionBuilderExt {
 
     @Final
     @Shadow
@@ -57,6 +59,14 @@ public abstract class SectionBuilderMixins {
         VertexSorter vertexSorter,
         BlockBufferAllocatorStorage allocatorStorage,
         CallbackInfoReturnable<SectionBuilder.RenderData> cir) {
+        cir.setReturnValue(radiance$build(sectionPos, renderRegion, vertexSorter,
+            allocatorStorage, SectionGeometryRenderer.EMPTY));
+    }
+
+    @Override
+    public SectionBuilder.RenderData radiance$build(ChunkSectionPos sectionPos,
+        ChunkRendererRegion renderRegion, VertexSorter vertexSorter,
+        BlockBufferAllocatorStorage allocatorStorage, SectionGeometryRenderer.Prepared geometry) {
         SectionBuilder.RenderData renderData = new SectionBuilder.RenderData();
         BlockPos blockPos = sectionPos.getMinPos();
         BlockPos blockPos2 = blockPos.add(15, 15, 15);
@@ -71,54 +81,66 @@ public abstract class SectionBuilderMixins {
         java.util.function.Function<RenderLayer, net.minecraft.client.render.VertexConsumer> buffers =
             layer -> this.beginBufferBuilding(map, allocatorStorage, layer);
 
-        for (BlockPos blockPos3 : BlockPos.iterate(blockPos, blockPos2)) {
-            BlockState blockState = renderRegion.getBlockState(blockPos3);
-            if (blockState.isOpaqueFullCube(renderRegion, blockPos3)) {
-                chunkOcclusionDataBuilder.markClosed(blockPos3);
-            }
+        try {
+            for (BlockPos blockPos3 : BlockPos.iterate(blockPos, blockPos2)) {
+                BlockState blockState = renderRegion.getBlockState(blockPos3);
+                if (blockState.isOpaqueFullCube(renderRegion, blockPos3)) {
+                    chunkOcclusionDataBuilder.markClosed(blockPos3);
+                }
 
-            if (blockState.hasBlockEntity()) {
-                BlockEntity blockEntity = renderRegion.getBlockEntity(blockPos3);
-                if (blockEntity != null) {
-                    this.addBlockEntity(renderData, blockEntity);
+                if (blockState.hasBlockEntity()) {
+                    BlockEntity blockEntity = renderRegion.getBlockEntity(blockPos3);
+                    if (blockEntity != null) {
+                        this.addBlockEntity(renderData, blockEntity);
+                    }
+                }
+
+                FluidState fluidState = blockState.getFluidState();
+                if (!fluidState.isEmpty()) {
+                    RenderLayer renderLayer = RenderLayers.getFluidLayer(fluidState);
+                    PBRVertexConsumer bufferBuilder = this.beginBufferBuilding(map, allocatorStorage,
+                        renderLayer);
+                    this.blockRenderManager.renderFluid(blockPos3, renderRegion, bufferBuilder,
+                        blockState, fluidState);
+                }
+
+                if (blockState.getRenderType() == BlockRenderType.MODEL) {
+                    matrixStack.push();
+                    try {
+                        matrixStack.translate((float) ChunkSectionPos.getLocalCoord(blockPos3.getX()),
+                            (float) ChunkSectionPos.getLocalCoord(blockPos3.getY()),
+                            (float) ChunkSectionPos.getLocalCoord(blockPos3.getZ()));
+                        com.radiance.client.compat.SectionModelRenderer.render(this.blockRenderManager,
+                            blockState, blockPos3, renderRegion, matrixStack, random, buffers);
+                    } finally { matrixStack.pop(); }
                 }
             }
 
-            FluidState fluidState = blockState.getFluidState();
-            if (!fluidState.isEmpty()) {
-                RenderLayer renderLayer = RenderLayers.getFluidLayer(fluidState);
-                PBRVertexConsumer bufferBuilder = this.beginBufferBuilding(map, allocatorStorage,
-                    renderLayer);
-                this.blockRenderManager.renderFluid(blockPos3, renderRegion, bufferBuilder,
-                    blockState, fluidState);
+            // NeoForge callbacks use section-local coordinates and the same PBR layer
+            // buffers as blocks. They must run before those buffers are finalized.
+            geometry.render(renderRegion, matrixStack, buffers);
+
+            for (Map.Entry<RenderLayer, PBRVertexConsumer> entry : map.entrySet()) {
+                RenderLayer renderLayer2 = entry.getKey();
+                BuiltBuffer
+                    builtBuffer =
+                    entry.getValue()
+                        .endNullable();
+                if (builtBuffer != null) {
+                    renderData.buffers.put(renderLayer2, builtBuffer);
+                }
             }
 
-            if (blockState.getRenderType() == BlockRenderType.MODEL) {
-                matrixStack.push();
-                try {
-                    matrixStack.translate((float) ChunkSectionPos.getLocalCoord(blockPos3.getX()),
-                        (float) ChunkSectionPos.getLocalCoord(blockPos3.getY()),
-                        (float) ChunkSectionPos.getLocalCoord(blockPos3.getZ()));
-                    com.radiance.client.compat.SectionModelRenderer.render(this.blockRenderManager,
-                        blockState, blockPos3, renderRegion, matrixStack, random, buffers);
-                } finally { matrixStack.pop(); }
-            }
+            renderData.chunkOcclusionData = chunkOcclusionDataBuilder.build();
+            return renderData;
+        } catch (RuntimeException | Error failure) {
+            // Results may already own completed buffers if finalizing a later
+            // layer fails. Keep ownership local until the whole build succeeds.
+            for (BuiltBuffer buffer : renderData.buffers.values()) buffer.close();
+            throw failure;
+        } finally {
+            BlockModelRenderer.disableBrightnessCache();
         }
-
-        for (Map.Entry<RenderLayer, PBRVertexConsumer> entry : map.entrySet()) {
-            RenderLayer renderLayer2 = entry.getKey();
-            BuiltBuffer
-                builtBuffer =
-                entry.getValue()
-                    .endNullable();
-            if (builtBuffer != null) {
-                renderData.buffers.put(renderLayer2, builtBuffer);
-            }
-        }
-
-        BlockModelRenderer.disableBrightnessCache();
-        renderData.chunkOcclusionData = chunkOcclusionDataBuilder.build();
-        cir.setReturnValue(renderData);
     }
 
     @Unique

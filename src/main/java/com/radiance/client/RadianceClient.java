@@ -44,10 +44,7 @@ public class RadianceClient {
         // core lib
         String osName = System.getProperty("os.name");
         if (osName.toLowerCase().contains("windows")) {
-            Path libTargetPath = radianceDir.resolve("core.lib");
-            Path libResourcePath = Path.of("core.lib");
-            copyFileFromResource(libTargetPath, libResourcePath);
-
+            // core.lib is a build-time import library, not a runtime dependency.
             Path dllTargetPath = radianceDir.resolve("core.dll");
             Path dllResourcePath = Path.of("core.dll");
             copyFileFromResource(dllTargetPath, dllResourcePath);

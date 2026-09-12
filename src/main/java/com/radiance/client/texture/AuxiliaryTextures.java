@@ -188,7 +188,7 @@ public enum AuxiliaryTextures {
                 if (auxiliaryImage == null && (
                     identifier.getPath().contains("textures/block") || identifier.getPath()
                         .contains("textures/item") || identifier.getPath()
-                        .contains("textures/entity"))) {
+                        .contains("textures/entity") || identifier.getPath().contains("optifine/ctm/"))) {
                     NativeImage preparedLevelCopy = auxiliaryTexture.copyPreparedImage(identifier,
                         level);
                     if (preparedLevelCopy != null) {

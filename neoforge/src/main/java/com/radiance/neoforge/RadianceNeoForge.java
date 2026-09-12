@@ -8,5 +8,6 @@ import net.neoforged.api.distmarker.Dist;
 public final class RadianceNeoForge {
     public RadianceNeoForge() {
         NeoForgeSectionModels.install();
+        SectionGeometrySelfTest.install();
     }
 }
