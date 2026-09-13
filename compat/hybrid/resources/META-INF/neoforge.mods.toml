@@ -3,7 +3,7 @@ loaderVersion="[4,)"
 license="GPL-3.0-only"
 [[mods]]
 modId="radiance_hybrid"
-version="0.0.2-native-hud.2"
+version="0.0.2-native-hud.5"
 displayName="Radiance Hybrid Backend Foundation"
 description='''Opt-in context and framebuffer foundation. Mod draw composition remains experimental and incomplete.'''
 [[dependencies.radiance_hybrid]]

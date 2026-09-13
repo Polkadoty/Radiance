@@ -92,6 +92,7 @@ public final class HudCompositor {
         }
     }
     public static void begin(GuiGraphics graphics) {
+        if(NativeHudCompositor.ENABLED){NativeHudCompositor.begin(graphics);return;}
         if(!HybridContext.ENABLED)return;
         HybridContext.assertCurrent();
         if(active)throw new IllegalStateException("Nested HUD composition scope");
@@ -129,6 +130,7 @@ public final class HudCompositor {
         } finally {GL15.glBindBuffer(GL21.GL_PIXEL_PACK_BUFFER,pack);GL30.glBindFramebuffer(GL30.GL_READ_FRAMEBUFFER,read);}
     }
     public static void end(GuiGraphics graphics) {
+        if(NativeHudCompositor.ENABLED){NativeHudCompositor.end(graphics);return;}
         if(!HybridContext.ENABLED||!active)return;
         endNativeHotbar(graphics);
         try {
@@ -152,6 +154,10 @@ public final class HudCompositor {
         }
     }
     private static void composite(int texture) {
+        composite(texture,target.width,target.height);
+    }
+    static void composite(int texture,int width,int height) {
+        int[] compositeViewport=new int[4];GL11.glGetIntegerv(GL11.GL_VIEWPORT,compositeViewport);
         if(shader==null)shader=createShader();
         var oldShader=RenderSystem.getShader();int oldTexture=RenderSystem.getShaderTexture(0);
         int[] caps={GL11.GL_BLEND,GL11.GL_DEPTH_TEST,GL11.GL_CULL_FACE,GL11.GL_SCISSOR_TEST,GL11.GL_COLOR_LOGIC_OP,GL11.GL_STENCIL_TEST};
@@ -164,7 +170,7 @@ public final class HudCompositor {
         int draw=GL11.glGetInteger(GL30.GL_DRAW_FRAMEBUFFER_BINDING);
         GL30.glBindFramebuffer(GL30.GL_DRAW_FRAMEBUFFER,0);
         try(ByteBufferBuilder bytes=new ByteBufferBuilder(256)) {
-            RenderSystem.viewport(0,0,target.width,target.height);
+            RenderSystem.viewport(0,0,width,height);
             RenderSystem.disableDepthTest();RenderSystem.depthMask(false);RenderSystem.disableCull();RenderSystem.disableScissor();
             GlStateManager._disableColorLogicOp();GL11.glDisable(GL11.GL_STENCIL_TEST);com.radiance.client.proxy.vulkan.PipelineStateProxy.DepthStencilState.setStencilTestEnable(false);
             RenderSystem.enableBlend();RenderSystem.blendEquation(GL14.GL_FUNC_ADD);
@@ -186,7 +192,7 @@ public final class HudCompositor {
             if(enabled[5])GL11.glEnable(GL11.GL_STENCIL_TEST);else GL11.glDisable(GL11.GL_STENCIL_TEST);
             com.radiance.client.proxy.vulkan.PipelineStateProxy.DepthStencilState.setStencilTestEnable(enabled[5]);
             RenderSystem.depthMask(depthMask);
-            RenderSystem.viewport(oldViewport[0],oldViewport[1],oldViewport[2],oldViewport[3]);
+            RenderSystem.viewport(compositeViewport[0],compositeViewport[1],compositeViewport[2],compositeViewport[3]);
             GL30.glBindFramebuffer(GL30.GL_DRAW_FRAMEBUFFER,draw);
         }
     }
@@ -220,6 +226,8 @@ public final class HudCompositor {
         catch(IOException failure){throw new IllegalStateException("Cannot load HUD composition shader",failure);}
     }
     public static void close() {
+        MapScreenCompositor.close();
+        NativeHudCompositor.close();
         if(active) {
             ((HybridMainTargetAccess)Minecraft.getInstance()).hybrid$swapMainTarget(previousMain);previousMain=null;active=false;
         }

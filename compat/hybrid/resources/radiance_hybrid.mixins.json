@@ -17,7 +17,8 @@
     "PipelineStateMixin",
     "TextureStorageMixin",
     "TextureUploadMixin",
-    "HudRenderMixin"
+    "HudRenderMixin",
+    "MapScreenRenderMixin"
   ],
   "injectors": {
     "defaultRequire": 1

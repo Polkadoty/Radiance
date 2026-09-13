@@ -18,6 +18,7 @@ public abstract class OffscreenDrawMixin {
     @Inject(method = {"drawWithShader", "lambda$drawWithShader$0"}, at = @At("HEAD"), cancellable = true)
     private static void hybrid$draw(MeshData mesh, CallbackInfo ci) {
         if (!RenderSystem.isOnRenderThread()) return;
+        com.radiance.hybrid.NativeHudCompositor.beforeDraw(mesh,false);
         if (!OffscreenRenderer.isPrivateTarget()) {
             com.radiance.hybrid.HudCompositor.recordHudDraw(true);
             return;
@@ -29,6 +30,7 @@ public abstract class OffscreenDrawMixin {
     }
     @Inject(method="draw",at=@At("HEAD"),cancellable=true)
     private static void hybrid$drawBound(MeshData mesh,CallbackInfo ci) {
+        if(RenderSystem.isOnRenderThread())com.radiance.hybrid.NativeHudCompositor.beforeDraw(mesh,true);
         if(!RenderSystem.isOnRenderThread()||!OffscreenRenderer.isPrivateTarget())return;
         com.radiance.hybrid.HudCompositor.recordHudDraw(false);
         try{OffscreenRenderer.drawBound(mesh);}finally{mesh.close();}ci.cancel();
