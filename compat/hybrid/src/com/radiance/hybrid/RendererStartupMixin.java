@@ -38,6 +38,7 @@ public abstract class RendererStartupMixin implements com.radiance.hybrid.Hybrid
             RenderTargetSelfTest.run();
             TextureNamespaceSelfTest.run();
             com.radiance.hybrid.StencilRestoreSelfTest.run();
+            com.radiance.client.shader.OverlayVertexLayoutSelfTest.run();
             int previousMaterialBinding = org.lwjgl.opengl.GL11.glGetInteger(org.lwjgl.opengl.GL11.GL_TEXTURE_BINDING_2D);
             try { com.radiance.client.texture.MaterialCacheSelfTest.run(); }
             finally { com.mojang.blaze3d.platform.GlStateManager._bindTexture(previousMaterialBinding); }

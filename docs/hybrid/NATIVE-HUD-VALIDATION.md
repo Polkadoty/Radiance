@@ -21,7 +21,7 @@ Overlay clears override and restore scissor, color, depth and front/back stencil
 - Xaero map-screen composition activated at 21:57:28. The user confirmed M opened/closed the map and HUD/chat/inventory looked correct. A supplied screenshot also shows the HUD, minimap and chat.
 - The .4 experiment permitted xaerolib/pos_tex_alpha_test_pre, position_color, position_color_no_alpha_test and position_color_tex names after inspecting their ordinary uniforms/samplers. Both mesh and shader layouts still had to be registered. Startup GPU checks passed, but the user reported a blank minimap. Runtime showed pos_tex_alpha_test_pre went native while both position_color variants remained in GL due to custom layouts.
 - The minimap's source attachment is GL-only. Standard shader syntax/layout does not imply that sampled textures are available to Vulkan. native-hud.5 removes the Xaero allowance and restores the .3 map-fix routing, retaining more explicit route diagnostics. The full-screen M-key map fix stays in place.
-- .5 compiles successfully. Final artifact SHA-256: `fdbab2e2ed17de7331a566c2dab3eecf78ca7384a6592dd3837e163190108afa`. Installation and final visual recheck are pending.
+- .5 compiles successfully. Final artifact SHA-256: `fdbab2e2ed17de7331a566c2dab3eecf78ca7384a6592dd3837e163190108afa`. Installed before Hybrid8 development; final visual recheck was not completed before the next build.
 
 ## Remaining scope
 
@@ -32,3 +32,5 @@ Bright horizontal leaf shelves remain visible in the user's screenshot. No leaf 
 ## Build
 
 Run `tools/build-hybrid-companion.py` with explicit `--main-jar`, `--libraries`, `--compile-deps`, `--jdk` and a fresh `--output` directory. It compiles all companion Java sources, packages resources, reads the version from NeoForge metadata and writes an artifact hash manifest. Runtime jars, local paths in generated argument files, and launcher data are not source checkpoints.
+
+Hybrid8/native-hud.6 continues this work with explicit custom layouts and two audited Xaero color shaders. See HYBRID8-VALIDATION.md for the paired native build and runtime limits.

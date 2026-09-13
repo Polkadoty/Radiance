@@ -32,6 +32,9 @@ public final class ShaderProxy {
         int drawMode, int uniformSize, String vertexShaderPath, String fragmentShaderPath,
         String[] defineNames, String[] defineValues);
 
+    public static native int registerShaderWithLayout(String shaderKey, int stride, int[] attributes,
+        int drawMode, int uniformSize, String vertexShaderPath, String fragmentShaderPath);
+
     public static native void draw(int vertexId, int indexId, int shaderId, int indexCount,
         int indexType, long uniformPtr, int uniformSize);
 

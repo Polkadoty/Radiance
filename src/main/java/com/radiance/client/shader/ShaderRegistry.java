@@ -76,14 +76,19 @@ public final class ShaderRegistry {
         writeIfChanged(vertexPath, result.vertexSource());
         writeIfChanged(fragmentPath, result.fragmentSource());
 
-        int nativeId = ShaderProxy.registerShader(key,
-            Constants.VertexFormats.getValue(vertexFormat),
+        var knownFormat = java.util.Arrays.stream(Constants.VertexFormats.values())
+            .filter(value -> value.getVertexFormat().equals(vertexFormat)).findFirst();
+        int nativeId = knownFormat.isPresent() ? ShaderProxy.registerShader(key,
+            knownFormat.get().getValue(),
             Constants.DrawModes.getValue(topology),
             result.uniformBufferSize(),
             vertexPath.toString(),
             fragmentPath.toString(),
             new String[0],
-            new String[0]);
+            new String[0]) : ShaderProxy.registerShaderWithLayout(key, vertexFormat.getVertexSizeByte(),
+                OverlayVertexLayout.describe(vertexFormat), Constants.DrawModes.getValue(topology),
+                result.uniformBufferSize(), vertexPath.toString(), fragmentPath.toString());
+        if (nativeId < 0) throw new IllegalStateException("Native shader registration failed: " + shaderName);
         return new ShaderDefinition(key, shaderName, nativeId, result.uniformBufferSize(), fields);
     }
 

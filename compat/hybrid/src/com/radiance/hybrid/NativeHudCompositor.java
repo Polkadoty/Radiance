@@ -26,6 +26,7 @@ public final class NativeHudCompositor {
     // GL-produced minimap attachment. Shader/layout support alone is insufficient:
     // keep that draw in GL until native offscreen target synchronization exists.
     private static final Set<String> reported = new HashSet<>();
+    private static final java.util.Map<com.mojang.blaze3d.vertex.VertexFormat, Boolean> customFormats = new java.util.HashMap<>();
     private static final Set<com.mojang.blaze3d.vertex.VertexFormat> FORMATS = java.util.Arrays.stream(Constants.VertexFormats.values())
         .map(Constants.VertexFormats::getVertexFormat).collect(java.util.stream.Collectors.toUnmodifiableSet());
     // Preserve the previous implementation's maximum of two full-resolution snapshots.
@@ -77,9 +78,16 @@ public final class NativeHudCompositor {
         String name = metadata.radiance$getShaderName();
         if (name == null) return false;
         String local = name.startsWith("minecraft:") ? name.substring(10) : "";
-        boolean shaderKnown = SIMPLE_SHADERS.contains(local) || local.startsWith("rendertype_");
+        boolean customColor = local.equals("xaerolib/position_color") || local.equals("xaerolib/position_color_no_alpha_test");
+        boolean shaderKnown = SIMPLE_SHADERS.contains(local) || local.startsWith("rendertype_") || customColor;
         boolean formatKnown = FORMATS.contains(mesh.drawState().format())
             && FORMATS.contains(metadata.radiance$getVertexFormat());
+        if (customColor && mesh.drawState().format().equals(metadata.radiance$getVertexFormat())) {
+            formatKnown = customFormats.computeIfAbsent(metadata.radiance$getVertexFormat(), format -> {
+                try { com.radiance.client.shader.OverlayVertexLayout.describe(format); return true; }
+                catch (IllegalArgumentException unsupported) { return false; }
+            });
+        }
         boolean result = shaderKnown && formatKnown;
         if (Boolean.getBoolean("radiance.hybridSelfTest") && reported.add(name))
             System.out.println("[Hybrid] Native HUD route " + name + " -> " + (result ? "Vulkan" : "OpenGL fallback")

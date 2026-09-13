@@ -20,6 +20,7 @@ public final class MaterialCacheSelfTest {
     }
     public static void run() {
         RenderSystem.assertOnRenderThread();
+        ConnectedMaterialSelfTest.run();
         int texture = TextureUtil.generateTextureId();
         NativeImage source = new NativeImage(NativeImage.Format.RGBA,16,16,true);
         INativeImageExt ext = (INativeImageExt)(Object)source;

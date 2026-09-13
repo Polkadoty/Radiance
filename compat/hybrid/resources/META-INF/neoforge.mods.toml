@@ -3,7 +3,7 @@ loaderVersion="[4,)"
 license="GPL-3.0-only"
 [[mods]]
 modId="radiance_hybrid"
-version="0.0.2-native-hud.5"
+version="0.0.2-native-hud.6"
 displayName="Radiance Hybrid Backend Foundation"
 description='''Opt-in context and framebuffer foundation. Mod draw composition remains experimental and incomplete.'''
 [[dependencies.radiance_hybrid]]
@@ -14,7 +14,7 @@ side="CLIENT"
 [[dependencies.radiance_hybrid]]
 modId="radiance"
 type="required"
-versionRange="[0.1.5-alpha-port.1-hybrid.7]"
+versionRange="[0.1.5-alpha-port.1-hybrid.8]"
 side="CLIENT"
 [[mixins]]
 config="radiance_hybrid.mixins.json"

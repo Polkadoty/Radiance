@@ -324,8 +324,10 @@ public enum AuxiliaryTextures {
     public static CompletableFuture<PreparedImages> prepareDecodedImagesAsync(
         ResourceManager resourceManager, Executor prepareExecutor) {
         List<CompletableFuture<DecodedEntry>> futures = new ArrayList<>();
-        Map<Identifier, Resource> resources = resourceManager.findResources("textures",
-            id -> classifyAuxiliaryResource(id) != null);
+        Map<Identifier, Resource> resources = new java.util.HashMap<>(resourceManager.findResources("textures",
+            id -> classifyAuxiliaryResource(id) != null));
+        resources.putAll(resourceManager.findResources("optifine/ctm",
+            id -> classifyAuxiliaryResource(id) != null));
 
         for (Map.Entry<Identifier, Resource> entry : resources.entrySet()) {
             AuxiliaryTextures auxiliaryTexture = classifyAuxiliaryResource(entry.getKey());
@@ -369,13 +371,15 @@ public enum AuxiliaryTextures {
     private static boolean isTrackedTexturePath(String path) {
         return path.startsWith("textures/block/")
             || path.startsWith("textures/item/")
-            || path.startsWith("textures/entity/");
+            || path.startsWith("textures/entity/")
+            || path.startsWith("optifine/ctm/");
     }
 
     private static boolean isTrackedFlagPath(String path) {
         return path.startsWith("textures/flag/block/")
             || path.startsWith("textures/flag/item/")
-            || path.startsWith("textures/flag/entity/");
+            || path.startsWith("textures/flag/entity/")
+            || path.startsWith("optifine/ctm/");
     }
 
     private record CacheKey(AuxiliaryTextures texture, Identifier identifier) {}
@@ -404,11 +408,16 @@ public enum AuxiliaryTextures {
 
         private final Map<CacheKey, CacheEntry> entries = new ConcurrentHashMap<>();
 
+        // Read-only access for the isolated decoder regression check (never installs a test cache).
+        NativeImage image(AuxiliaryTextures type, Identifier base, int level) {
+            return entries.getOrDefault(new CacheKey(type, base), CacheEntry.MISSING).getImage(level);
+        }
+
         private void add(DecodedEntry entry) {
             this.entries.put(entry.cacheKey(), entry.cacheEntry());
         }
 
-        private void close() {
+        void close() {
             for (CacheEntry entry : this.entries.values()) {
                 if (entry.levels == null) {
                     continue;

@@ -5,7 +5,7 @@ Use `feature/hybrid-vulkan-1.21.1` in both Polkadoty/Radiance and Polkadoty/MCVR
 ## Current scope
 
 - Minecraft 1.21.1, NeoForge 21.1.249; Windows hybrid backend.
-- Radiance `0.1.5-alpha-port.1-hybrid.7`, hybrid companion `0.0.2-native-hud.5`.
+- Radiance `0.1.5-alpha-port.1-hybrid.8`, hybrid companion `0.0.2-native-hud.6`.
 - Native Vulkan world renderer, DLSS integration, experimental frame generation, DH and persistent Sable geometry bridges, and the integrated cloud/ocean shaderpack.
 - Standard HUD shaders now use native Vulkan, including text, bars, icons and item/glint draws. Ordered compatibility segments preserve unsupported HUD draws, with at most two snapshots per HUD frame. Xaero's full-screen map and private framebuffer consumers retain OpenGL compatibility rendering. Its minimap sampling draw also remains in GL because that image is produced in a private GL framebuffer.
 - NeoForge model data and declared cutout layers are respected by terrain compilation; chest stencil-state and shared-resource shutdown fixes are retained.
@@ -17,8 +17,8 @@ The Sable sources include the producer and callback modules required by its mixi
 
 ## Next work, in order
 
-1. Confirm native-hud.5 restores the minimap after the .4 experiment, then record comparable CPU/GPU frame times with `radiance.nativeHud=true` and `false`. The user confirmed the matching .3 native HUD/map-crash fix visually. Performance gain is not established.
-2. Implement general vertex-layout registration and native offscreen color/depth/stencil targets with correct resize, sampling, texture identity and state restoration. These are shared prerequisites for minimaps and mod UI/postprocessing.
+1. Validate Hybrid8/native-hud.6 after the CTM decoder and custom-layout startup fixes, then record comparable CPU/GPU frame times with `radiance.nativeHud=true` and `false`. The user confirmed the matching .3 native HUD/map-crash fix visually. Performance gain is not established.
+2. Validate explicit vertex-layout registration across resource reload/resize, then implement native offscreen color/depth/stencil targets with correct resize, sampling, texture identity and state restoration. These are shared prerequisites for minimaps and mod UI/postprocessing.
 3. Remove the remaining custom-layout/private-target HUD fallback after native target support is available. Preserve ordering, stencil and alpha semantics; do not route arbitrary GL calls into Vulkan without an equivalent target/state implementation.
 4. Validate additional-section geometry visually, extend capture to the Sable producer, and audit custom world and particle producers for material, transform and visibility submission into the ray-traced scene.
 5. Integrate and validate Flywheel instancing/compute and moving Create contraptions; retain a compatibility fallback for unsupported producers.
@@ -28,9 +28,9 @@ The Sable sources include the producer and callback modules required by its mixi
 
 Hybrid7 adds client-thread collection and worker execution of NeoForge additional-section geometry, including otherwise empty sections. Three runtime probes passed in the full modpack: region capture, worker execution, identity pose and PBR solid/cutout/translucent buffers. The probes emit no vertices, so this is not visual validation of every mod's geometry. The Sable four-argument compiler entry still uses the empty callback set.
 
-Hybrid7 also includes a scoped Indigo material-layer adapter for Continuity overlays and loads auxiliary maps from `optifine/ctm` paths. The connected-texture fixes passed the NeoForge build and native-resource verification, and the user confirmed the installed fix worked. Existing Aeronautics PBR textures already include the reported Stay True grass overlays; no texture assets were changed. Leaf shelf brightness remains under investigation; sampled oak/birch maps have emission disabled.
+Hybrid7 also includes a scoped Indigo material-layer adapter for Continuity overlays and allows upload of auxiliary maps from `optifine/ctm` paths. Hybrid8 corrects the missing CTM directory scan in the decoded material cache; see `docs/hybrid/HYBRID8-VALIDATION.md`. The connected-texture fixes passed the NeoForge build and native-resource verification, and the user confirmed the installed fix worked. Existing Aeronautics PBR textures already include the reported Stay True grass overlays; no texture assets were changed. Leaf shelf brightness remains under investigation; sampled oak/birch maps have emission disabled.
 
-The required copy of `core.lib` was removed: it is a build-time Windows import library and is not needed to load `core.dll`. Native binaries are unchanged from Hybrid6. `tools/stage-hybrid-test.py` checks the installed DLL identity and preserves companion bytecode while updating exact dependency metadata. The companion Java sources are still not built by the main Gradle project.
+The required copy of `core.lib` was removed: it is a build-time Windows import library and is not needed to load `core.dll`. Hybrid7 native binaries were unchanged from Hybrid6. Hybrid8 requires its matching rebuilt MCVR core for explicit overlay layouts. `tools/stage-hybrid-test.py` checks the installed DLL identity and preserves companion bytecode while updating exact dependency metadata. The companion Java sources are still not built by the main Gradle project.
 
 See `docs/hybrid/HYBRID7-VALIDATION.md` and `docs/hybrid/NATIVE-HUD-VALIDATION.md` for the tested/staged distinction. `tools/build-hybrid-companion.py` builds the companion from source against a matching main JAR and cached NeoForge dependencies.
 
